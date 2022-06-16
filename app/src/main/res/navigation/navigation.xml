@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation.xml"
+    app:startDestination="@id/groupFragment">
+
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="com.mark.badmintonpeer.group.GroupFragment"
+        android:label="group_fragment"
+        tools:layout="@layout/group_fragment" />
+    <fragment
+        android:id="@+id/chatroomFragment"
+        android:name="com.mark.badmintonpeer.chatroom.ChatroomFragment"
+        android:label="chatroom_fragment"
+        tools:layout="@layout/chatroom_fragment" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.mark.badmintonpeer.news.NewsFragment"
+        android:label="news_fragment"
+        tools:layout="@layout/news_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.mark.badmintonpeer.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+</navigation>

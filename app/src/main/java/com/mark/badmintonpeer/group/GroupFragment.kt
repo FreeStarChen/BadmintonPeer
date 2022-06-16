@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.mark.badmintonpeer.NavigationDirections
 import com.mark.badmintonpeer.R
+import com.mark.badmintonpeer.databinding.GroupFragmentBinding
 
 class GroupFragment : Fragment() {
 
@@ -20,7 +23,14 @@ class GroupFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.group_fragment, container, false)
+        val binding = GroupFragmentBinding.inflate(inflater)
+
+        binding.imageAddGroup.setOnClickListener {
+            this.findNavController().navigate(NavigationDirections.navigateToCreateGroupFragment())
+        }
+
+        return binding.root
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

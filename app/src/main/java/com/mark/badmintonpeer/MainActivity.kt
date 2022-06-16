@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mark.badmintonpeer.databinding.ActivityMainBinding
@@ -40,7 +41,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
+        binding.imageToolbarFilter.setOnClickListener {
+            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToFilterFragment())
+        }
 
     }
 }

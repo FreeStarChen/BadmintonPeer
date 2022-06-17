@@ -1,0 +1,32 @@
+package com.mark.badmintonpeer.data.source
+
+import androidx.lifecycle.MutableLiveData
+import com.mark.badmintonpeer.data.*
+
+/**
+ * Interface to the Badminton Peer layers.
+ */
+interface BadmintonPeerRepository {
+    suspend fun login(id: String): Result<User>
+
+    suspend fun getGroups(): Result<List<Group>>
+
+    suspend fun addGroup() : Result<Group>
+
+    suspend fun deleteGroup(id: String) : Result<Group>
+
+    suspend fun getChatroom(id: String) : Result<List<Chatroom>>
+
+    fun getLiveChats(id: String) : MutableLiveData<List<Chat>>
+
+    suspend fun getComments(id: String) : Result<List<Comment>>
+
+    suspend fun addComment() : Result<Comment>
+
+    suspend fun getInvitation(id: String) : Result<List<Invitation>>
+
+    suspend fun addInvitation() : Result<Invitation>
+
+    suspend fun deleteInvitation(id: String) : Result<Invitation>
+
+}

@@ -11,7 +11,12 @@ import com.mark.badmintonpeer.R
 class GroupTypeFragment : Fragment() {
 
     companion object {
-        fun newInstance() = GroupTypeFragment()
+        fun newInstance(): GroupTypeFragment {
+            val fragment = GroupTypeFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
     private lateinit var viewModel: GroupTypeViewModel

@@ -14,12 +14,12 @@ class DefaultBadmintonPeerRepository(
         return localDataSource.login(id)
     }
 
-    override suspend fun getGroups(): Result<List<Group>> {
-        return remoteDataSource.getGroups()
+    override suspend fun getGroups(type: String): Result<List<Group>> {
+        return remoteDataSource.getGroups(type)
     }
 
-    override suspend fun addGroup(): Result<Group> {
-        return remoteDataSource.addGroup()
+    override suspend fun addGroup(group: Group): Result<Boolean> {
+        return remoteDataSource.addGroup(group)
     }
 
     override suspend fun deleteGroup(id: String): Result<Group> {

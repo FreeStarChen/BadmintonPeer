@@ -18,39 +18,61 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
 
     private const val PATH_GROUPS = "group"
     private const val KEY_START_TIME = "startTime"
+    private const val KEY_CLASSIFICATION = "classification"
 
     override suspend fun login(id: String): Result<User> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getGroups(): Result<List<Group>> = suspendCoroutine{ continutaion ->
+    override suspend fun getGroups(type:String): Result<List<Group>> = suspendCoroutine{ continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_GROUPS)
-            .orderBy(KEY_START_TIME,Query.Direction.ASCENDING)
+//            .whereEqualTo(KEY_CLASSIFICATION,type)
+//            .orderBy(KEY_START_TIME,Query.Direction.ASCENDING)
+//            .limit(10)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val list = mutableListOf<Group>()
                     for (document in task.result) {
-                        Timber.d(document.id + "=>" + document.data)
+                        Timber.d(document.id + " => " + document.data)
 
                         val group = document.toObject(Group::class.java)
                         list.add(group)
                     }
-                    continutaion.resume(Result.Success(list))
+                    continuation.resume(Result.Success(list))
                 }else {
                     task.exception?.let {
                         Timber.e("Error getting documents. ${it.message}")
-                        continutaion.resume(Result.Error(it))
+                        continuation.resume(Result.Error(it))
                         return@addOnCompleteListener
                     }
-                    continutaion.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
                 }
             }
     }
 
-    override suspend fun addGroup(): Result<Group> {
-        TODO("Not yet implemented")
+    override suspend fun addGroup(group: Group): Result<Boolean> = suspendCoroutine { continuation ->
+        val groups = FirebaseFirestore.getInstance().collection(PATH_GROUPS)
+        val document = groups.document()
+
+        group.id = document.id
+        //之後要加ownerId
+        document
+            .set(group)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Timber.d("Add group=$group")
+                    continuation.resume(Result.Success(true))
+                }else {
+                    task.exception?.let {
+                        Timber.e("Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                }
+            }
     }
 
     override suspend fun deleteGroup(id: String): Result<Group> {

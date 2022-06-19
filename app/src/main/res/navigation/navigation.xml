@@ -39,13 +39,26 @@
         android:id="@+id/groupDetailFragment"
         android:name="com.mark.badmintonpeer.groupdetail.GroupDetailFragment"
         android:label="group_detail_fragment"
-        tools:layout="@layout/group_detail_fragment" />
+        tools:layout="@layout/group_detail_fragment">
 
-    <action android:id="@+id/navigate_to_filter_fragment" app:destination="@id/filterFragment"/>
-    <action android:id="@+id/navigate_to_create_group_fragment" app:destination="@id/createGroupFragment"/>
-    <action android:id="@+id/navigate_to_group_detail_fragment" app:destination="@id/groupDetailFragment"/>
-    <action android:id="@+id/navigate_to_group_fragment" app:destination="@id/groupFragment"/>
+        <argument
+            android:name="groupKey"
+            app:argType="com.mark.badmintonpeer.data.Group"
+            app:nullable="false"/>
+    </fragment>
 
+    <action
+        android:id="@+id/navigate_to_filter_fragment"
+        app:destination="@id/filterFragment" />
+    <action
+        android:id="@+id/navigate_to_create_group_fragment"
+        app:destination="@id/createGroupFragment" />
+    <action
+        android:id="@+id/navigate_to_group_detail_fragment"
+        app:destination="@id/groupDetailFragment" />
+    <action
+        android:id="@+id/navigate_to_group_fragment"
+        app:destination="@id/groupFragment" />
 
 
 </navigation>

@@ -74,11 +74,23 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginEnd="16dp"
+            android:background="@color/purple_700"
             app:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/toolbar"
             app:srcCompat="@drawable/ic_filter" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="地圖"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_toolbar_filter"
+            app:layout_constraintEnd_toStartOf="@+id/image_toolbar_filter"
+            app:layout_constraintTop_toTopOf="@+id/image_toolbar_filter" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

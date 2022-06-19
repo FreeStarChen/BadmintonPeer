@@ -13,11 +13,11 @@ class BadmintonPeerLocalDataSource(val context: Context) : BadmintonPeerDataSour
         TODO("Not yet implemented")
     }
 
-    override suspend fun getGroups(): Result<List<Group>> {
+    override suspend fun getGroups(type: String): Result<List<Group>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addGroup(): Result<Group> {
+    override suspend fun addGroup(group: Group): Result<Boolean> {
         TODO("Not yet implemented")
     }
 

@@ -6,10 +6,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     var fragments: ArrayList<Fragment> = arrayListOf(
-        GroupTypeFragment.newInstance(),
-        GroupTypeFragment.newInstance(),
-        GroupTypeFragment.newInstance(),
-        GroupTypeFragment.newInstance()
+        GroupTypeFragment.newInstance("零打"),
+        GroupTypeFragment.newInstance("季打"),
+        GroupTypeFragment.newInstance("課程"),
+        GroupTypeFragment.newInstance("比賽")
 
     )
 

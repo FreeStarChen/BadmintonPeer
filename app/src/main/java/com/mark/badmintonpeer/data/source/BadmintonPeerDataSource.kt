@@ -10,9 +10,9 @@ interface BadmintonPeerDataSource {
 
     suspend fun login(id: String): Result<User>
 
-    suspend fun getGroups(): Result<List<Group>>
+    suspend fun getGroups(type: String): Result<List<Group>>
 
-    suspend fun addGroup() : Result<Group>
+    suspend fun addGroup(group: Group) : Result<Boolean>
 
     suspend fun deleteGroup(id: String) : Result<Group>
 

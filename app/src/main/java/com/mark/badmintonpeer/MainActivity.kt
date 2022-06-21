@@ -2,6 +2,9 @@ package com.mark.badmintonpeer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -19,10 +22,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val navController = Navigation.findNavController(this,R.id.nav_host_fragment)
+        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         val bottomNavigationView: BottomNavigationView = binding.bottomNavigationView
 
-        NavigationUI.setupWithNavController(bottomNavigationView,navController)
+        NavigationUI.setupWithNavController(bottomNavigationView, navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -40,6 +43,34 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.cities,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerCities.adapter = adapter
+
+        }
+
+
+        binding.spinnerCities.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (p2 != 0) {
+                    var selectedCity = binding.spinnerCities.selectedItem.toString()
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+
+
+
 
         binding.imageToolbarFilter.setOnClickListener {
             findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToFilterFragment())

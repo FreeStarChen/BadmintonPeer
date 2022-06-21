@@ -60,10 +60,11 @@
         </androidx.appcompat.widget.Toolbar>
 
         <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="120dp"
+            android:id="@+id/spinner_cities"
+            android:layout_width="130dp"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
+            android:backgroundTint="@color/white"
             app:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +91,8 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/image_toolbar_filter"
             app:layout_constraintEnd_toStartOf="@+id/image_toolbar_filter"
-            app:layout_constraintTop_toTopOf="@+id/image_toolbar_filter" />
+            app:layout_constraintTop_toTopOf="@+id/image_toolbar_filter"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

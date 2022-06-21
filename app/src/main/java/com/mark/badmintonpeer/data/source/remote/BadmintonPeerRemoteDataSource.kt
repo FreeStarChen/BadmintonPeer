@@ -27,7 +27,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
     override suspend fun getGroups(type:String): Result<List<Group>> = suspendCoroutine{ continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_GROUPS)
-//            .whereEqualTo(KEY_CLASSIFICATION,type)
+            .whereEqualTo(KEY_CLASSIFICATION,type)
 //            .orderBy(KEY_START_TIME,Query.Direction.ASCENDING)
 //            .limit(10)
             .get()

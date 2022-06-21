@@ -6,15 +6,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.mark.badmintonpeer.R
+import com.mark.badmintonpeer.ext.getVmFactory
 
 class GroupDetailFragment : Fragment() {
+
+    private val viewModel by viewModels<GroupDetailViewModel> {
+        getVmFactory(
+            GroupDetailFragmentArgs.fromBundle(
+                requireArguments()
+            ).groupKey
+        )
+    }
 
     companion object {
         fun newInstance() = GroupDetailFragment()
     }
-
-    private lateinit var viewModel: GroupDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,10 +31,6 @@ class GroupDetailFragment : Fragment() {
         return inflater.inflate(R.layout.group_detail_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(GroupDetailViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }

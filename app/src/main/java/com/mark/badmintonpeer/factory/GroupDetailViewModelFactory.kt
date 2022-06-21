@@ -2,24 +2,21 @@ package com.mark.badmintonpeer.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.mark.badmintonpeer.data.Group
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
-import com.mark.badmintonpeer.group.GroupTypeViewModel
+import com.mark.badmintonpeer.groupdetail.GroupDetailViewModel
 import java.lang.IllegalArgumentException
 
-/**
- * Factory for group type item ViewModels.
- */
-@Suppress("UNCHECKED_CAST")
-class GroupTypeViewModelFactory(
-    private val type: String,
+class GroupDetailViewModelFactory(
+    private val group: Group,
     private val repository: BadmintonPeerRepository
 ) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>) =
         with(modelClass) {
             when {
-                isAssignableFrom(GroupTypeViewModel::class.java) ->
-                    GroupTypeViewModel(type, repository)
+                isAssignableFrom(GroupDetailViewModel::class.java) ->
+                    GroupDetailViewModel(group, repository)
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

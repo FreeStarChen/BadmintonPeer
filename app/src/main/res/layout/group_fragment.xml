@@ -8,6 +8,17 @@
         android:layout_height="match_parent"
         tools:context=".group.GroupFragment">
 
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/height_toolbar"-->
+<!--            android:background="@color/purple_700"-->
+<!--            app:elevation="5dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"/>-->
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager_group"
             android:layout_width="0dp"

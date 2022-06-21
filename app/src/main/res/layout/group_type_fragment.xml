@@ -23,6 +23,6 @@ xmlns:tools="http://schemas.android.com/tools">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/group_type_item_fragment"/>
+        tools:listitem="@layout/group_type_item"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

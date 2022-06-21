@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="group"
             type="com.mark.badmintonpeer.data.Group" />
@@ -11,15 +12,32 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg__corner_radius_10dip">
+
+        <TextView
+            android:id="@+id/text_court_number2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/noto_sans"
+            android:text="Lv."
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/image_group"
+            app:layout_constraintTop_toBottomOf="@+id/image_group" />
 
         <TextView
             android:id="@+id/text_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:fontFamily="@font/noto_sans"
             android:text="@{group.place}"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/image_location"
             app:layout_constraintStart_toEndOf="@+id/image_location"
@@ -31,8 +49,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:fontFamily="@font/noto_sans"
             android:text="@{String.valueOf(group.needPeopleNumber)}"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/image_group"
             app:layout_constraintStart_toEndOf="@+id/image_group"
@@ -44,8 +63,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:fontFamily="@font/noto_sans"
             android:text="/"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/image_group"
             app:layout_constraintStart_toEndOf="@+id/text_need_people_number"
@@ -57,8 +77,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:fontFamily="@font/noto_sans"
             android:text="@{String.valueOf(group.totalPeopleNumber)}"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/text_slash"
             app:layout_constraintTop_toTopOf="@+id/text_slash"
@@ -69,8 +90,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:fontFamily="@font/noto_sans"
             android:text="@{String.valueOf(group.courtNumber)}"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintStart_toEndOf="@+id/imageView6"
@@ -79,8 +101,8 @@
 
         <ImageView
             android:id="@+id/image_time"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="@+id/image_medal"
             app:layout_constraintTop_toBottomOf="@+id/image_medal"
@@ -88,8 +110,8 @@
 
         <ImageView
             android:id="@+id/image_location"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="@+id/image_medal"
             app:layout_constraintTop_toBottomOf="@+id/image_time"
@@ -97,8 +119,8 @@
 
         <ImageView
             android:id="@+id/image_group"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="@+id/image_medal"
             app:layout_constraintTop_toBottomOf="@+id/image_location"
@@ -106,13 +128,12 @@
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="30dp"
-            android:layout_height="24dp"
+            android:layout_width="26dp"
+            android:layout_height="20dp"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="10dp"
             android:rotation="90"
+            app:layout_constraintBottom_toBottomOf="@+id/image_group"
             app:layout_constraintStart_toStartOf="@+id/text_need_people_number"
-            app:layout_constraintTop_toBottomOf="@+id/image_location"
             app:srcCompat="@drawable/ic_court_color" />
 
         <ImageView
@@ -122,10 +143,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{group.images[0]}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/badminton" />
+            tools:src="@drawable/badminton" />
 
         <TextView
             android:id="@+id/text_group_title"
@@ -133,6 +156,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/noto_sans"
             android:text="@{String.valueOf(group.name)}"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -148,7 +172,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textSize="16sp"
+            android:fontFamily="@font/noto_sans"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/image_time"
             app:layout_constraintStart_toEndOf="@+id/image_time"
@@ -169,18 +194,18 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="5dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:background="@color/teal_200"
+            android:background="@color/purple_500"
+            app:layout_constraintBottom_toBottomOf="@+id/image_group_photo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/image_group"
-            app:layout_constraintTop_toBottomOf="@+id/image_group" />
+            app:layout_constraintStart_toStartOf="@+id/image_group" />
 
         <TextView
             android:id="@+id/text_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/noto_sans"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/progressBar"
@@ -191,31 +216,36 @@
             android:id="@+id/recycler_view_degree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/text_price"
-            app:layout_constraintEnd_toEndOf="@+id/text_price"
-            tools:itemCount="3" />
+            app:layout_constraintBottom_toTopOf="@+id/progressBar"
+            app:layout_constraintStart_toStartOf="@+id/text_need_people_number"
+            app:layout_constraintTop_toBottomOf="@+id/text_need_people_number"
+            tools:itemCount="3"
+            tools:listitem="@layout/group_type_item_degree" />
 
         <TextView
             android:id="@+id/text_start_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textSize="16sp"
+            android:fontFamily="@font/noto_sans"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/text_date"
             app:layout_constraintTop_toTopOf="@+id/text_date"
-            tools:text="18:00"/>
+            tools:text="18:00" />
 
         <TextView
             android:id="@+id/text_wave_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:fontFamily="@font/noto_sans"
             android:text="~"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/text_start_time"
             app:layout_constraintTop_toTopOf="@+id/text_date" />
@@ -225,10 +255,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:textSize="16sp"
+            android:fontFamily="@font/noto_sans"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/text_wave_line"
             app:layout_constraintTop_toTopOf="@+id/text_date"
-            tools:text="20:00"/>
+            tools:text="20:00" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mark.badmintonpeer.data.Group
-import com.mark.badmintonpeer.databinding.GroupTypeItemFragmentBinding
+import com.mark.badmintonpeer.databinding.GroupTypeItemBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 class GroupTypeAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Group, GroupTypeAdapter.GroupViewHolder>(DiffCallback) {
-    class GroupViewHolder(private var binding: GroupTypeItemFragmentBinding) :
+    class GroupViewHolder(private var binding: GroupTypeItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
@@ -23,6 +23,10 @@ class GroupTypeAdapter(private val onClickListener: OnClickListener) :
             binding.textStartTime.text = getTime(group.startTime.time)
             binding.textEndTime.text = getTime(group.endTime.time)
             binding.textPrice.text = "$${group.price}"
+
+            val adapter = GroupTypeDegreeAdapter()
+            binding.recyclerViewDegree.adapter = adapter
+            adapter.submitList(group.degree)
             binding.executePendingBindings()
         }
 
@@ -72,7 +76,7 @@ class GroupTypeAdapter(private val onClickListener: OnClickListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
         return GroupViewHolder(
-            GroupTypeItemFragmentBinding.inflate(
+            GroupTypeItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

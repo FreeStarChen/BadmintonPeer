@@ -10,5 +10,7 @@
     <color name="greyish_brown">#3f3a3a</color>
     <color name="menu_grey">#979797</color>
     <color name="gray_888888">#888888</color>
+    <color name="light_blue">#FF2196F3</color>
+    <color name="court_green">#009688</color>
 
 </resources>

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.mark.badmintonpeer.R
+import com.mark.badmintonpeer.databinding.GroupDetailFragmentBinding
 import com.mark.badmintonpeer.ext.getVmFactory
 
 class GroupDetailFragment : Fragment() {
@@ -28,7 +29,13 @@ class GroupDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.group_detail_fragment, container, false)
+        val binding = GroupDetailFragmentBinding.inflate(inflater)
+
+        binding.lifecycleOwner = this
+
+        binding.viewModel = viewModel
+
+        return binding.root
     }
 
 

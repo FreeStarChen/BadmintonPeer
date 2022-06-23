@@ -59,6 +59,9 @@
     <action
         android:id="@+id/navigate_to_group_fragment"
         app:destination="@id/groupFragment" />
+    <action
+        android:id="@+id/navigate_to_chatroom_fragment"
+        app:destination="@+id/chatroomFragment" />
 
 
 </navigation>

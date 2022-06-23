@@ -26,6 +26,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="揪團名稱："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -38,6 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="揪團資料"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -61,32 +63,41 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/noto_sans"
                         android:minHeight="48dp"
-                        android:text="零打" />
+                        android:text="零打"
+                        android:background="@drawable/bg__orange_radius_4dip"
+                        android:textSize="20sp" />
 
                     <RadioButton
                         android:id="@+id/radioButton4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/noto_sans"
                         android:minHeight="48dp"
-                        android:text="季打" />
+                        android:text="季打"
+                        android:textSize="20sp" />
 
                     <RadioButton
                         android:id="@+id/radioButton5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/noto_sans"
                         android:minHeight="48dp"
-                        android:text="課程" />
+                        android:text="課程"
+                        android:textSize="20sp" />
 
                     <RadioButton
                         android:id="@+id/radioButton6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/noto_sans"
                         android:minHeight="48dp"
-                        android:text="比賽" />
+                        android:text="比賽"
+                        android:textSize="20sp" />
                 </RadioGroup>
 
                 <EditText
@@ -132,6 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="打球時間："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -143,6 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="場館名稱："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -154,6 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="場館地址："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -165,6 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="需求人數："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -176,6 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="總人數："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -188,6 +204,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="使用球種："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -199,6 +216,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="場地數量："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -210,6 +228,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="場地特色："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -221,6 +240,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="費用："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -233,6 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="120dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="程度："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -244,6 +265,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="80dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="連絡電話："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -255,6 +277,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="其他說明："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -272,13 +295,15 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView18"
+                    android:fontFamily="@font/noto_sans" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="打球日期："
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -425,6 +450,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60dp"
                     android:layout_marginBottom="24dp"
+                    android:fontFamily="@font/noto_sans"
                     android:text="創建"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

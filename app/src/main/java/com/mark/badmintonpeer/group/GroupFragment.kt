@@ -56,10 +56,4 @@ class GroupFragment : Fragment() {
         }.attach()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(GroupViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

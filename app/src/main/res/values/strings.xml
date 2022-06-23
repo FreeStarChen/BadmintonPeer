@@ -28,4 +28,14 @@
         <item>金門縣</item>
         <item>連江縣</item>
     </string-array>
+
+    <!-- Page Title Name -->
+    <string name="group">揪團列表</string>
+    <string name="chatroom">聊天室</string>
+    <string name="news">最新消息</string>
+    <string name="profile">個人資料</string>
+    <string name="filter">篩選</string>
+    <string name="create">建立揪團</string>
+
+
 </resources>

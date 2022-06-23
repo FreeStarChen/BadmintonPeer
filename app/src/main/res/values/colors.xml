@@ -12,5 +12,8 @@
     <color name="gray_888888">#888888</color>
     <color name="light_blue">#FF2196F3</color>
     <color name="court_green">#009688</color>
+    <color name="light_green">#D2F3E7</color>
+    <color name="red">#FF1100</color>
+    <color name="orange">#FFC107</color>
 
 </resources>

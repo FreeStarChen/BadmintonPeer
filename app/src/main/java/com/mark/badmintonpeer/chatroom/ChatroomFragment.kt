@@ -22,11 +22,4 @@ class ChatroomFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.chatroom_fragment, container, false)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ChatroomViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

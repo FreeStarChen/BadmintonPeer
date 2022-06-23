@@ -16,7 +16,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/bg__corner_radius_10dip">
+        android:background="@drawable/bg__light_green_radius_10dip">
 
         <TextView
             android:id="@+id/text_court_number2"
@@ -143,6 +143,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/bg__white_radius_10dip"
             android:scaleType="centerCrop"
             app:imageUrl="@{group.images[0]}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -151,13 +152,13 @@
             tools:src="@drawable/badminton" />
 
         <TextView
-            android:id="@+id/text_group_title"
+            android:id="@+id/text_detail_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/noto_sans"
-            android:text="@{String.valueOf(group.name)}"
+            android:text="@{group.name}"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -206,6 +207,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/noto_sans"
+            android:textColor="#E91E63"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/progressBar"

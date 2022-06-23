@@ -4,7 +4,14 @@
     <dimen name="height_toolbar">60dp</dimen>
     <dimen name="height_status_bar_origin">24dp</dimen>
 
-    <!-- Catalog -->
-    <dimen name="height_catalog_tab">48dp</dimen>
+    <!-- TabLayout -->
+    <dimen name="height_group_tab">48dp</dimen>
+
+    <!-- group detail image -->
+    <dimen name="height_detail_image">300dp</dimen>
+    <dimen name="size_detail_circle">6dp</dimen>
+    <dimen name="space_detail_circle">8dp</dimen>
+    <dimen name="edge_detail_circle">1px</dimen>
+    <dimen name="radius_detail_circle">3dp</dimen>
 
 </resources>

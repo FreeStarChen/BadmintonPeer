@@ -3,34 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="com.mark.badmintonpeer.util.CurrentFragmentType" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.mark.badmintonpeer.MainViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_toolbar"
-            android:background="@color/white"
-            app:elevation="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/text_toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/greyish_brown"
-                android:letterSpacing="0.15"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="羽球同行"
-                android:layout_gravity="center"
-                tools:visibility="visible" />
-
-        </androidx.appcompat.widget.Toolbar>
 
 
         <fragment
@@ -50,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP || viewModel.currentFragmentType == CurrentFragmentType.CHATROOM || viewModel.currentFragmentType == CurrentFragmentType.NEWS || viewModel.currentFragmentType == CurrentFragmentType.PROFILE ? View.VISIBLE : View.GONE}"
             app:itemIconSize="36dp"
             app:itemIconTint="@drawable/bottom_nav_item_selector"
             app:labelVisibilityMode="unlabeled"
@@ -57,6 +45,105 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_nav_menu" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_toolbar"
+            android:background="@color/teal_700"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.DETAIL ? View.GONE : View.VISIBLE}"
+            app:elevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/text_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/noto_sans"
+                android:letterSpacing="0.15"
+                android:text="@{viewModel.currentFragmentType.value}"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="159dp"
+                tools:layout_editor_absoluteY="16dp"
+                tools:visibility="visible" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <Spinner
+            android:id="@+id/spinner_cities"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/spinner_cities_layer_list"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP ? View.VISIBLE : View.GONE}"
+            app:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+        <ImageView
+            android:id="@+id/image_toolbar_filter"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/teal_700"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP ? View.VISIBLE : View.GONE}"
+            app:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar"
+            app:srcCompat="@drawable/ic_filter" />
+
+        <Switch
+            android:id="@+id/switch_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/noto_sans"
+            android:minHeight="48dp"
+            android:text="地圖"
+            android:textSize="16sp"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/image_toolbar_filter"
+            app:layout_constraintEnd_toStartOf="@+id/image_toolbar_filter"
+            app:layout_constraintTop_toTopOf="@+id/image_toolbar_filter"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <Button
+            android:id="@+id/button_create_group"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg__light_green_radius_10dip"
+            android:text="創建"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.CREATE ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg__red_radius_10dip"
+            android:text="取消"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.CREATE ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

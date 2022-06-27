@@ -8,17 +8,17 @@
 
     <item
         android:id="@+id/chatroomFragment"
-        android:icon="@drawable/ic_group"
+        android:icon="@drawable/ic_chat"
         android:title=""/>
 
     <item
         android:id="@+id/newsFragment"
-        android:icon="@drawable/ic_group"
+        android:icon="@drawable/ic_megaphone"
         android:title=""/>
 
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_group"
+        android:icon="@drawable/ic_user"
         android:title=""/>
 
 </menu>

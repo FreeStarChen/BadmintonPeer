@@ -7,26 +7,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mark.badmintonpeer.R
+import com.mark.badmintonpeer.databinding.ChatroomTypeFragmentBinding
+import com.mark.badmintonpeer.databinding.GroupTypeFragmentBinding
+import com.mark.badmintonpeer.group.GroupTypeFragment
 
-class ChatroomTypeFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ChatroomTypeFragment()
-    }
+class ChatroomTypeFragment() : Fragment() {
 
     private lateinit var viewModel: ChatroomTypeViewModel
+
+    companion object {
+        fun newInstance(type: String): ChatroomTypeFragment {
+            val fragment = ChatroomTypeFragment()
+            val args = Bundle()
+            args.putString("type", type)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+
+
+    fun getType(): String {
+        return requireArguments().getString("type","")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.chatroom_type_fragment, container, false)
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ChatroomTypeViewModel::class.java)
-        // TODO: Use the ViewModel
+        val binding = ChatroomTypeFragmentBinding.inflate(inflater)
+        return binding.root
     }
 
 }

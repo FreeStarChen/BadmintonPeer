@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">BadmintonPeer</string>
+
+    <string name="you_know_nothing">You know nothing</string>
+
+    <string-array name="cities">
+        <item>選擇縣市</item>
+        <item>基隆市</item>
+        <item>台北市</item>
+        <item>新北市</item>
+        <item>桃園市</item>
+        <item>新竹縣</item>
+        <item>新竹市</item>
+        <item>苗栗縣</item>
+        <item>台中市</item>
+        <item>彰化縣</item>
+        <item>南投縣</item>
+        <item>雲林縣</item>
+        <item>嘉義縣</item>
+        <item>嘉義市</item>
+        <item>台南市</item>
+        <item>高雄市</item>
+        <item>屏東縣</item>
+        <item>宜蘭縣</item>
+        <item>花蓮縣</item>
+        <item>台東縣</item>
+        <item>澎湖縣</item>
+        <item>金門縣</item>
+        <item>連江縣</item>
+    </string-array>
+
+    <!-- Page Title Name -->
+    <string name="group">揪團列表</string>
+    <string name="chatroom">聊天室</string>
+    <string name="news">最新消息</string>
+    <string name="profile">個人資料</string>
+    <string name="filter">篩選</string>
+    <string name="create">建立揪團</string>
+
+    <!-- characteristic type -->
+    <string name="water_dispenser">飲水機</string>
+    <string name="air_condition">冷氣</string>
+
+
 </resources>

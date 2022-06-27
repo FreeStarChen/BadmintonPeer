@@ -1,5 +1,6 @@
 package com.mark.badmintonpeer.data.source.remote
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -55,12 +56,14 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
     override suspend fun addGroup(group: Group): Result<Boolean> = suspendCoroutine { continuation ->
         val groups = FirebaseFirestore.getInstance().collection(PATH_GROUPS)
         val document = groups.document()
-
+        Timber.d("addGroup")
         group.id = document.id
+        Timber.d("group.id=${group}")
         //之後要加ownerId
         document
             .set(group)
             .addOnCompleteListener { task ->
+                Timber.i("Add group Complete")
                 if (task.isSuccessful) {
                     Timber.d("Add group=$group")
                     continuation.resume(Result.Success(true))

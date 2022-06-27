@@ -2,7 +2,7 @@ package com.mark.badmintonpeer.util
 
 object CitiesAndTowns {
 
-    private val counties = listOf(
+    private val cities = listOf(
         "基隆市", "臺北市", "新北市",
         "桃園市", "新竹市", "新竹縣",
         "苗栗縣", "臺中市", "彰化縣",
@@ -456,6 +456,33 @@ object CitiesAndTowns {
      * @return 返回所有縣市名稱
      */
     fun getAllCountiesName(): List<Any> {
-        return counties
+        return cities
+    }
+
+    /**
+     * 透過縣市名稱，獲取特定鄉鎮名稱
+     * @param countyName 縣市名稱
+     * @return 返回該縣市的所有鄉鎮名稱
+     */
+    fun getTownsByCountyName(countyName: String): List<Any> {
+        val index = cities.indexOf(countyName)
+        return towns[index]
+    }
+
+    /**
+     * 獲取縣市索引值
+     * @return 返回縣市索引值
+     */
+    fun getCountyIndexByName(countyName:String): Int {
+        return cities.indexOf(countyName)
+    }
+
+    /**
+     * 獲取鄉鎮索引值
+     * @return 返回鄉鎮索引值
+     */
+    fun getTownIndexByName(countyName:String,townName:String): Int {
+        val index = cities.indexOf(countyName)
+        return towns[index].indexOf(townName)
     }
 }

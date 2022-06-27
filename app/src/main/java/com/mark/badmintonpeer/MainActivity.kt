@@ -13,9 +13,12 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mark.badmintonpeer.creategroup.CreateGroupFragment
 import com.mark.badmintonpeer.databinding.ActivityMainBinding
 import com.mark.badmintonpeer.ext.getVmFactory
+import com.mark.badmintonpeer.group.GroupTypeFragment
 import com.mark.badmintonpeer.util.CurrentFragmentType
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -95,6 +98,40 @@ class MainActivity : AppCompatActivity() {
 
         binding.imageToolbarFilter.setOnClickListener {
             findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToFilterFragment())
+        }
+
+        binding.buttonCancel.setOnClickListener {
+            findNavController(R.id.nav_host_fragment).navigateUp()
+        }
+
+        binding.buttonCreateGroup.setOnClickListener {
+            viewModel.buttonClick.value = true
+            val fragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+            val createGroupFragment = fragment?.childFragmentManager?.primaryNavigationFragment as CreateGroupFragment
+            createGroupFragment.callViewModelAddGroupResult()
+
+//            childFragment.callViewModelAddGroupResult()
+            Timber.d("childFragment=$createGroupFragment")
+
+//            val createGroupViewModel = ViewModelProvider(
+//                this,
+//                ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+//            )[CreateGroupViewModel::class.java]
+//
+//            createGroupViewModel.addGroupResult()
+
+            findNavController(R.id.nav_host_fragment).navigateUp()
+//            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToGroupFragment())
+        }
+
+        binding.switchMap.setOnCheckedChangeListener { compoundButton, b ->
+            compoundButton.isChecked.let {
+                val fragment =
+                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+                val groupTypeFragment = fragment?.childFragmentManager?.primaryNavigationFragment as GroupTypeFragment
+                groupTypeFragment.setRecyclerViewVisible(it)
+            }
         }
 
         setupNavController()

@@ -4,13 +4,17 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.Shape
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.request.RequestOptions
 import com.mark.badmintonpeer.groupdetail.GroupDetailCircleAdapter
 import com.mark.badmintonpeer.groupdetail.GroupDetailImageAdapter
+import com.mark.badmintonpeer.network.LoadApiStatus
 import com.mark.badmintonpeer.util.Util.getColor
 
 /**
@@ -92,4 +96,31 @@ fun bindDetailCircleStatus(imageView: ImageView, isSelected: Boolean = false) {
             )
         }
     })
+}
+
+/**
+ * According to [LoadApiStatus] to decide the visibility of [ProgressBar]
+ */
+@BindingAdapter("setupApiStatus")
+fun bindApiStatus(view: ProgressBar, status: LoadApiStatus?) {
+    when (status) {
+        LoadApiStatus.LOADING -> view.visibility = View.VISIBLE
+        LoadApiStatus.DONE, LoadApiStatus.ERROR -> view.visibility = View.GONE
+    }
+}
+
+/**
+ * According to [message] to decide the visibility of [ProgressBar]
+ */
+@BindingAdapter("setupApiErrorMessage")
+fun bindApiErrorMessage(view: TextView, message: String?) {
+    when (message) {
+        null, "" -> {
+            view.visibility = View.GONE
+        }
+        else -> {
+            view.text = message
+            view.visibility = View.VISIBLE
+        }
+    }
 }

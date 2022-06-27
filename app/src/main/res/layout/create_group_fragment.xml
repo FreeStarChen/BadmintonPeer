@@ -3,6 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.widget.DatePicker" />
+
+        <variable
+            name="viewModel"
+            type="com.mark.badmintonpeer.creategroup.CreateGroupViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,22 +29,22 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/text_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="揪團名稱："
+                    android:text="揪團名稱"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/text_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -56,21 +66,20 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView">
+                    app:layout_constraintTop_toBottomOf="@+id/text_data">
 
                     <RadioButton
-                        android:id="@+id/radioButton3"
+                        android:id="@+id/radioButton1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/noto_sans"
                         android:minHeight="48dp"
                         android:text="零打"
-                        android:background="@drawable/bg__orange_radius_4dip"
                         android:textSize="20sp" />
 
                     <RadioButton
-                        android:id="@+id/radioButton4"
+                        android:id="@+id/radioButton2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -80,7 +89,7 @@
                         android:textSize="20sp" />
 
                     <RadioButton
-                        android:id="@+id/radioButton5"
+                        android:id="@+id/radioButton3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -90,7 +99,7 @@
                         android:textSize="20sp" />
 
                     <RadioButton
-                        android:id="@+id/radioButton6"
+                        android:id="@+id/radioButton4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -101,361 +110,879 @@
                 </RadioGroup>
 
                 <EditText
-                    android:id="@+id/editTextDate"
+                    android:id="@+id/edit_text_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
+                    android:clickable="false"
+                    android:cursorVisible="false"
                     android:ems="10"
-                    android:inputType="date"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none"
                     android:minHeight="48dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                    app:layout_constraintStart_toEndOf="@+id/textView2"
-                    app:layout_constraintTop_toTopOf="@+id/textView2"
+                    android:paddingStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_date_create"
+                    app:layout_constraintStart_toEndOf="@+id/text_date_create"
+                    app:layout_constraintTop_toTopOf="@+id/text_date_create"
                     app:layout_constraintVertical_bias="0.38" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/text_wave_line_create"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="～"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/editTextTime"
-                    app:layout_constraintStart_toEndOf="@+id/editTextTime"
-                    app:layout_constraintTop_toTopOf="@+id/editTextTime"
+                    app:layout_constraintBottom_toBottomOf="@+id/edit_text_start_time"
+                    app:layout_constraintStart_toEndOf="@+id/edit_text_start_time"
+                    app:layout_constraintTop_toTopOf="@+id/edit_text_start_time"
                     app:layout_constraintVertical_bias="0.476" />
 
                 <EditText
-                    android:id="@+id/editTextTime2"
+                    android:id="@+id/edit_text_end_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:ems="6"
+                    android:background="@drawable/bg_edit_text_selector"
+                    android:ems="5"
                     android:inputType="time"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                    app:layout_constraintStart_toEndOf="@+id/textView4"
-                    app:layout_constraintTop_toTopOf="@+id/textView3"
+                    android:minHeight="48dp"
+                    android:paddingStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_time"
+                    app:layout_constraintStart_toEndOf="@+id/text_wave_line_create"
+                    app:layout_constraintTop_toTopOf="@+id/text_time"
                     app:layout_constraintVertical_bias="0.571" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/text_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="打球時間："
+                    android:text="打球時間"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_date_create" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/text_place_create"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="場館名稱："
+                    android:text="場館名稱"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_time" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/text_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="場館地址："
+                    android:text="場館地址"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_place_create" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/text_need_people"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="需求人數："
+                    android:text="需求人數"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_address" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/text_total_people"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="總人數："
+                    android:text="總人數"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
-                    app:layout_constraintStart_toEndOf="@+id/editTextNumber"
-                    app:layout_constraintTop_toTopOf="@+id/editTextNumber" />
+                    app:layout_constraintBottom_toBottomOf="@+id/edit_text_need_number"
+                    app:layout_constraintStart_toEndOf="@+id/edit_text_need_number"
+                    app:layout_constraintTop_toTopOf="@+id/edit_text_need_number" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/text_ball"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="使用球種："
+                    android:text="使用球種"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_need_people" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/text_court_number_create"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="場地數量："
+                    android:text="場地數量"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_ball" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/text_court_provide"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="場地特色："
+                    android:text="場地提供"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_court_number_create" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_water_dispenser"
+                    android:layout_width="70dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toStartOf="@+id/text_court_provide"
+                    app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
+
+
+                    <ImageView
+                        android:id="@+id/image_water_dispenser"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_water_dispenser" />
+
+                    <TextView
+                        android:id="@+id/text_water_dispenser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="@string/water_dispenser"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/image_water_dispenser" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_air_condition"
+                    android:layout_width="70dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toEndOf="@+id/constraint_water_dispenser"
+                    app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
+
+
+                    <ImageView
+                        android:id="@+id/image_air_condition"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_air_condition" />
+
+                    <TextView
+                        android:id="@+id/text_air_condition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="@string/air_condition"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/image_air_condition" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_pu_ground"
+                    android:layout_width="70dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toEndOf="@+id/constraint_air_condition"
+                    app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
+
+
+                    <ImageView
+                        android:id="@+id/image_pu_ground"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_pu_ground" />
+
+                    <TextView
+                        android:id="@+id/text_pu_ground"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="PU地面"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/image_pu_ground" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_spotlight"
+                    android:layout_width="70dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toEndOf="@+id/constraint_pu_ground"
+                    app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
+
+
+                    <ImageView
+                        android:id="@+id/image_spotlight"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_spotlight" />
+
+                    <TextView
+                        android:id="@+id/text_spotlight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="側面燈光"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/image_spotlight" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_shower"
+                    android:layout_width="70dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toStartOf="@+id/constraint_water_dispenser"
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
+
+
+                    <ImageView
+                        android:id="@+id/image_shower"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_shower" />
+
+                    <TextView
+                        android:id="@+id/text_shower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="淋浴間"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/image_shower" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_parking"
+                    android:layout_width="70dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toStartOf="@+id/constraint_air_condition"
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
+
+
+                    <ImageView
+                        android:id="@+id/image_parking"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_parking" />
+
+                    <TextView
+                        android:id="@+id/text_parking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="停車場"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/image_parking" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_cutlery"
+                    android:layout_width="70dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toStartOf="@+id/constraint_pu_ground"
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
+
+
+                    <ImageView
+                        android:id="@+id/image_cutlery"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_cutlery" />
+
+                    <TextView
+                        android:id="@+id/text_cutlery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="餐飲販售"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/image_cutlery" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_hair_dryer"
+                    android:layout_width="70dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toStartOf="@+id/constraint_spotlight"
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
+
+
+                    <ImageView
+                        android:id="@+id/image_hair_dryer"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_hair_dryer" />
+
+                    <TextView
+                        android:id="@+id/text_hair_dryer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="吹風機"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/image_hair_dryer" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/text_price_create"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="費用："
+                    android:text="費用"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/editTextNumber3"
-                    app:layout_constraintStart_toEndOf="@+id/editTextNumber3"
-                    app:layout_constraintTop_toTopOf="@+id/editTextNumber3" />
+                    app:layout_constraintBottom_toBottomOf="@+id/edit_text_court_number"
+                    app:layout_constraintStart_toEndOf="@+id/edit_text_court_number"
+                    app:layout_constraintTop_toTopOf="@+id/edit_text_court_number" />
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/text_need_degree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:text="需求程度"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/radioGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_shower" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_degree_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toStartOf="@+id/text_need_degree"
+                    app:layout_constraintTop_toBottomOf="@+id/text_need_degree">
+
+                    <TextView
+                        android:id="@+id/text_degree_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="新手"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_degree_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toEndOf="@+id/constraint_degree_1"
+                    app:layout_constraintTop_toBottomOf="@+id/text_need_degree">
+
+                    <TextView
+                        android:id="@+id/text_degree_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="初階"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_degree_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toEndOf="@+id/constraint_degree_2"
+                    app:layout_constraintTop_toBottomOf="@+id/text_need_degree">
+
+                    <TextView
+                        android:id="@+id/text_degree_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="初中"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_degree_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toStartOf="@+id/text_need_degree"
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_degree_1">
+
+                    <TextView
+                        android:id="@+id/text_degree_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="中階"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_degree_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toStartOf="@+id/constraint_degree_2"
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_degree_1">
+
+                    <TextView
+                        android:id="@+id/text_degree_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="中上"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_degree_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg__white_radius_10dip"
+                    app:layout_constraintStart_toStartOf="@+id/constraint_degree_3"
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_degree_1">
+
+                    <TextView
+                        android:id="@+id/text_degree_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="高階"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/text_contact_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="120dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="程度："
+                    android:text="連絡電話"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_need_degree" />
 
                 <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="80dp"
-                    android:fontFamily="@font/noto_sans"
-                    android:text="連絡電話："
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-                <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/text_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="其他說明："
+                    android:text="其他說明"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_contact_number" />
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/text_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginBottom="32dp"
-                    android:text="相關照片："
+                    android:layout_marginStart="130dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:text="相關照片"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18"
-                    android:fontFamily="@font/noto_sans" />
+                    app:layout_constraintStart_toEndOf="@+id/text_need_degree"
+                    app:layout_constraintTop_toTopOf="@+id/text_need_degree" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/text_date_create"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="打球日期："
+                    android:text="打球日期"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_name" />
 
                 <EditText
-                    android:id="@+id/editTextTime"
+                    android:id="@+id/edit_text_start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:ems="6"
+                    android:background="@drawable/bg_edit_text_selector"
+                    android:ems="5"
                     android:inputType="time"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                    app:layout_constraintStart_toEndOf="@+id/textView3"
-                    app:layout_constraintTop_toTopOf="@+id/textView3"
+                    android:minHeight="48dp"
+                    android:paddingStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_time"
+                    app:layout_constraintStart_toEndOf="@+id/text_time"
+                    app:layout_constraintTop_toTopOf="@+id/text_time"
                     app:layout_constraintVertical_bias="0.571" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName"
+                    android:id="@+id/edit_text_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="textPersonName|textMultiLine"
                     android:minHeight="48dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                    android:paddingStart="8dp"
+                    android:text="@={viewModel.group.name}"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_name"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView6"
-                    app:layout_constraintTop_toTopOf="@+id/textView6" />
+                    app:layout_constraintStart_toEndOf="@+id/text_name"
+                    app:layout_constraintTop_toTopOf="@+id/text_name" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName2"
+                    android:id="@+id/edit_text_place"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="textPersonName|textMultiLine"
                     android:minHeight="48dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                    android:paddingStart="8dp"
+                    android:text="@={viewModel.group.place}"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_place_create"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView7"
-                    app:layout_constraintTop_toTopOf="@+id/textView7" />
+                    app:layout_constraintStart_toEndOf="@+id/text_place_create"
+                    app:layout_constraintTop_toTopOf="@+id/text_place_create" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName3"
+                    android:id="@+id/edit_text_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="textPersonName|textMultiLine"
                     android:minHeight="48dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                    android:paddingStart="8dp"
+                    android:text="@={viewModel.group.address}"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_address"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView8"
-                    app:layout_constraintTop_toTopOf="@+id/textView8" />
+                    app:layout_constraintStart_toEndOf="@+id/text_address"
+                    app:layout_constraintTop_toTopOf="@+id/text_address" />
 
                 <EditText
-                    android:id="@+id/editTextNumber"
+                    android:id="@+id/edit_text_need_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
                     android:ems="4"
                     android:inputType="number"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                    app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toTopOf="@+id/textView9" />
+                    android:minHeight="48dp"
+                    android:paddingStart="8dp"
+                    android:text="@={viewModel.convertIntToString(viewModel.group.needPeopleNumber)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_need_people"
+                    app:layout_constraintStart_toEndOf="@+id/text_need_people"
+                    app:layout_constraintTop_toTopOf="@+id/text_need_people" />
 
                 <EditText
-                    android:id="@+id/editTextNumber2"
+                    android:id="@+id/edit_text_total_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
                     android:ems="4"
                     android:inputType="number"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                    app:layout_constraintStart_toEndOf="@+id/textView10"
-                    app:layout_constraintTop_toTopOf="@+id/textView9" />
+                    android:minHeight="48dp"
+                    android:paddingStart="8dp"
+                    android:text="@={viewModel.convertIntToString(viewModel.group.totalPeopleNumber)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_need_people"
+                    app:layout_constraintStart_toEndOf="@+id/text_total_people"
+                    app:layout_constraintTop_toTopOf="@+id/text_need_people" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName4"
+                    android:id="@+id/edit_text_ball"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                    app:layout_constraintStart_toEndOf="@+id/textView12"
-                    app:layout_constraintTop_toTopOf="@+id/textView12" />
+                    android:inputType="textPersonName|textMultiLine"
+                    android:minHeight="48dp"
+                    android:paddingStart="8dp"
+                    android:text="@={viewModel.group.ball}"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_ball"
+                    app:layout_constraintStart_toEndOf="@+id/text_ball"
+                    app:layout_constraintTop_toTopOf="@+id/text_ball" />
 
                 <EditText
-                    android:id="@+id/editTextNumber3"
+                    android:id="@+id/edit_text_court_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
                     android:ems="3"
                     android:inputType="number"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                    app:layout_constraintStart_toEndOf="@+id/textView13"
-                    app:layout_constraintTop_toTopOf="@+id/textView13" />
+                    android:minHeight="48dp"
+                    android:paddingStart="8dp"
+                    android:text="@={viewModel.convertIntToString(viewModel.group.courtNumber)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_court_number_create"
+                    app:layout_constraintStart_toEndOf="@+id/text_court_number_create"
+                    app:layout_constraintTop_toTopOf="@+id/text_court_number_create" />
 
                 <EditText
-                    android:id="@+id/editTextNumber4"
+                    android:id="@+id/edit_text_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
                     android:ems="6"
                     android:inputType="number"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                    app:layout_constraintStart_toEndOf="@+id/textView15"
-                    app:layout_constraintTop_toTopOf="@+id/textView13" />
+                    android:minHeight="48dp"
+                    android:paddingStart="8dp"
+                    android:text="@={viewModel.convertIntToString(viewModel.group.price)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_court_number_create"
+                    app:layout_constraintStart_toEndOf="@+id/text_price_create"
+                    app:layout_constraintTop_toTopOf="@+id/text_court_number_create" />
 
                 <EditText
-                    android:id="@+id/editTextPhone"
+                    android:id="@+id/edit_text_phone_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
                     android:ems="10"
                     android:inputType="phone"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView17"
-                    app:layout_constraintStart_toEndOf="@+id/textView17"
-                    app:layout_constraintTop_toTopOf="@+id/textView17" />
+                    android:minHeight="48dp"
+                    android:paddingStart="8dp"
+                    android:text="@={viewModel.convertLongToString(viewModel.group.contactNumber)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_contact_number"
+                    app:layout_constraintStart_toEndOf="@+id/text_contact_number"
+                    app:layout_constraintTop_toTopOf="@+id/text_contact_number" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName5"
+                    android:id="@+id/edit_text_other"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_edit_text_selector"
                     android:ems="10"
                     android:gravity="start"
                     android:inputType="textMultiLine|textPersonName"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView18"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView18"
-                    app:layout_constraintTop_toTopOf="@+id/textView18" />
-
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginBottom="24dp"
-                    android:fontFamily="@font/noto_sans"
-                    android:text="創建"
+                    android:minHeight="200dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:text="@={viewModel.group.other}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/text_other"
+                    app:layout_constraintTop_toBottomOf="@+id/text_other"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_photo"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_edit_text_selector"
+                    app:layout_constraintStart_toStartOf="@+id/text_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/text_photo">
+
+                    <ImageView
+                        android:id="@+id/image_add_photo"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_add" />
+
+                    <TextView
+                        android:id="@+id/text_choose_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="選擇照片"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/image_add_photo" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.mark.badmintonpeer.MainViewModel
 import com.mark.badmintonpeer.NavigationDirections
 import com.mark.badmintonpeer.databinding.GroupTypeFragmentBinding
 import com.mark.badmintonpeer.ext.getVmFactory
@@ -62,7 +64,30 @@ class GroupTypeFragment(private val type: String) : Fragment() {
             Timber.d("groups=${viewModel.groups.value}")
         }
 
+        binding.layoutSwipeRefreshGroupType.setOnRefreshListener {
+            viewModel.refresh()
+            Timber.d("layoutSwipeRefreshGroupType refresh")
+        }
+
+        viewModel.refreshStatus.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.layoutSwipeRefreshGroupType.isRefreshing = it
+            }
+        }
+
+        ViewModelProvider(requireActivity()).get(MainViewModel::class.java).apply {
+            refresh.observe(viewLifecycleOwner) {
+                it?.let {
+                    viewModel.refresh()
+                    onRefreshed()
+                }
+            }
+        }
+
        return binding.root
     }
 
+    fun setRecyclerViewVisible(boolean: Boolean) {
+        viewModel._recyclerViewVisible.value = boolean
+    }
 }

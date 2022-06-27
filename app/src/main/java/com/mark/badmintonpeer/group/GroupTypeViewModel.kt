@@ -41,6 +41,11 @@ class GroupTypeViewModel(val type: String,private val repository: BadmintonPeerR
     val navigateToGroupDetail: LiveData<Group>
         get() = _navigateToGroupDetail
 
+    // Handle recycler view visible
+    var _recyclerViewVisible = MutableLiveData<Boolean>()
+    val recyclerViewVisible: LiveData<Boolean>
+        get() = _recyclerViewVisible
+
     private var viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -56,6 +61,7 @@ class GroupTypeViewModel(val type: String,private val repository: BadmintonPeerR
         Timber.d("------------------------------------------")
 
         getGroupsResult()
+        _recyclerViewVisible.value = false
     }
 
     fun getGroupsResult() {
@@ -90,6 +96,20 @@ class GroupTypeViewModel(val type: String,private val repository: BadmintonPeerR
                 }
             }
             _refreshStatus.value = false
+        }
+    }
+
+    fun refresh() {
+
+//        if (MainApplication.instance.isLiveDataDesign()) {
+//            _status.value = LoadApiStatus.DONE
+//            _refreshStatus.value = false
+//
+//        } else {
+            if (status.value != LoadApiStatus.LOADING) {
+                getGroupsResult()
+                Timber.d("GroupTypeViewModel refresh()")
+//            }
         }
     }
 

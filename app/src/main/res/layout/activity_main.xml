@@ -37,10 +37,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP || viewModel.currentFragmentType == CurrentFragmentType.CHATROOM || viewModel.currentFragmentType == CurrentFragmentType.NEWS || viewModel.currentFragmentType == CurrentFragmentType.PROFILE ? View.VISIBLE : View.GONE}"
             app:itemIconSize="36dp"
             app:itemIconTint="@drawable/bottom_nav_item_selector"
             app:labelVisibilityMode="unlabeled"
-            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP || viewModel.currentFragmentType == CurrentFragmentType.CHATROOM || viewModel.currentFragmentType == CurrentFragmentType.NEWS || viewModel.currentFragmentType == CurrentFragmentType.PROFILE ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_toolbar"
-            android:background="@color/purple_700"
+            android:background="@color/teal_700"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.DETAIL ? View.GONE : View.VISIBLE}"
             app:elevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -91,7 +92,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginEnd="16dp"
-            android:background="@color/purple_700"
+            android:background="@color/teal_700"
             android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP ? View.VISIBLE : View.GONE}"
             app:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
@@ -100,7 +101,7 @@
             app:srcCompat="@drawable/ic_filter" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/switch_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -113,6 +114,35 @@
             app:layout_constraintEnd_toStartOf="@+id/image_toolbar_filter"
             app:layout_constraintTop_toTopOf="@+id/image_toolbar_filter"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <Button
+            android:id="@+id/button_create_group"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg__light_green_radius_10dip"
+            android:text="創建"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.CREATE ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg__red_radius_10dip"
+            android:text="取消"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.CREATE ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

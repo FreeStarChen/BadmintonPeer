@@ -37,5 +37,9 @@
     <string name="filter">篩選</string>
     <string name="create">建立揪團</string>
 
+    <!-- characteristic type -->
+    <string name="water_dispenser">飲水機</string>
+    <string name="air_condition">冷氣</string>
+
 
 </resources>

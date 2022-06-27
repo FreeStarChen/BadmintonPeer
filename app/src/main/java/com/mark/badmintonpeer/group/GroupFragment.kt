@@ -25,8 +25,6 @@ class GroupFragment : Fragment() {
         fun newInstance() = GroupFragment()
     }
 
-    private lateinit var viewModel: GroupViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

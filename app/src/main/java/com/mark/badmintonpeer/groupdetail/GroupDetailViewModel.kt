@@ -78,6 +78,6 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
 
     val groupDate = _group.value?.date?.let { TimeCalculator.getDate(it.time) }
     val groupStartTime = _group.value?.startTime?.let { TimeCalculator.getTime(it.time) }
-    val groupEndTime = _group.value?.startTime?.let { TimeCalculator.getTime(it.time) }
+    val groupEndTime = _group.value?.endTime?.let { TimeCalculator.getTime(it.time) }
     val groupPrice = "$${_group.value?.price}"
 }

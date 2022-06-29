@@ -61,7 +61,7 @@ class GroupTypeViewModel(val type: String,private val repository: BadmintonPeerR
         Timber.d("------------------------------------------")
 
         getGroupsResult()
-        _recyclerViewVisible.value = false
+//        _recyclerViewVisible.value = false
     }
 
     fun getGroupsResult() {

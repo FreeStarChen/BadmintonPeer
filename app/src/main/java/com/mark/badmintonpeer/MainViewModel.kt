@@ -17,7 +17,9 @@ class MainViewModel(private val repository: BadmintonPeerRepository) : ViewModel
     val refresh: LiveData<Boolean>
         get() = _refresh
 
-    val buttonClick = MutableLiveData<Boolean>()
+    val switchStatus = MutableLiveData<Boolean>()
+
+    val type = MutableLiveData<String>()
 
     private var viewModelJob = Job()
 
@@ -30,7 +32,7 @@ class MainViewModel(private val repository: BadmintonPeerRepository) : ViewModel
         Timber.d("------------------------------------------")
         Timber.d("$this")
         Timber.d("------------------------------------------")
-        buttonClick.value = false
+        switchStatus.value = false
     }
 
     fun refresh() {

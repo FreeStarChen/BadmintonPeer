@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.mark.badmintonpeer.MainActivity
 import com.mark.badmintonpeer.MainViewModel
 import com.mark.badmintonpeer.databinding.CreateGroupFragmentBinding
 import com.mark.badmintonpeer.ext.getVmFactory
@@ -34,6 +35,8 @@ class CreateGroupFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
 
         val binding = CreateGroupFragmentBinding.inflate(inflater)
 

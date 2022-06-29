@@ -41,5 +41,7 @@
     <string name="water_dispenser">飲水機</string>
     <string name="air_condition">冷氣</string>
 
+    <string name="google_maps_key"></string>
+
 
 </resources>

@@ -26,6 +26,15 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.deleteGroup(id)
     }
 
+    override suspend fun addGroupMember(groupId: String, userId: String): Result<Boolean> {
+        return remoteDataSource.addGroupMember(groupId, userId)
+    }
+
+    override suspend fun subtractNeedPeopleNumber(groupId: String, needPeopleNumber: Int): Result<Boolean> {
+        return remoteDataSource.subtractNeedPeopleNumber(groupId, needPeopleNumber)
+    }
+
+
     override suspend fun getChatroom(id: String): Result<List<Chatroom>> {
         return remoteDataSource.getChatroom(id)
     }

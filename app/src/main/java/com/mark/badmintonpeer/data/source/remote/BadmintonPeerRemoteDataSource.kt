@@ -2,6 +2,7 @@ package com.mark.badmintonpeer.data.source.remote
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.mark.badmintonpeer.MainApplication
@@ -20,6 +21,8 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
     private const val PATH_GROUPS = "group"
     private const val KEY_START_TIME = "startTime"
     private const val KEY_CLASSIFICATION = "classification"
+    private const val KEY_MEMBER = "member"
+    private const val KEY_NEED_PEOPLE_NUMBER = "needPeopleNumber"
 
     override suspend fun login(id: String): Result<User> {
         TODO("Not yet implemented")
@@ -63,7 +66,6 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
         document
             .set(group)
             .addOnCompleteListener { task ->
-                Timber.i("Add group Complete")
                 if (task.isSuccessful) {
                     Timber.d("Add group=$group")
                     continuation.resume(Result.Success(true))
@@ -80,6 +82,46 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
 
     override suspend fun deleteGroup(id: String): Result<Group> {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun addGroupMember(groupId: String, userId: String): Result<Boolean> = suspendCoroutine{ continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_GROUPS)
+            .document(groupId)
+            .update(KEY_MEMBER,FieldValue.arrayUnion(userId))
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Timber.d("Add group member complete")
+                    continuation.resume(Result.Success(true))
+                }else {
+                    task.exception?.let {
+                        Timber.e("Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                }
+            }
+    }
+
+    override suspend fun subtractNeedPeopleNumber(groupId: String, needPeopleNumber: Int): Result<Boolean> = suspendCoroutine{ continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_GROUPS)
+            .document(groupId)
+            .update(KEY_NEED_PEOPLE_NUMBER,needPeopleNumber-1)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Timber.d("subtract need people number complete")
+                    continuation.resume(Result.Success(true))
+                }else {
+                    task.exception?.let {
+                        Timber.e("Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                }
+            }
     }
 
     override suspend fun getChatroom(id: String): Result<List<Chatroom>> {

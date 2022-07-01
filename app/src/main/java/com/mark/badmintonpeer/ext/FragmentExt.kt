@@ -2,16 +2,15 @@ package com.mark.badmintonpeer.ext
 
 import androidx.fragment.app.Fragment
 import com.mark.badmintonpeer.MainApplication
-import com.mark.badmintonpeer.creategroup.CreateGroupFragment
 import com.mark.badmintonpeer.data.Group
 import com.mark.badmintonpeer.factory.*
 
 /**
  * Extension functions for Fragment.
  */
-fun Fragment.getVmFactory(type: String): GroupTypeViewModelFactory {
+fun Fragment.getVmFactory(type: String): StringTypeViewModelFactory {
     val repository = (requireContext().applicationContext as MainApplication).repository
-    return GroupTypeViewModelFactory(type, repository)
+    return StringTypeViewModelFactory(type, repository)
 }
 
 fun Fragment.getVmFactory(group: Group): GroupDetailViewModelFactory {

@@ -25,6 +25,17 @@ class BadmintonPeerLocalDataSource(val context: Context) : BadmintonPeerDataSour
         TODO("Not yet implemented")
     }
 
+    override suspend fun addGroupMember(groupId: String, userId: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun subtractNeedPeopleNumber(
+        groupId: String,
+        needPeopleNumber: Int
+    ): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getChatroom(id: String): Result<List<Chatroom>> {
         TODO("Not yet implemented")
     }

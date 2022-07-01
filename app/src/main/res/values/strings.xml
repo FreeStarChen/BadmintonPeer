@@ -30,7 +30,7 @@
     </string-array>
 
     <!-- Page Title Name -->
-    <string name="group">揪團列表</string>
+    <string name="group">羽球同行</string>
     <string name="chatroom">聊天室</string>
     <string name="news">最新消息</string>
     <string name="profile">個人資料</string>
@@ -42,6 +42,10 @@
     <string name="air_condition">冷氣</string>
 
     <string name="google_maps_key"></string>
+
+    <!-- google sign in -->
+    <string name="login_success">登入成功</string>
+    <string name="login_fail">登入失敗</string>
 
 
 </resources>

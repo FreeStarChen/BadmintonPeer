@@ -16,6 +16,10 @@ interface BadmintonPeerDataSource {
 
     suspend fun deleteGroup(id: String) : Result<Group>
 
+    suspend fun addGroupMember(groupId: String, userId: String) : Result<Boolean>
+
+    suspend fun subtractNeedPeopleNumber(groupId: String, needPeopleNumber: Int) : Result<Boolean>
+
     suspend fun getChatroom(id: String) : Result<List<Chatroom>>
 
     fun getLiveChats(id: String) : MutableLiveData<List<Chat>>

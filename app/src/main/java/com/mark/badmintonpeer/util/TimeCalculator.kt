@@ -7,8 +7,10 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.EditText
 import com.mark.badmintonpeer.R
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 object TimeCalculator {
 
@@ -110,6 +112,28 @@ object TimeCalculator {
         }
     }
 
+    fun String.toDateLong(pattern: String = "MM/dd/yyyy") : Long {
+        @SuppressLint("SimpleDateFormat")
+        val dateFormat = SimpleDateFormat(pattern)
+        var date: Date? = Date()
+        try {
+            date = dateFormat.parse(this)
+        }catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return date?.time ?: 0
+    }
 
+    fun String.toTimeLong(pattern: String = "HH:mm") : Long {
+        @SuppressLint("SimpleDateFormat")
+        val dateFormat = SimpleDateFormat(pattern)
+        var date: Date? = Date()
+        try {
+            date = dateFormat.parse(this)
+        }catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return date?.time ?: 0
+    }
 
 }

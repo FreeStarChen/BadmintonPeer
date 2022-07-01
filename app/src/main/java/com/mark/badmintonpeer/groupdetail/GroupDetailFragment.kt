@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearSnapHelper
+import com.mark.badmintonpeer.MainViewModel
 import com.mark.badmintonpeer.NavigationDirections
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.chatroom.ChatroomFragmentDirections
@@ -83,7 +84,21 @@ class GroupDetailFragment : Fragment() {
         }
 
         binding.buttonDetailSignUp.setOnClickListener {
+            viewModel.addGroupMemberResult()
+            viewModel.subtractNeedPeopleNumberResult()
+            findNavController().navigateUp()
+        }
 
+        viewModel.leave.observe(viewLifecycleOwner) {
+            it?.let { needRefresh ->
+                if (needRefresh) {
+                    ViewModelProvider(requireActivity()).get(MainViewModel::class.java).apply {
+                        refresh()
+                    }
+                }
+                findNavController().navigateUp()
+                viewModel.onLeft()
+            }
         }
 
         binding.imageDetailChat.setOnClickListener {

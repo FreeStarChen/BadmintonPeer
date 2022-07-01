@@ -2,7 +2,6 @@ package com.mark.badmintonpeer.ext
 
 import android.app.Activity
 import com.mark.badmintonpeer.MainApplication
-import com.mark.badmintonpeer.factory.GroupTypeViewModelFactory
 import com.mark.badmintonpeer.factory.ViewModelFactory
 
 /**

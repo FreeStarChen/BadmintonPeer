@@ -1,10 +1,8 @@
 package com.mark.badmintonpeer.data.source.remote
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.mark.badmintonpeer.MainApplication
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.*
@@ -18,11 +16,16 @@ import kotlin.coroutines.suspendCoroutine
  */
 object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
 
-    private const val PATH_GROUPS = "group"
+    private const val PATH_GROUPS = "groups"
     private const val KEY_START_TIME = "startTime"
     private const val KEY_CLASSIFICATION = "classification"
     private const val KEY_MEMBER = "member"
     private const val KEY_NEED_PEOPLE_NUMBER = "needPeopleNumber"
+    private const val PATH_CHATROOM = "chatroom"
+    private const val KEY_TYPE = "type"
+    private const val KEY_LAST_TALK_TIME = "lastTalkTime"
+    private const val PATH_USERS = "users"
+    private const val KEY_ID = "id"
 
     override suspend fun login(id: String): Result<User> {
         TODO("Not yet implemented")
@@ -124,8 +127,59 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             }
     }
 
-    override suspend fun getChatroom(id: String): Result<List<Chatroom>> {
-        TODO("Not yet implemented")
+    override suspend fun getAllChatroom(): Result<List<Chatroom>> = suspendCoroutine{ continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_CHATROOM)
+//            .whereEqualTo(KEY_CLASSIFICATION,type)
+//            .orderBy(KEY_START_TIME,Query.Direction.ASCENDING)
+//            .limit(10)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<Chatroom>()
+                    for (document in task.result) {
+                        Timber.d(document.id + " => " + document.data)
+
+                        val chatroom = document.toObject(Chatroom::class.java)
+                        list.add(chatroom)
+                    }
+                    continuation.resume(Result.Success(list))
+                }else {
+                    task.exception?.let {
+                        Timber.e("Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                }
+            }
+    }
+
+    override suspend fun getTypeChatroom(type: String): Result<List<Chatroom>> = suspendCoroutine{ continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_CHATROOM)
+            .whereEqualTo(KEY_TYPE,type)
+//            .orderBy(KEY_LAST_TALK_TIME,Query.Direction.ASCENDING)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<Chatroom>()
+                    for (document in task.result) {
+                        Timber.d(document.id + " => " + document.data)
+
+                        val chatroom = document.toObject(Chatroom::class.java)
+                        list.add(chatroom)
+                    }
+                    continuation.resume(Result.Success(list))
+                }else {
+                    task.exception?.let {
+                        Timber.e("Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                }
+            }
     }
 
     override fun getLiveChats(id: String): MutableLiveData<List<Chat>> {
@@ -151,4 +205,59 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
     override suspend fun deleteInvitation(id: String): Result<Invitation> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun checkUser(id: String): Result<User> = suspendCoroutine{ continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USERS)
+            .whereEqualTo(KEY_ID,id)
+            .get()
+            .addOnSuccessListener {
+                Timber.d("checkUser addOnSuccessListener")
+            }
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Timber.d("task=${task.result}")
+                    if (task.result.documents.isEmpty()){
+                        Timber.d("empty")
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }else {
+                        for (document in task.result) {
+                            Timber.d("document=${document}")
+                            val user = document.toObject(User::class.java)
+                            Timber.d("user=${user}")
+                            continuation.resume(Result.Success(user))
+                        }
+                    }
+                }else {
+                    task.exception?.let {
+                        Timber.e("Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                }
+            }
+    }
+
+    override suspend fun addUser(user: User): Result<Boolean> = suspendCoroutine { continuation ->
+        val groups = FirebaseFirestore.getInstance().collection(PATH_USERS)
+        val document = groups.document(user.id)
+
+        document
+            .set(user)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Timber.d("Add user=$user")
+                    continuation.resume(Result.Success(true))
+                }else {
+                    task.exception?.let {
+                        Timber.e("Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                }
+            }
+    }
+
 }

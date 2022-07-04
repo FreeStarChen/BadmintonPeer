@@ -31,6 +31,10 @@ class GroupTypeViewModel(val type: String,private val repository: BadmintonPeerR
     val error: LiveData<String>
         get() = _error
 
+    private val _leave = MutableLiveData<Boolean>()
+    val leave: LiveData<Boolean>
+        get() = _leave
+
     // status for the loading icon of swl
     private val _refreshStatus = MutableLiveData<Boolean>()
     val refreshStatus: LiveData<Boolean>
@@ -100,17 +104,24 @@ class GroupTypeViewModel(val type: String,private val repository: BadmintonPeerR
     }
 
     fun refresh() {
+        if (MainApplication.instance.isLiveDataDesign()) {
+            _status.value = LoadApiStatus.DONE
+            _refreshStatus.value = false
 
-//        if (MainApplication.instance.isLiveDataDesign()) {
-//            _status.value = LoadApiStatus.DONE
-//            _refreshStatus.value = false
-//
-//        } else {
+        } else {
             if (status.value != LoadApiStatus.LOADING) {
                 getGroupsResult()
                 Timber.d("GroupTypeViewModel refresh()")
-//            }
+            }
         }
+    }
+
+    fun leave(needRefresh: Boolean = false) {
+        _leave.value = needRefresh
+    }
+
+    fun onLeft() {
+        _leave.value = null
     }
 
     fun navigateToGroupDetail(group: Group) {

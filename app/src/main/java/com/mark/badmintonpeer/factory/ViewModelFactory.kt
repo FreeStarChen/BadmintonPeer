@@ -8,6 +8,7 @@ import com.mark.badmintonpeer.creategroup.CreateGroupViewModel
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.filter.FilterViewModel
 import com.mark.badmintonpeer.group.GroupViewModel
+import com.mark.badmintonpeer.login.LoginViewModel
 import com.mark.badmintonpeer.news.NewsViewModel
 import com.mark.badmintonpeer.profile.ProfileViewModel
 
@@ -26,6 +27,9 @@ class ViewModelFactory constructor(
                 isAssignableFrom(GroupViewModel::class.java) ->
                     GroupViewModel(repository)
 
+                isAssignableFrom(ChatroomViewModel::class.java) ->
+                    ChatroomViewModel(repository)
+
                 isAssignableFrom(NewsViewModel::class.java) ->
                     NewsViewModel(repository)
 
@@ -37,6 +41,9 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(FilterViewModel::class.java) ->
                     FilterViewModel(repository)
+
+                isAssignableFrom(LoginViewModel::class.java) ->
+                    LoginViewModel(repository)
 
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

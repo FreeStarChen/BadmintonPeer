@@ -1,57 +1,33 @@
 package com.mark.badmintonpeer
 
-import android.Manifest
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.google.android.gms.location.*
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mark.badmintonpeer.creategroup.CreateGroupFragment
 import com.mark.badmintonpeer.databinding.ActivityMainBinding
 import com.mark.badmintonpeer.ext.getVmFactory
-import com.mark.badmintonpeer.group.GroupTypeViewModel
+import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.util.CurrentFragmentType
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
     val viewModel by viewModels<MainViewModel> { getVmFactory() }
 
     lateinit var binding: ActivityMainBinding
-//
-//    private var locationPermissionGranted = false
-//
-//    private lateinit var mContext: Context
-//    private var googleMap: GoogleMap? = null
-//    private lateinit var mLocationProviderClient: FusedLocationProviderClient
-//
-//    companion object {
-//        const val REQUEST_LOCATION_PERMISSION = 1
-//        const val REQUEST_ENABLE_GPS = 2
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,27 +40,12 @@ class MainActivity : AppCompatActivity() {
 //        mContext = this
 //        mLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        val bottomNavigationView: BottomNavigationView = binding.bottomNavigationView
+//        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+//        val bottomNavigationView: BottomNavigationView = binding.bottomNavigationView
 
-        NavigationUI.setupWithNavController(bottomNavigationView, navController)
+//        NavigationUI.setupWithNavController(bottomNavigationView, navController)
 
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            when (destination.id) {
-//                R.id.groupFragment -> {
-//
-//                }
-//                R.id.chatroomFragment -> {
-//
-//                }
-//                R.id.newsFragment -> {
-//
-//                }
-//                R.id.profileFragment -> {
-//
-//                }
-//            }
-//        }
+
 
 //        val list = listOf("1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1")
 //
@@ -131,18 +92,50 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.buttonCancel.setOnClickListener {
-            findNavController(R.id.nav_host_fragment).navigateUp()
+
+            AlertDialog.Builder(this)
+                .setTitle("確定取消?")
+                .setIcon(R.drawable.ic_warning)
+                .setMessage("您所輸入的資料將不會被保留")
+                .setPositiveButton("確定") { dialog, _ ->
+
+                    findNavController(R.id.nav_host_fragment).navigateUp()
+
+                    Toast.makeText(this, "已取消", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                }
+                .setNeutralButton("取消") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+
         }
 
         binding.buttonCreateGroup.setOnClickListener {
-            val fragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
-            val createGroupFragment =
-                fragment?.childFragmentManager?.primaryNavigationFragment as CreateGroupFragment
-            createGroupFragment.callViewModelAddGroupResult()
+
+            AlertDialog.Builder(this)
+                .setTitle("確定儲存?")
+                .setPositiveButton("確定") { dialog, _ ->
+
+                    val fragment =
+                        supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+                    val createGroupFragment =
+                        fragment?.childFragmentManager?.primaryNavigationFragment as CreateGroupFragment
+                    createGroupFragment.callViewModelAddGroupResult()
+
+                    findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToGroupFragment())
+
+                    Toast.makeText(this, "已成功創建揪團", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                }
+                .setNeutralButton("取消") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+
+
 
 //            childFragment.callViewModelAddGroupResult()
-            Timber.d("childFragment=$createGroupFragment")
 
 //            val createGroupViewModel = ViewModelProvider(
 //                this,
@@ -151,8 +144,6 @@ class MainActivity : AppCompatActivity() {
 //
 //            createGroupViewModel.addGroupResult()
 
-            findNavController(R.id.nav_host_fragment).navigateUp()
-//            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToGroupFragment())
         }
 
         binding.switchMap.setOnCheckedChangeListener { compoundButton, b ->
@@ -171,8 +162,64 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupNavController()
+        setupBottomNav()
+        UserManager.clear()
 
     }
+
+    /**
+     * Set up [BottomNavigationView], add badge view through [BottomNavigationMenuView] and [BottomNavigationItemView]
+     * to display the count of Cart
+     */
+    private fun setupBottomNav() {
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+
+                R.id.navigation_group -> {
+                    findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToGroupFragment())
+                    return@setOnItemSelectedListener true
+                }
+
+                R.id.navigation_chatroom -> {
+
+                    when (viewModel.isLoggedIn) {
+                        true -> {
+                            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToChatroomFragment())
+                            return@setOnItemSelectedListener true
+                        }
+                        false -> {
+                            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToLoginDialog())
+                            return@setOnItemSelectedListener false
+                        }
+                    }
+                    return@setOnItemSelectedListener true
+                }
+
+                R.id.navigation_news -> {
+                    findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToNewsFragment())
+                    return@setOnItemSelectedListener true
+                }
+
+                R.id.navigation_profile -> {
+
+                    when (viewModel.isLoggedIn) {
+                        true -> {
+                            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToProfileFragment())
+                            return@setOnItemSelectedListener true
+                        }
+                        false -> {
+                            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToLoginDialog())
+                            return@setOnItemSelectedListener false
+                        }
+                    }
+                    return@setOnItemSelectedListener true
+                }
+
+            }
+            false
+        }
+    }
+
 
     /**
      * Set up [NavController.addOnDestinationChangedListener] to record the current fragment, it better than another design
@@ -181,13 +228,14 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavController() {
         findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener { navController: NavController, _: NavDestination, _: Bundle? ->
             viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
-                R.id.groupFragment -> CurrentFragmentType.GROUP
-                R.id.chatroomFragment -> CurrentFragmentType.CHATROOM
-                R.id.newsFragment -> CurrentFragmentType.NEWS
-                R.id.profileFragment -> CurrentFragmentType.PROFILE
+                R.id.navigation_group -> CurrentFragmentType.GROUP
+                R.id.navigation_chatroom -> CurrentFragmentType.CHATROOM
+                R.id.navigation_news -> CurrentFragmentType.NEWS
+                R.id.navigation_profile -> CurrentFragmentType.PROFILE
                 R.id.filterFragment -> CurrentFragmentType.FILTER
                 R.id.createGroupFragment -> CurrentFragmentType.CREATE
                 R.id.groupDetailFragment -> CurrentFragmentType.DETAIL
+                R.id.chatroomDetailFragment -> CurrentFragmentType.CHAT
                 else -> viewModel.currentFragmentType.value
             }
         }

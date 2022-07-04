@@ -103,9 +103,9 @@
             android:id="@+id/image_time"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="@+id/image_medal"
-            app:layout_constraintTop_toBottomOf="@+id/image_medal"
+            app:layout_constraintTop_toBottomOf="@+id/text_detail_title"
             app:srcCompat="@drawable/ic_time_color_2" />
 
         <ImageView
@@ -139,13 +139,12 @@
         <ImageView
             android:id="@+id/image_group_photo"
             android:layout_width="110dp"
-            android:layout_height="150dp"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_white_radius_10dip"
             android:scaleType="centerCrop"
-            app:imageUrl="@{group.images[0]}"
+            app:imageUrlTransform="@{group.images[0]}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -156,16 +155,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/noto_sans"
             android:text="@{group.name}"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/image_medal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_medal"
-            app:layout_constraintTop_toTopOf="@+id/image_medal"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="快樂羽球團" />
 
         <TextView
@@ -187,7 +186,7 @@
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@+id/image_group_photo"
-            app:layout_constraintTop_toTopOf="@+id/image_group_photo"
+            app:layout_constraintTop_toTopOf="@+id/text_detail_title"
             app:srcCompat="@drawable/ic_medal_color" />
 
         <ProgressBar
@@ -195,11 +194,14 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="5dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@color/purple_500"
-            app:layout_constraintBottom_toBottomOf="@+id/image_group_photo"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/image_group" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/image_group"
+            app:layout_constraintTop_toBottomOf="@+id/text_court_number2" />
 
         <TextView
             android:id="@+id/text_price"

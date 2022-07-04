@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="chatroom"
+            type="com.mark.badmintonpeer.data.Chatroom" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,9 +24,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_white_radius_10dip"
+            android:background="@drawable/bg_white_radius_30dip"
             android:scaleType="centerCrop"
-
+            app:imageUrlWithCircleCrop="@{chatroom.image}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -37,22 +39,23 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/noto_sans"
-
+            android:text="@{chatroom.name}"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/text_last_talk_time"
             app:layout_constraintStart_toEndOf="@+id/image_chatroom_photo"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="快樂羽球團" />
 
         <TextView
-            android:id="@+id/text_date"
+            android:id="@+id/text_last_talk_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/noto_sans"
-            android:text="哈囉"
+            android:text="@{chatroom.lastTalkMessage}"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/image_chatroom_photo"
@@ -60,7 +63,7 @@
             tools:text="哈囉" />
 
         <TextView
-            android:id="@+id/text_last_time"
+            android:id="@+id/text_last_talk_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -68,7 +71,6 @@
             android:fontFamily="@font/noto_sans"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:text="18:00"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="18:00" />

@@ -12,6 +12,7 @@ import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.Group
 import com.mark.badmintonpeer.data.Result
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
+import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.network.LoadApiStatus
 import com.mark.badmintonpeer.util.TimeCalculator
 import kotlinx.coroutines.CoroutineScope
@@ -59,6 +60,10 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
     }
     val characteristic: LiveData<List<String>>
         get() = _characteristic
+
+    // check user login status
+    val isLoggedIn
+        get() = UserManager.isLoggedIn
 
     val decoration = object : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(
@@ -172,7 +177,7 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
         }
     }
 
-    val groupDate = _group.value?.date?.let { TimeCalculator.getDate(it.time) }
+    val groupDate = _group.value?.date?.let { TimeCalculator.getDateAndWeek(it.time) }
     val groupStartTime = _group.value?.startTime?.let { TimeCalculator.getTime(it.time) }
     val groupEndTime = _group.value?.endTime?.let { TimeCalculator.getTime(it.time) }
     val groupPrice = "$${_group.value?.price}"

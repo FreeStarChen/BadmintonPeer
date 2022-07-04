@@ -10,6 +10,7 @@ enum class CurrentFragmentType(val value: String) {
     PROFILE(getString(R.string.profile)),
     DETAIL(""),
     FILTER(getString(R.string.filter)),
-    CREATE(getString(R.string.create))
+    CREATE(getString(R.string.create)),
+    CHAT("")
 
 }

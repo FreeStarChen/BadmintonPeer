@@ -37,7 +37,7 @@ import com.mark.badmintonpeer.ext.getVmFactory
 import timber.log.Timber
 import java.util.*
 
-class GroupTypeFragment(private val type: String) : Fragment(), OnMapReadyCallback {
+class GroupTypeFragment : Fragment(), OnMapReadyCallback {
 
     private var locationPermissionGranted = false
 
@@ -53,14 +53,14 @@ class GroupTypeFragment(private val type: String) : Fragment(), OnMapReadyCallba
     /**
      * Lazily initialize our [GroupTypeViewModel].
      */
-    private val viewModel by viewModels<GroupTypeViewModel> { getVmFactory(type) }
+    private val viewModel by viewModels<GroupTypeViewModel> { getVmFactory(getType()) }
 
     companion object {
         fun newInstance(type: String): GroupTypeFragment {
-            val fragment = GroupTypeFragment(type)
-//            val args = Bundle()
-//            args.putString("type", type)
-//            fragment.arguments = args
+            val fragment = GroupTypeFragment()
+            val args = Bundle()
+            args.putString("type", type)
+            fragment.arguments = args
             return fragment
         }
 
@@ -69,9 +69,9 @@ class GroupTypeFragment(private val type: String) : Fragment(), OnMapReadyCallba
 
     }
 
-//    fun getType(): String {
-//        return requireArguments().getString("type", "")
-//    }
+    fun getType(): String {
+        return requireArguments().getString("type", "")
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -100,6 +100,7 @@ class GroupTypeFragment(private val type: String) : Fragment(), OnMapReadyCallba
             }
         )
 
+
         viewModel.navigateToGroupDetail.observe(viewLifecycleOwner) {
             it?.let {
                 findNavController().navigate(NavigationDirections.navigateToGroupDetailFragment(it))
@@ -109,8 +110,10 @@ class GroupTypeFragment(private val type: String) : Fragment(), OnMapReadyCallba
 
         viewModel.groups.observe(viewLifecycleOwner) {
             (binding.recyclerViewGroupType.adapter as GroupTypeAdapter).submitList(it)
+//            (binding.recyclerViewGroupType.adapter as GroupTypeAdapter).notifyDataSetChanged()
             Timber.d("groups=${viewModel.groups.value}")
 
+            //Add groups address Marker at google map
             viewModel.groups.value?.let { listGroups ->
                 val geoCoder: Geocoder? = Geocoder(context, Locale.getDefault())
 //                val groupAddressList = mutableListOf<List<Address>>()
@@ -157,12 +160,12 @@ class GroupTypeFragment(private val type: String) : Fragment(), OnMapReadyCallba
         }
 
         mainViewModel.switchStatus.observe(viewLifecycleOwner) {
-            Log.i("TestW", "type=$type, switchStatus=$it")
+            Log.i("TestW", "type=${getType()}, switchStatus=$it")
             viewModel._recyclerViewVisible.value = it
         }
 
         viewModel.recyclerViewVisible.observe(viewLifecycleOwner) {
-            Log.i("TestW", "type=$type, recyclerViewVisible=$it")
+            Log.i("TestW", "type=${getType()}, recyclerViewVisible=$it")
         }
 
         return binding.root

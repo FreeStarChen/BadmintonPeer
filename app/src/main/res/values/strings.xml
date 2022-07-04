@@ -46,6 +46,23 @@
     <!-- google sign in -->
     <string name="login_success">登入成功</string>
     <string name="login_fail">登入失敗</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--Profile-->
+    <string name="profile_mystic_information">Into the Unknown~</string>
+    <string name="collections">我的收藏</string>
+    <string name="group_record">揪團紀錄</string>
+    <string name="comments">我的評價</string>
+    <string name="friends">我的好友</string>
+    <string name="class_record">課程紀錄</string>
+    <string name="competition_record">比賽紀錄</string>
+    
+    
+
+    <!-- Login Dialog -->
+    <string name="login_title">請先登入會員</string>
+    <string name="login_description">登入會員後即可使用個人功能。</string>
+    <string name="login_facebook_text">Facebook 登入</string>
 
 </resources>

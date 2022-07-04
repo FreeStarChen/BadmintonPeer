@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.mark.badmintonpeer.NavigationDirections
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.databinding.GroupFragmentBinding
+import com.mark.badmintonpeer.login.UserManager
 
 class GroupFragment : Fragment() {
 
@@ -32,7 +33,12 @@ class GroupFragment : Fragment() {
         val binding = GroupFragmentBinding.inflate(inflater)
 
         binding.imageAddGroup.setOnClickListener {
-            this.findNavController().navigate(NavigationDirections.navigateToCreateGroupFragment())
+            if (UserManager.isLoggedIn) {
+                findNavController().navigate(NavigationDirections.navigateToCreateGroupFragment())
+            }
+            else {
+                findNavController().navigate(NavigationDirections.navigateToLoginDialog())
+            }
         }
 
         return binding.root

@@ -19,7 +19,9 @@ interface BadmintonPeerRepository {
 
     suspend fun subtractNeedPeopleNumber(groupId: String, needPeopleNumber: Int) : Result<Boolean>
 
-    suspend fun getChatroom(id: String) : Result<List<Chatroom>>
+    suspend fun getAllChatroom() : Result<List<Chatroom>>
+
+    suspend fun getTypeChatroom(type: String) : Result<List<Chatroom>>
 
     fun getLiveChats(id: String) : MutableLiveData<List<Chat>>
 
@@ -32,5 +34,9 @@ interface BadmintonPeerRepository {
     suspend fun addInvitation() : Result<Invitation>
 
     suspend fun deleteInvitation(id: String) : Result<Invitation>
+
+    suspend fun checkUser(id: String) : Result<User>
+
+    suspend fun addUser(user: User) : Result<Boolean>
 
 }

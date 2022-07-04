@@ -34,10 +34,14 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.subtractNeedPeopleNumber(groupId, needPeopleNumber)
     }
 
-
-    override suspend fun getChatroom(id: String): Result<List<Chatroom>> {
-        return remoteDataSource.getChatroom(id)
+    override suspend fun getAllChatroom(): Result<List<Chatroom>> {
+        return remoteDataSource.getAllChatroom()
     }
+
+    override suspend fun getTypeChatroom(type: String): Result<List<Chatroom>> {
+        return remoteDataSource.getTypeChatroom(type)
+    }
+
 
     override fun getLiveChats(id: String): MutableLiveData<List<Chat>> {
         return remoteDataSource.getLiveChats(id)
@@ -61,5 +65,13 @@ class DefaultBadmintonPeerRepository(
 
     override suspend fun deleteInvitation(id: String): Result<Invitation> {
         return remoteDataSource.deleteInvitation(id)
+    }
+
+    override suspend fun checkUser(id: String): Result<User> {
+        return remoteDataSource.checkUser(id)
+    }
+
+    override suspend fun addUser(user: User): Result<Boolean> {
+        return remoteDataSource.addUser(user)
     }
 }

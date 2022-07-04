@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/groupFragment">
+    app:startDestination="@id/navigation_group">
 
     <fragment
-        android:id="@+id/groupFragment"
+        android:id="@+id/navigation_group"
         android:name="com.mark.badmintonpeer.group.GroupFragment"
         android:label="group_fragment"
         tools:layout="@layout/group_fragment" />
     <fragment
-        android:id="@+id/chatroomFragment"
+        android:id="@+id/navigation_chatroom"
         android:name="com.mark.badmintonpeer.chatroom.ChatroomFragment"
         android:label="chatroom_fragment"
         tools:layout="@layout/chatroom_fragment" />
     <fragment
-        android:id="@+id/newsFragment"
+        android:id="@+id/navigation_news"
         android:name="com.mark.badmintonpeer.news.NewsFragment"
         android:label="news_fragment"
         tools:layout="@layout/news_fragment" />
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/navigation_profile"
         android:name="com.mark.badmintonpeer.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
@@ -58,10 +58,40 @@
         app:destination="@id/groupDetailFragment" />
     <action
         android:id="@+id/navigate_to_group_fragment"
-        app:destination="@id/groupFragment" />
+        app:popUpTo="@id/navigation"
+        app:destination="@id/navigation_group" />
     <action
         android:id="@+id/navigate_to_chatroom_fragment"
-        app:destination="@+id/chatroomFragment" />
+        app:popUpTo="@id/navigation"
+        app:destination="@+id/navigation_chatroom" />
+    <action
+        android:id="@+id/navigate_to_news_fragment"
+        app:popUpTo="@id/navigation"
+        app:destination="@+id/navigation_news" />
+    <action
+        android:id="@+id/navigate_to_profile_fragment"
+        app:popUpTo="@id/navigation"
+        app:destination="@+id/navigation_profile" />
+    <fragment
+        android:id="@+id/chatroomDetailFragment"
+        android:name="com.mark.badmintonpeer.chatroom.ChatroomChatFragment"
+        android:label="chatroom_detail_fragment"
+        tools:layout="@layout/chatroom_chat_fragment" >
 
+        <argument
+            android:name="chatroomKey"
+            app:argType="com.mark.badmintonpeer.data.Chatroom"
+            app:nullable="false"/>
+    </fragment>
 
+    <action
+        android:id="@+id/navigate_to_chatroom_detail_fragment"
+        app:destination="@+id/chatroomDetailFragment" />
+    <dialog
+        android:id="@+id/loginDialog"
+        android:name="com.mark.badmintonpeer.login.LoginDialog"
+        android:label="Login_dialog" />
+
+    <action android:id="@+id/navigate_to_login_dialog"
+        app:destination="@+id/loginDialog"/>
 </navigation>

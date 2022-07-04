@@ -7,12 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearSnapHelper
+import com.mark.badmintonpeer.MainViewModel
 import com.mark.badmintonpeer.NavigationDirections
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.chatroom.ChatroomFragmentDirections
+import com.mark.badmintonpeer.creategroup.CreateGroupFragment
 import com.mark.badmintonpeer.databinding.GroupDetailFragmentBinding
 import com.mark.badmintonpeer.ext.getVmFactory
 import timber.log.Timber
@@ -84,10 +89,54 @@ class GroupDetailFragment : Fragment() {
 
         binding.buttonDetailSignUp.setOnClickListener {
 
+            if (viewModel.isLoggedIn) {
+
+                AlertDialog.Builder(requireContext())
+                    .setTitle("確定報名?")
+                    .setPositiveButton("確定") { dialog, _ ->
+
+                        viewModel.addGroupMemberResult()
+                        viewModel.subtractNeedPeopleNumberResult()
+                        findNavController().navigate(NavigationDirections.navigateToGroupFragment())
+
+                        Toast.makeText(
+                            requireContext(),
+                            "已成功報名${viewModel.group.value?.name}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        dialog.dismiss()
+                    }
+                    .setNeutralButton("取消") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+            else {
+                findNavController().navigate(NavigationDirections.navigateToLoginDialog())
+            }
+
+        }
+
+        viewModel.leave.observe(viewLifecycleOwner) {
+            it?.let { needRefresh ->
+                if (needRefresh) {
+                    ViewModelProvider(requireActivity()).get(MainViewModel::class.java).apply {
+                        refresh()
+                    }
+                }
+                findNavController().navigateUp()
+                viewModel.onLeft()
+            }
         }
 
         binding.imageDetailChat.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToChatroomFragment())
+            if (viewModel.isLoggedIn){
+                findNavController().navigate(NavigationDirections.navigateToChatroomFragment())
+            }
+            else {
+                findNavController().navigate(NavigationDirections.navigateToLoginDialog())
+            }
+
         }
 
         return binding.root

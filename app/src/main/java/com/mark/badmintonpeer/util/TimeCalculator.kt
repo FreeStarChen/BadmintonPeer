@@ -7,8 +7,10 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.EditText
 import com.mark.badmintonpeer.R
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 object TimeCalculator {
 
@@ -29,9 +31,25 @@ object TimeCalculator {
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun getDate(time: Long): String {
+    fun getDateAndWeek(time: Long): String {
         return if (android.os.Build.VERSION.SDK_INT >= 24) {
             SimpleDateFormat("YYYY/MM/dd EE").format(time)
+        } else {
+            val tms = Calendar.getInstance()
+            tms.get(Calendar.DAY_OF_MONTH).toString() + "/" +
+                    tms.get(Calendar.MONTH).toString() + "/" +
+                    tms.get(Calendar.YEAR).toString() + " " +
+                    tms.get(Calendar.DAY_OF_MONTH).toString() + " " +
+                    tms.get(Calendar.HOUR_OF_DAY).toString() + ":" +
+                    tms.get(Calendar.MINUTE).toString() + ":" +
+                    tms.get(Calendar.SECOND).toString()
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun getDate(time: Long): String {
+        return if (android.os.Build.VERSION.SDK_INT >= 24) {
+            SimpleDateFormat("YYYY/MM/dd").format(time)
         } else {
             val tms = Calendar.getInstance()
             tms.get(Calendar.DAY_OF_MONTH).toString() + "/" +
@@ -110,6 +128,28 @@ object TimeCalculator {
         }
     }
 
+    fun String.toDateLong(pattern: String = "MM/dd/yyyy") : Long {
+        @SuppressLint("SimpleDateFormat")
+        val dateFormat = SimpleDateFormat(pattern)
+        var date: Date? = Date()
+        try {
+            date = dateFormat.parse(this)
+        }catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return date?.time ?: 0
+    }
 
+    fun String.toTimeLong(pattern: String = "HH:mm") : Long {
+        @SuppressLint("SimpleDateFormat")
+        val dateFormat = SimpleDateFormat(pattern)
+        var date: Date? = Date()
+        try {
+            date = dateFormat.parse(this)
+        }catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return date?.time ?: 0
+    }
 
 }

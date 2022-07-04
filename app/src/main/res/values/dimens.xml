@@ -14,4 +14,7 @@
     <dimen name="edge_detail_circle">1px</dimen>
     <dimen name="radius_detail_circle">3dp</dimen>
 
+    <!-- Login Dialog -->
+    <dimen name="height_login">202dp</dimen>
+
 </resources>

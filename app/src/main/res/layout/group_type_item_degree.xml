@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
-        android:background="@drawable/bg__orange_radius_4dip">
+        android:background="@drawable/bg_orange_radius_4dip">
 
         <TextView
             android:id="@+id/text_degree"

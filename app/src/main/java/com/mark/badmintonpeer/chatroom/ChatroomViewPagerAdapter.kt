@@ -21,5 +21,4 @@ class ChatroomViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragme
         return fragments[position]
     }
 
-
 }

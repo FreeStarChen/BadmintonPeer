@@ -10,8 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mark.badmintonpeer.MainApplication
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.Group
+import com.mark.badmintonpeer.data.Result
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
+import com.mark.badmintonpeer.login.UserManager
+import com.mark.badmintonpeer.network.LoadApiStatus
 import com.mark.badmintonpeer.util.TimeCalculator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class GroupDetailViewModel(val argument: Group,private val repository: BadmintonPeerRepository) : ViewModel() {
 
@@ -21,6 +29,20 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
     }
     val group: LiveData<Group>
     get() = _group
+
+    // status: The internal MutableLiveData that stores the status of the most recent request
+    private val _status = MutableLiveData<LoadApiStatus>()
+    val status: LiveData<LoadApiStatus>
+        get() = _status
+
+    // error: The internal MutableLiveData that stores the error of the most recent request
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
+    private val _leave = MutableLiveData<Boolean>()
+    val leave: LiveData<Boolean>
+        get() = _leave
 
     // it for image circles design
     private val _snapPosition = MutableLiveData<Int>()
@@ -39,6 +61,9 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
     val characteristic: LiveData<List<String>>
         get() = _characteristic
 
+    // check user login status
+    val isLoggedIn
+        get() = UserManager.isLoggedIn
 
     val decoration = object : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(
@@ -59,6 +84,82 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
         }
     }
 
+    private var viewModelJob = Job()
+
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
+    init {
+        Timber.d("------------------------------------------")
+        Timber.d("$this")
+        Timber.d("------------------------------------------")
+    }
+
+    fun addGroupMemberResult() {
+
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+            when (val result = group.value?.let { repository.addGroupMember(it.id,"4YrrM2lfgqz1QAPgn1r9")}) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    leave(true)
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = MainApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    fun subtractNeedPeopleNumberResult() {
+
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+            when (val result = group.value?.let { repository.subtractNeedPeopleNumber(it.id,it.needPeopleNumber)}) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    leave(true)
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = MainApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    fun leave(needRefresh: Boolean = false) {
+        _leave.value = needRefresh
+    }
+
+    fun onLeft() {
+        _leave.value = null
+    }
+
+
     /**
      * When the gallery scroll, at the same time circles design will switch.
      */
@@ -76,7 +177,7 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
         }
     }
 
-    val groupDate = _group.value?.date?.let { TimeCalculator.getDate(it.time) }
+    val groupDate = _group.value?.date?.let { TimeCalculator.getDateAndWeek(it.time) }
     val groupStartTime = _group.value?.startTime?.let { TimeCalculator.getTime(it.time) }
     val groupEndTime = _group.value?.endTime?.let { TimeCalculator.getTime(it.time) }
     val groupPrice = "$${_group.value?.price}"

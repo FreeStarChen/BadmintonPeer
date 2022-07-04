@@ -11,6 +11,8 @@ import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.mark.badmintonpeer.groupdetail.GroupDetailCircleAdapter
 import com.mark.badmintonpeer.groupdetail.GroupDetailImageAdapter
@@ -29,7 +31,40 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.ig_loading)
-                    .error(R.drawable.ig_failed_loading)
+                    .error(R.drawable.ic_badminton_two_color)
+            )
+            .into(imgView)
+    }
+}
+
+@BindingAdapter("imageUrlTransform")
+fun bindImageTransform(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = it.toUri().buildUpon().build()
+        GlideApp.with(imgView.context)
+            .load(imgUri)
+            .transform(CenterCrop(), RoundedCorners(25))
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.ig_loading)
+                    .error(R.drawable.ic_badminton_two_color)
+                    .transform(CenterCrop(), RoundedCorners(25))
+            )
+            .into(imgView)
+    }
+}
+
+@BindingAdapter("imageUrlWithCircleCrop")
+fun bindImageWithCircleCrop(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = it.toUri().buildUpon().build()
+        GlideApp.with(imgView.context)
+            .load(imgUri)
+            .circleCrop()
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.ig_loading)
+                    .error(R.drawable.ic_badminton_two_color)
             )
             .into(imgView)
     }

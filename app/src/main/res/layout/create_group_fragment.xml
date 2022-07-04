@@ -259,7 +259,8 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.haveWaterDispenser()}"
                     app:layout_constraintStart_toStartOf="@+id/text_court_provide"
                     app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
 
@@ -282,6 +283,7 @@
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/water_dispenser"
+                        android:textColor="@{viewModel.haveWaterDispenser == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -295,7 +297,8 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.haveAirCondition()}"
                     app:layout_constraintStart_toEndOf="@+id/constraint_water_dispenser"
                     app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
 
@@ -318,6 +321,7 @@
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/air_condition"
+                        android:textColor="@{viewModel.haveAirCondition == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -331,7 +335,8 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.havePuGround()}"
                     app:layout_constraintStart_toEndOf="@+id/constraint_air_condition"
                     app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
 
@@ -354,6 +359,7 @@
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="PU地面"
+                        android:textColor="@{viewModel.havePuGround == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -367,7 +373,8 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.haveSpotlight()}"
                     app:layout_constraintStart_toEndOf="@+id/constraint_pu_ground"
                     app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
 
@@ -390,6 +397,7 @@
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="側面燈光"
+                        android:textColor="@{viewModel.haveSpotlight == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -402,7 +410,8 @@
                     android:layout_width="70dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.haveShower()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_water_dispenser"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
 
@@ -425,6 +434,7 @@
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="淋浴間"
+                        android:textColor="@{viewModel.haveShower == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -437,7 +447,8 @@
                     android:layout_width="70dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.haveParking()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_air_condition"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
 
@@ -460,6 +471,7 @@
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="停車場"
+                        android:textColor="@{viewModel.haveParking == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -472,7 +484,8 @@
                     android:layout_width="70dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.haveCutlery()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_pu_ground"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
 
@@ -495,6 +508,7 @@
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="餐飲販售"
+                        android:textColor="@{viewModel.haveCutlery == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -507,7 +521,8 @@
                     android:layout_width="70dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.haveHairDryer()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_spotlight"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
 
@@ -530,6 +545,7 @@
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="吹風機"
+                        android:textColor="@{viewModel.haveHairDryer == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -568,7 +584,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.degree1()}"
                     app:layout_constraintStart_toStartOf="@+id/text_need_degree"
                     app:layout_constraintTop_toBottomOf="@+id/text_need_degree">
 
@@ -582,6 +599,7 @@
                         android:layout_marginBottom="4dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="新手"
+                        android:textColor="@{viewModel.degree1 == true? @color/black : @color/gray_888888}"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -596,7 +614,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.degree2()}"
                     app:layout_constraintStart_toEndOf="@+id/constraint_degree_1"
                     app:layout_constraintTop_toBottomOf="@+id/text_need_degree">
 
@@ -610,6 +629,7 @@
                         android:layout_marginBottom="4dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="初階"
+                        android:textColor="@{viewModel.degree2 == true? @color/black : @color/gray_888888}"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -624,7 +644,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.degree3()}"
                     app:layout_constraintStart_toEndOf="@+id/constraint_degree_2"
                     app:layout_constraintTop_toBottomOf="@+id/text_need_degree">
 
@@ -639,6 +660,7 @@
                         android:fontFamily="@font/noto_sans"
                         android:text="初中"
                         android:textSize="20sp"
+                        android:textColor="@{viewModel.degree3 == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -652,7 +674,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.degree4()}"
                     app:layout_constraintStart_toStartOf="@+id/text_need_degree"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_degree_1">
 
@@ -667,6 +690,7 @@
                         android:fontFamily="@font/noto_sans"
                         android:text="中階"
                         android:textSize="20sp"
+                        android:textColor="@{viewModel.degree4 == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -679,7 +703,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.degree5()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_degree_2"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_degree_1">
 
@@ -694,6 +719,7 @@
                         android:fontFamily="@font/noto_sans"
                         android:text="中上"
                         android:textSize="20sp"
+                        android:textColor="@{viewModel.degree5 == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -706,7 +732,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg__white_radius_10dip"
+                    android:background="@drawable/bg_white_radius_30dip"
+                    android:onClick="@{() -> viewModel.degree6()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_degree_3"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_degree_1">
 
@@ -721,6 +748,7 @@
                         android:fontFamily="@font/noto_sans"
                         android:text="高階"
                         android:textSize="20sp"
+                        android:textColor="@{viewModel.degree6 == true? @color/black : @color/gray_888888}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

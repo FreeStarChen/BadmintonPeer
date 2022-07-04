@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
+import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.util.CurrentFragmentType
 import kotlinx.coroutines.Job
 import timber.log.Timber
@@ -17,7 +18,13 @@ class MainViewModel(private val repository: BadmintonPeerRepository) : ViewModel
     val refresh: LiveData<Boolean>
         get() = _refresh
 
-    val buttonClick = MutableLiveData<Boolean>()
+    // check user login status
+    val isLoggedIn
+        get() = UserManager.isLoggedIn
+
+    val switchStatus = MutableLiveData<Boolean>()
+
+    val type = MutableLiveData<String>()
 
     private var viewModelJob = Job()
 
@@ -30,7 +37,7 @@ class MainViewModel(private val repository: BadmintonPeerRepository) : ViewModel
         Timber.d("------------------------------------------")
         Timber.d("$this")
         Timber.d("------------------------------------------")
-        buttonClick.value = false
+        switchStatus.value = false
     }
 
     fun refresh() {

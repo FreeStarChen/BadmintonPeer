@@ -11,3 +11,4 @@ fun Activity.getVmFactory(): ViewModelFactory {
     val repository = (applicationContext as MainApplication).repository
     return ViewModelFactory(repository)
 }
+

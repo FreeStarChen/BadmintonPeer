@@ -11,5 +11,5 @@ data class User (
     val sex: String = "",
     val image: String = "",
     val degree: String = "",
-    val friends: ArrayList<String>? = null
+    val friends: List<String> = listOf("")
         ) : Parcelable

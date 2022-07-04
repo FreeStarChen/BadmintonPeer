@@ -30,7 +30,7 @@
     </string-array>
 
     <!-- Page Title Name -->
-    <string name="group">揪團列表</string>
+    <string name="group">羽球同行</string>
     <string name="chatroom">聊天室</string>
     <string name="news">最新消息</string>
     <string name="profile">個人資料</string>
@@ -41,5 +41,28 @@
     <string name="water_dispenser">飲水機</string>
     <string name="air_condition">冷氣</string>
 
+    <string name="google_maps_key"></string>
+
+    <!-- google sign in -->
+    <string name="login_success">登入成功</string>
+    <string name="login_fail">登入失敗</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Profile-->
+    <string name="profile_mystic_information">Into the Unknown~</string>
+    <string name="collections">我的收藏</string>
+    <string name="group_record">揪團紀錄</string>
+    <string name="comments">我的評價</string>
+    <string name="friends">我的好友</string>
+    <string name="class_record">課程紀錄</string>
+    <string name="competition_record">比賽紀錄</string>
+    
+    
+
+    <!-- Login Dialog -->
+    <string name="login_title">請先登入會員</string>
+    <string name="login_description">登入會員後即可使用個人功能。</string>
+    <string name="login_facebook_text">Facebook 登入</string>
 
 </resources>

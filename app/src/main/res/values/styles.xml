@@ -5,4 +5,12 @@
         <item name="colorAccent">@color/black</item>
     </style>
 
+    <style name="LoginDialog">
+        <item name="android:windowBackground">@color/translucent_40</item>
+    </style>
+
+    <style name="ProgressThemeDark" parent="Widget.AppCompat.ProgressBar">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
 </resources>

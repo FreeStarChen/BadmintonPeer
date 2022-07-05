@@ -67,8 +67,8 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.deleteInvitation(id)
     }
 
-    override suspend fun checkUser(id: String): Result<User> {
-        return remoteDataSource.checkUser(id)
+    override suspend fun getUser(id: String): Result<User> {
+        return remoteDataSource.getUser(id)
     }
 
     override suspend fun addUser(user: User): Result<Boolean> {

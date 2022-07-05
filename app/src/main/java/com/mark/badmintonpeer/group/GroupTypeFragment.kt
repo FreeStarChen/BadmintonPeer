@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.mark.badmintonpeer.MainViewModel
 import com.mark.badmintonpeer.NavigationDirections
@@ -37,7 +39,10 @@ import com.mark.badmintonpeer.ext.getVmFactory
 import timber.log.Timber
 import java.util.*
 
-class GroupTypeFragment : Fragment(), OnMapReadyCallback {
+class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
+    GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
+
+    private lateinit var binding: GroupTypeFragmentBinding
 
     private var locationPermissionGranted = false
 
@@ -88,13 +93,19 @@ class GroupTypeFragment : Fragment(), OnMapReadyCallback {
         mLocationProviderClient =
             activity?.let { LocationServices.getFusedLocationProviderClient(it) }!!
 
-        val binding = GroupTypeFragmentBinding.inflate(inflater)
+        binding = GroupTypeFragmentBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
 
         binding.recyclerViewGroupType.adapter = GroupTypeAdapter(
+            GroupTypeAdapter.OnClickListener {
+                viewModel.navigateToGroupDetail(it)
+            }
+        )
+
+        binding.recyclerViewGroupTypeForMap.adapter = GroupTypeAdapter(
             GroupTypeAdapter.OnClickListener {
                 viewModel.navigateToGroupDetail(it)
             }
@@ -125,18 +136,10 @@ class GroupTypeFragment : Fragment(), OnMapReadyCallback {
                     val stopLongitude = addressLocation[0].longitude
                     val groupLocation = LatLng(stopLatitude, stopLongitude)
                     googleMap?.addMarker(
-                        MarkerOptions().position(groupLocation).title(group.name)
-                    )?.showInfoWindow()
-
+                        MarkerOptions().position(groupLocation).draggable(true).title(group.name)
+                    )
                 }
-
             }
-
-
-//        val geoCoder: Geocoder? = Geocoder(context, Locale.getDefault())
-//        val addressLocation: List<Address> = geoCoder!!.getFromLocationName(it.address, 1)
-//        val stoplatitude = addressLocation[0].latitude
-//        val stoplongitude = addressLocation[0].longitude
         }
 
         binding.layoutSwipeRefreshGroupType.setOnRefreshListener {
@@ -253,7 +256,7 @@ class GroupTypeFragment : Fragment(), OnMapReadyCallback {
 //                            )?.showInfoWindow()
                             googleMap?.moveCamera(
                                 CameraUpdateFactory.newLatLngZoom(
-                                    currentLocation, 12f
+                                    currentLocation, 13f
                                 )
                             )
                         }
@@ -367,8 +370,38 @@ class GroupTypeFragment : Fragment(), OnMapReadyCallback {
             )
         )
 
+//        googleMap.uiSettings.setAllGesturesEnabled(true)
+//        googleMap.setOnInfoWindowClickListener(this)
+        googleMap.setOnMarkerClickListener(this)
 
     }
 
+    override fun onInfoWindowClick(p0: Marker) {
+//        Timber.d("fun onInfoWindowClick")
+//        viewModel.groups.value?.let {
+//            Timber.d("viewModel.groups.value=${viewModel.groups.value}")
+//            for (group in it) {
+//                if (group.name == p0.title) {
+//                    (binding.recyclerViewGroupTypeForMap.adapter as GroupTypeAdapter).submitList(
+//                        listOf(group)
+//                    )
+//                }
+//            }
+//        }
+    }
 
+    override fun onMarkerClick(p0: Marker): Boolean {
+        Timber.d("fun onMarkerClick")
+        viewModel.groups.value?.let {
+            for (group in it) {
+                if (group.name == p0.title) {
+                    Timber.d("group.name=${group.name}")
+                    (binding.recyclerViewGroupTypeForMap.adapter as GroupTypeAdapter).submitList(
+                        listOf(group)
+                    )
+                }
+            }
+        }
+        return false
+    }
 }

@@ -69,7 +69,7 @@ class BadmintonPeerLocalDataSource(val context: Context) : BadmintonPeerDataSour
         TODO("Not yet implemented")
     }
 
-    override suspend fun checkUser(id: String): Result<User> {
+    override suspend fun getUser(id: String): Result<User> {
         TODO("Not yet implemented")
     }
 

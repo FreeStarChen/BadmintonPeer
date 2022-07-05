@@ -206,7 +206,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun checkUser(id: String): Result<User> = suspendCoroutine{ continuation ->
+    override suspend fun getUser(id: String): Result<User> = suspendCoroutine{ continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_USERS)
             .whereEqualTo(KEY_ID,id)
@@ -218,7 +218,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 if (task.isSuccessful) {
                     Timber.d("task=${task.result}")
                     if (task.result.documents.isEmpty()){
-                        Timber.d("empty")
+                        Timber.d("task.result.documents is empty")
                         continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
                     }else {
                         for (document in task.result) {

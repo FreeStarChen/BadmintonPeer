@@ -81,12 +81,11 @@ class LoginViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
             _status.value = LoadApiStatus.LOADING
             Timber.d("checkUserResult is start")
 
-            val checkUserResult = userFromGooglelogin.value?.let { repository.checkUser(it.id) }
+            val checkUserResult = userFromGooglelogin.value?.let { repository.getUser(it.id) }
             Timber.d("checkUserResult=$checkUserResult")
             _userFromFirebase.value = when (checkUserResult) {
 
                 is Result.Success -> {
-                    Timber.d("_userFromFirebase=${_userFromFirebase.value}")
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     checkUserResult.data
@@ -133,6 +132,7 @@ class LoginViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
 
             } else {
                 UserManager.user.value = _userFromFirebase.value
+                leave()
             }
             Timber.d("UserManager.user.value=${UserManager.user.value}")
         }

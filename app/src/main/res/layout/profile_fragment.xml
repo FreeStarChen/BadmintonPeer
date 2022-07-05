@@ -5,8 +5,11 @@
 
     <data>
         <variable
-            name="user"
-            type="com.mark.badmintonpeer.data.User" />
+            name="UserManager"
+            type="com.mark.badmintonpeer.login.UserManager" />
+        <variable
+            name="viewModel"
+            type="com.mark.badmintonpeer.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +51,7 @@
                     android:layout_marginStart="8dp"
                     android:background="@drawable/bg_white_radius_30dip"
                     android:scaleType="centerCrop"
-                    app:imageUrlWithCircleCrop="@{user.image}"
+                    app:imageUrlWithCircleCrop="@{viewModel.user.image}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -60,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="Mark7766"
+                    android:text="@{viewModel.user.nickname}"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"

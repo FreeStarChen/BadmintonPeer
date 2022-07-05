@@ -86,6 +86,7 @@ class LoginDialog : AppCompatDialogFragment() {
                 val name = account?.displayName
 
                 UserManager.userToken = token
+                UserManager.userId = id
                 Timber.d("userToken=${token}")
 
                viewModel.userFromGooglelogin.value =

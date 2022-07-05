@@ -7,28 +7,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.databinding.ProfileFragmentBinding
+import com.mark.badmintonpeer.ext.getVmFactory
 import com.mark.badmintonpeer.login.UserManager
 import timber.log.Timber
 
 class ProfileFragment : Fragment() {
+
+    private val viewModel by viewModels<ProfileViewModel> { getVmFactory() }
+    private lateinit var binding: ProfileFragmentBinding
 
     companion object {
         fun newInstance() = ProfileFragment()
 
     }
 
-    private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = ProfileFragmentBinding.inflate(inflater)
+
+        binding = ProfileFragmentBinding.inflate(inflater)
+
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+
+        
 
         return binding.root
     }

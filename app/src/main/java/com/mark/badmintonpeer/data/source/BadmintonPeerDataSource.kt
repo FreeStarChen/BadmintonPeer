@@ -36,7 +36,7 @@ interface BadmintonPeerDataSource {
 
     suspend fun deleteInvitation(id: String) : Result<Invitation>
 
-    suspend fun checkUser(id: String) : Result<User>
+    suspend fun getUser(id: String) : Result<User>
 
     suspend fun addUser(user: User) : Result<Boolean>
 

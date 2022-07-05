@@ -64,7 +64,7 @@ class CreateGroupFragment : Fragment() {
                 characteristics.add("飲水機")
                 viewModel.group.value?.characteristic = characteristics
             }else {
-                binding.constraintWaterDispenser.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintWaterDispenser.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 characteristics.remove("飲水機")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -76,7 +76,7 @@ class CreateGroupFragment : Fragment() {
                 characteristics.add("冷氣")
                 viewModel.group.value?.characteristic = characteristics
             }else {
-                binding.constraintAirCondition.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintAirCondition.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 characteristics.remove("冷氣")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -88,7 +88,7 @@ class CreateGroupFragment : Fragment() {
                 characteristics.add("PU地面")
                 viewModel.group.value?.characteristic = characteristics
             }else {
-                binding.constraintPuGround.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintPuGround.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 characteristics.remove("PU地面")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -100,7 +100,7 @@ class CreateGroupFragment : Fragment() {
                 characteristics.add("側面燈光")
                 viewModel.group.value?.characteristic = characteristics
             }else {
-                binding.constraintSpotlight.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintSpotlight.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 characteristics.remove("側面燈光")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -112,7 +112,7 @@ class CreateGroupFragment : Fragment() {
                 characteristics.add("淋浴間")
                 viewModel.group.value?.characteristic = characteristics
             }else {
-                binding.constraintShower.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintShower.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 characteristics.remove("淋浴間")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -124,7 +124,7 @@ class CreateGroupFragment : Fragment() {
                 characteristics.add("停車場")
                 viewModel.group.value?.characteristic = characteristics
             }else {
-                binding.constraintParking.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintParking.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 characteristics.remove("停車場")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -136,7 +136,7 @@ class CreateGroupFragment : Fragment() {
                 characteristics.add("餐飲販售")
                 viewModel.group.value?.characteristic = characteristics
             }else {
-                binding.constraintCutlery.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintCutlery.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 characteristics.remove("餐飲販售")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -148,7 +148,7 @@ class CreateGroupFragment : Fragment() {
                 characteristics.add("吹風機")
                 viewModel.group.value?.characteristic = characteristics
             }else {
-                binding.constraintHairDryer.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintHairDryer.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 characteristics.remove("吹風機")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -160,7 +160,7 @@ class CreateGroupFragment : Fragment() {
                 degree.add("新手")
                 viewModel.group.value?.degree = degree
             }else {
-                binding.constraintDegree1.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintDegree1.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 degree.remove("新手")
                 viewModel.group.value?.degree = degree
             }
@@ -172,7 +172,7 @@ class CreateGroupFragment : Fragment() {
                 degree.add("初階")
                 viewModel.group.value?.degree = degree
             }else {
-                binding.constraintDegree2.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintDegree2.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 degree.remove("初階")
                 viewModel.group.value?.degree = degree
             }
@@ -184,7 +184,7 @@ class CreateGroupFragment : Fragment() {
                 degree.add("初中")
                 viewModel.group.value?.degree = degree
             }else {
-                binding.constraintDegree3.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintDegree3.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 degree.remove("初中")
                 viewModel.group.value?.degree = degree
             }
@@ -196,7 +196,7 @@ class CreateGroupFragment : Fragment() {
                 degree.add("中階")
                 viewModel.group.value?.degree = degree
             }else {
-                binding.constraintDegree4.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintDegree4.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 degree.remove("中階")
                 viewModel.group.value?.degree = degree
             }
@@ -208,7 +208,7 @@ class CreateGroupFragment : Fragment() {
                 degree.add("中上")
                 viewModel.group.value?.degree = degree
             }else {
-                binding.constraintDegree5.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintDegree5.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 degree.remove("中上")
                 viewModel.group.value?.degree = degree
             }
@@ -220,7 +220,7 @@ class CreateGroupFragment : Fragment() {
                 degree.add("高階")
                 viewModel.group.value?.degree = degree
             }else {
-                binding.constraintDegree6.setBackgroundResource(R.drawable.bg_white_radius_30dip)
+                binding.constraintDegree6.setBackgroundResource(R.drawable.bg_white_radius_10dip)
                 degree.remove("高階")
                 viewModel.group.value?.degree = degree
             }

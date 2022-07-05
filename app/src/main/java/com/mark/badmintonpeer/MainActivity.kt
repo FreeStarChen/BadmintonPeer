@@ -163,7 +163,7 @@ class MainActivity : AppCompatActivity() {
 
         setupNavController()
         setupBottomNav()
-        UserManager.clear()
+//        UserManager.clear()
 
     }
 

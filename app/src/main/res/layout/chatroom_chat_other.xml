@@ -19,7 +19,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:background="@drawable/bg_white_radius_30dip"
+            android:background="@drawable/bg_white_radius_15dip"
             android:scaleType="centerCrop"
             app:imageUrlWithCircleCrop="@{chat.image}"
             app:layout_constraintStart_toStartOf="parent"

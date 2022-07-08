@@ -16,7 +16,10 @@ class ChatroomTypeAdapter(private val onClickListener: OnClickListener) :
         RecyclerView.ViewHolder(binding.root) {
             fun bind(chatroom: Chatroom) {
                 binding.chatroom = chatroom
-                binding.textLastTalkTime.text = TimeCalculator.getDate(chatroom.lastTalkTime.time)
+                binding.textLastTalkTime.text = chatroom.lastTalkTime?.let {
+                    TimeCalculator.getDate(
+                        it.time)
+                }
             }
     }
 

@@ -35,6 +35,14 @@ class ChatroomChatFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        val adapter = ChatroomChatAdapter()
+
+        binding.recyclerViewChat.adapter = adapter
+
+        viewModel.chatItem.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+
         binding.imageChatBack.setOnClickListener {
             findNavController().navigate(NavigationDirections.navigateToChatroomFragment())
         }

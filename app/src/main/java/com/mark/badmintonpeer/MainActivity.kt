@@ -11,16 +11,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mark.badmintonpeer.creategroup.CreateGroupFragment
 import com.mark.badmintonpeer.databinding.ActivityMainBinding
 import com.mark.badmintonpeer.ext.getVmFactory
-import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.util.CurrentFragmentType
 
 class MainActivity : AppCompatActivity() {
@@ -235,7 +232,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.filterFragment -> CurrentFragmentType.FILTER
                 R.id.createGroupFragment -> CurrentFragmentType.CREATE
                 R.id.groupDetailFragment -> CurrentFragmentType.DETAIL
-                R.id.chatroomDetailFragment -> CurrentFragmentType.CHAT
+                R.id.chatroomChatFragment -> CurrentFragmentType.CHAT
                 else -> viewModel.currentFragmentType.value
             }
         }

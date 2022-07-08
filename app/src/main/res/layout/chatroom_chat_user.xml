@@ -19,12 +19,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:background="@drawable/bg_green_radius_5dip"
+            android:background="@mipmap/bubble_user"
             android:fontFamily="@font/noto_sans"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="4dp"
+            android:paddingStart="16dp"
+            android:paddingTop="13dp"
+            android:paddingEnd="23dp"
+            android:paddingBottom="-3dp"
             android:text="@{chat.content}"
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -32,7 +32,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="妳好" />
+            tools:text="妳好妳好" />
 
         <TextView
             android:id="@+id/text_chat_owner_time"

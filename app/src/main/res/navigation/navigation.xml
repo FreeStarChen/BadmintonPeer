@@ -73,20 +73,21 @@
         app:popUpTo="@id/navigation"
         app:destination="@+id/navigation_profile" />
     <fragment
-        android:id="@+id/chatroomDetailFragment"
+        android:id="@+id/chatroomChatFragment"
         android:name="com.mark.badmintonpeer.chatroom.ChatroomChatFragment"
-        android:label="chatroom_detail_fragment"
+        android:label="chatroom_chat_fragment"
         tools:layout="@layout/chatroom_chat_fragment" >
 
         <argument
             android:name="chatroomKey"
             app:argType="com.mark.badmintonpeer.data.Chatroom"
             app:nullable="false"/>
+
     </fragment>
 
     <action
-        android:id="@+id/navigate_to_chatroom_detail_fragment"
-        app:destination="@+id/chatroomDetailFragment" />
+        android:id="@+id/navigate_to_chatroom_chat_fragment"
+        app:destination="@+id/chatroomChatFragment" />
     <dialog
         android:id="@+id/loginDialog"
         android:name="com.mark.badmintonpeer.login.LoginDialog"
@@ -94,4 +95,19 @@
 
     <action android:id="@+id/navigate_to_login_dialog"
         app:destination="@+id/loginDialog"/>
+    <fragment
+        android:id="@+id/chatroomGroupChatFragment"
+        android:name="com.mark.badmintonpeer.chatroom.ChatroomGroupChatFragment"
+        android:label="chatroom_group_chat_fragment"
+        tools:layout="@layout/chatroom_group_chat_fragment" >
+
+        <argument
+            android:name="groupKey"
+            app:argType="com.mark.badmintonpeer.data.Group"
+            app:nullable="false"/>
+    </fragment>
+
+    <action
+        android:id="@+id/navigate_to_chatroom_group_chat_fragment"
+        app:destination="@+id/chatroomGroupChatFragment" />
 </navigation>

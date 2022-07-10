@@ -60,6 +60,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:minHeight="70dp"
                     android:background="@drawable/bg_edit_text_unfocused"
                     android:elevation="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -71,43 +72,41 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@{viewModel.group.name}"
                         android:textColor="@color/black"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/image_detail_metal"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/text_detail_price"
                         app:layout_constraintStart_toEndOf="@+id/image_detail_metal"
-                        app:layout_constraintTop_toTopOf="@+id/image_detail_metal"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="快樂羽球團" />
 
                     <ImageView
                         android:id="@+id/image_detail_metal"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/text_detail_title"
                         app:srcCompat="@drawable/ic_medal_color" />
 
                     <TextView
                         android:id="@+id/text_detail_classification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@{viewModel.group.classification}"
                         android:textAlignment="viewStart"
-                        android:textColor="@color/purple_700"
+                        android:textColor="@color/light_blue"
                         android:textSize="16sp"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/text_detail_price"
                         app:layout_constraintEnd_toEndOf="@+id/text_detail_price"
                         app:layout_constraintStart_toStartOf="@+id/text_detail_price"
-                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="零打" />
 
                     <TextView
@@ -115,13 +114,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="4dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@{viewModel.groupPrice}"
                         android:textColor="#E91E63"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_detail_classification" />
+                        tools:text="$200" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,6 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:minHeight="200dp"
                     android:background="@drawable/bg_edit_text_unfocused"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_detail_name">
@@ -139,7 +141,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="7dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
@@ -167,8 +169,8 @@
 
                     <ImageView
                         android:id="@+id/image_detail_date"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginTop="8dp"
                         app:layout_constraintStart_toStartOf="@+id/text_detail_information"
                         app:layout_constraintTop_toBottomOf="@+id/text_detail_information"
@@ -176,18 +178,18 @@
 
                     <ImageView
                         android:id="@+id/image_detail_time"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="6dp"
                         app:layout_constraintStart_toStartOf="@+id/image_detail_date"
                         app:layout_constraintTop_toBottomOf="@+id/image_detail_date"
                         app:srcCompat="@drawable/ic_time_color_2" />
 
                     <ImageView
                         android:id="@+id/image_detail_location"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="6dp"
                         app:layout_constraintStart_toStartOf="@+id/image_detail_time"
                         app:layout_constraintTop_toBottomOf="@+id/image_detail_time"
                         app:srcCompat="@drawable/ic_location_color" />
@@ -245,7 +247,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="1dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@{viewModel.group.place}"
@@ -258,7 +259,7 @@
                         android:id="@+id/text_detail_address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="7dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@{viewModel.group.address}"
@@ -270,18 +271,18 @@
 
                     <ImageView
                         android:id="@+id/image_detail_ball"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginTop="9dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="7dp"
                         app:layout_constraintStart_toStartOf="@+id/image_detail_map"
                         app:layout_constraintTop_toBottomOf="@+id/text_detail_address"
                         app:srcCompat="@drawable/ic_shuttlecock" />
 
                     <ImageView
                         android:id="@+id/image_detail_map"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginTop="9dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="7dp"
                         app:layout_constraintStart_toStartOf="@+id/image_detail_location"
                         app:layout_constraintTop_toBottomOf="@+id/text_detail_place"
                         app:srcCompat="@drawable/ic_google_maps" />
@@ -305,9 +306,9 @@
                         android:id="@+id/recycler_view_detail_degree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="10dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:itemCount="3"
@@ -315,19 +316,19 @@
 
                     <ImageView
                         android:id="@+id/image_detail_group"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/recycler_view_detail_degree"
                         app:srcCompat="@drawable/ic_group_color" />
 
                     <ImageView
                         android:id="@+id/image_detail_court"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="6dp"
                         android:rotation="90"
                         app:layout_constraintStart_toStartOf="@+id/image_detail_group"
                         app:layout_constraintTop_toBottomOf="@+id/image_detail_group"
@@ -461,6 +462,7 @@
                         android:id="@+id/text_detail_other"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
@@ -503,6 +505,7 @@
                         android:id="@+id/recycler_view_detail_comment"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
@@ -547,10 +550,12 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
+                android:scaleType="centerCrop"
+                app:imageUrlWithCircleCrop="@{viewModel.owner.image}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_user" />
+                tools:src="@drawable/ic_user" />
 
             <TextView
                 android:id="@+id/text_detail_owner"
@@ -595,7 +600,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="陳星星"
+                android:text="@{viewModel.owner.nickname}"
                 app:layout_constraintStart_toEndOf="@+id/text_detail_owner"
                 app:layout_constraintTop_toTopOf="@+id/text_detail_owner"
                 tools:text="陳星星" />

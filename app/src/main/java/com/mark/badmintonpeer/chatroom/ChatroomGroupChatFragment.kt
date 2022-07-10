@@ -54,6 +54,7 @@ class ChatroomGroupChatFragment : Fragment() {
                 viewModel.addChatroomMessageAndTimeResult()
                 Timber.d("binding.imageGroupChatSend.setOnClickListener")
             }
+            binding.editTextGroupChatInputMessage.text.clear()
         }
 
         binding.imageGroupChatBack.setOnClickListener {
@@ -71,7 +72,6 @@ class ChatroomGroupChatFragment : Fragment() {
                     viewModel.getChatsResult()
                 }
             }
-
         }
 
         viewModel.observeChatItem.observe(viewLifecycleOwner) {
@@ -81,6 +81,7 @@ class ChatroomGroupChatFragment : Fragment() {
                 viewModel.liveChatItem.observe(viewLifecycleOwner) { ListChat ->
                     val chats = viewModel.chatToChatItem(ListChat)
                     adapter.submitList(chats)
+                    binding.recyclerViewGroupChat.smoothScrollToPosition(chats.size)
                 }
 
 

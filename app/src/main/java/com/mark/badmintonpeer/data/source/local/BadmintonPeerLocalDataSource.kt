@@ -61,12 +61,19 @@ class BadmintonPeerLocalDataSource(val context: Context) : BadmintonPeerDataSour
         TODO("Not yet implemented")
     }
 
-    override suspend fun addChatroomMessageAndTime(chatroomId: String, message: String): Result<Boolean> {
+    override suspend fun addChatroomMessageAndTime(
+        chatroomId: String,
+        message: String
+    ): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
 
     override fun getLiveChats(chatroomId: String): MutableLiveData<List<Chat>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getSearchCityGroup(city: String, type: String): Result<List<Group>> {
         TODO("Not yet implemented")
     }
 
@@ -95,6 +102,14 @@ class BadmintonPeerLocalDataSource(val context: Context) : BadmintonPeerDataSour
     }
 
     override suspend fun addUser(user: User): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getOwner(ownerId: String): Result<User> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getJoinGroup(userId: String): Result<List<Group>> {
         TODO("Not yet implemented")
     }
 }

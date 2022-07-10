@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textSize="16sp"
-    android:textColor="@color/black"
-    android:background="@color/light_blue"
-    android:textStyle="normal"
+    android:background="@color/court_green"
+    android:fontFamily="@font/noto_sans"
     android:padding="5dp"
-    android:fontFamily="@font/noto_sans">
-    </TextView>
+    android:textColor="@color/black"
+    android:textSize="16sp"
+    android:textStyle="normal"></TextView>

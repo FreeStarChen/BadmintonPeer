@@ -18,11 +18,17 @@ class MainViewModel(private val repository: BadmintonPeerRepository) : ViewModel
     val refresh: LiveData<Boolean>
         get() = _refresh
 
+    private val _spinnerReset = MutableLiveData<Boolean>()
+    val spinnerReset: LiveData<Boolean>
+        get() = _spinnerReset
+
     // check user login status
     val isLoggedIn
         get() = UserManager.isLoggedIn
 
     val switchStatus = MutableLiveData<Boolean>()
+
+    val city = MutableLiveData<String>()
 
     val type = MutableLiveData<String>()
 
@@ -41,15 +47,27 @@ class MainViewModel(private val repository: BadmintonPeerRepository) : ViewModel
     }
 
     fun refresh() {
-        if (!MainApplication.instance.isLiveDataDesign()) {
+        if (MainApplication.instance.isLiveDataDesign()) {
             _refresh.value = true
         }
     }
 
     fun onRefreshed() {
-        if (!MainApplication.instance.isLiveDataDesign()) {
+        if (MainApplication.instance.isLiveDataDesign()) {
             _refresh.value = null
         }
     }
+
+    fun spinnerReset() {
+            _spinnerReset.value = true
+
+    }
+
+    fun onSpinnerReset() {
+            _spinnerReset.value = null
+
+    }
+
+
 
 }

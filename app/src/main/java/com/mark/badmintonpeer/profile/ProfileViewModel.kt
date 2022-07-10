@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mark.badmintonpeer.MainApplication
 import com.mark.badmintonpeer.R
+import com.mark.badmintonpeer.data.Group
 import com.mark.badmintonpeer.data.Result
 import com.mark.badmintonpeer.data.User
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
@@ -23,6 +24,10 @@ class ProfileViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
     val user: LiveData<User>
         get() = _user
 
+    private var _groups = MutableLiveData<List<Group>>()
+    val groups: LiveData<List<Group>>
+        get() = _groups
+
     // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -34,6 +39,11 @@ class ProfileViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
 
     val error: LiveData<String>
         get() = _error
+
+    // Handle navigation to group detail
+    private val _navigateToGroupDetail = MutableLiveData<Group>()
+    val navigateToGroupDetail: LiveData<Group>
+        get() = _navigateToGroupDetail
 
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
@@ -57,6 +67,7 @@ class ProfileViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
         Timber.d("------------------------------------------")
 
         getUserResult()
+        getJoinGroupResult()
     }
 
     fun getUserResult() {
@@ -87,6 +98,44 @@ class ProfileViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
                 }
             }
         }
+    }
+
+    fun getJoinGroupResult() {
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+            Timber.d("getJoinGroupResult is start")
+            val result = UserManager.userId?.let { repository.getJoinGroup(it) }
+            _groups.value = when (result) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+                    _error.value = MainApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+        }
+    }
+
+    fun navigateToGroupDetail(group: Group) {
+        _navigateToGroupDetail.value = group
+    }
+
+    fun onGroupDetailNavigated() {
+        _navigateToGroupDetail.value = null
     }
 
 

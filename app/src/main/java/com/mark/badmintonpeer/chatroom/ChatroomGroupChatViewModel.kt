@@ -40,7 +40,6 @@ class ChatroomGroupChatViewModel(
                         null, group.name, "揪團", emptyList()
                     )
             }
-
         }
     }
     val addChatroom: LiveData<Chatroom>
@@ -130,6 +129,7 @@ class ChatroomGroupChatViewModel(
 
     fun addChatroomResult() {
         coroutineScope.launch {
+            Timber.d("_addChatroom.value=${_addChatroom.value}")
             when (val addChatroomResult = repository.addChatroom(_addChatroom.value!!)) {
                 is Result.Success -> {
                     _error.value = null

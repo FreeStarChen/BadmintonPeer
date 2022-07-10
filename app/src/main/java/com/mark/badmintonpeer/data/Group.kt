@@ -19,12 +19,12 @@ data class Group (
     var place: String = "",
     var address: String = "",
     var characteristic: List<String> = listOf(""),
-    var needPeopleNumber: Int = 0,
-    var totalPeopleNumber: Int = 0,
+    var needPeopleNumber: Int? = null,
+    var totalPeopleNumber: Int? = null,
     var ball: String = "",
-    var price: Int = 0,
+    var price: Int? = null,
     var degree: List<String> = listOf(""),
-    var contactNumber: Long = 0L,
-    var courtNumber: Int = 0,
+    var contactNumber: Long? = null,
+    var courtNumber: Int? = null,
     var other: String = ""
         ) : Parcelable

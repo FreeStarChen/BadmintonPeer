@@ -103,16 +103,51 @@ class GroupTypeViewModel(val type: String,private val repository: BadmintonPeerR
         }
     }
 
+    fun getSearchCityGroupResult(city: String) {
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            val result = repository.getSearchCityGroup(city,type)
+            Timber.d("type=$type")
+
+            _groups.value = when (result) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+                    _error.value = MainApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+            _refreshStatus.value = false
+        }
+    }
+
     fun refresh() {
         if (MainApplication.instance.isLiveDataDesign()) {
-            _status.value = LoadApiStatus.DONE
-            _refreshStatus.value = false
+            getGroupsResult()
+//            _status.value = LoadApiStatus.DONE
+//            _refreshStatus.value = false
 
-        } else {
-            if (status.value != LoadApiStatus.LOADING) {
-                getGroupsResult()
-                Timber.d("GroupTypeViewModel refresh()")
-            }
+//        } else {
+//            if (status.value != LoadApiStatus.LOADING) {
+//                getGroupsResult()
+//                Timber.d("GroupTypeViewModel refresh()")
+//            }
         }
     }
 

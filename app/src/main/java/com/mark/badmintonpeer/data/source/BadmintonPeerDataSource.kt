@@ -37,6 +37,8 @@ interface BadmintonPeerDataSource {
 
     fun getLiveChats(chatroomId: String) : MutableLiveData<List<Chat>>
 
+    suspend fun getSearchCityGroup(city: String, type: String) : Result<List<Group>>
+
     suspend fun getComments(id: String) : Result<List<Comment>>
 
     suspend fun addComment() : Result<Comment>
@@ -50,5 +52,9 @@ interface BadmintonPeerDataSource {
     suspend fun getUser(id: String) : Result<User>
 
     suspend fun addUser(user: User) : Result<Boolean>
+
+    suspend fun getOwner(ownerId: String): Result<User>
+
+    suspend fun getJoinGroup(userId: String): Result<List<Group>>
 
 }

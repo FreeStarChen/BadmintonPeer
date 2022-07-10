@@ -34,6 +34,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
     private const val PATH_CHATS = "chats"
     private const val KEY_CREATED_TIME = "createdTime"
     private const val KEY_LAST_TALK_MESSAGE = "lastTalkMessage"
+    private const val KEY_ADDRESS = "address"
 
     override suspend fun login(id: String): Result<User> {
         TODO("Not yet implemented")
@@ -143,13 +144,13 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
 
     override suspend fun getGroupChatroom(groupId: String): Result<Chatroom> =
         suspendCoroutine { continuation ->
-            UserManager.userId?.let {
-                Timber.d("UserManager.userId=$it")
+            UserManager.userId?.let { id ->
+                Timber.d("UserManager.userId=$id")
                 Timber.d("groupId=$groupId")
                 FirebaseFirestore.getInstance()
                     .collection(PATH_CHATROOM)
                     .whereEqualTo(KEY_GROUP_ID, groupId)
-                    .whereArrayContains(KEY_MEMBER, it)
+                    .whereArrayContains(KEY_MEMBER, id)
                     .get()
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -313,13 +314,21 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 }
         }
 
-    override suspend fun addChatroomMessageAndTime(chatroomId: String, message: String): Result<Boolean> =
+    override suspend fun addChatroomMessageAndTime(
+        chatroomId: String,
+        message: String
+    ): Result<Boolean> =
         suspendCoroutine { continuation ->
 
             FirebaseFirestore.getInstance()
                 .collection(PATH_CHATROOM)
                 .document(chatroomId)
-                .update(mapOf(KEY_LAST_TALK_MESSAGE to message, KEY_LAST_TALK_TIME to Date(System.currentTimeMillis())))
+                .update(
+                    mapOf(
+                        KEY_LAST_TALK_MESSAGE to message,
+                        KEY_LAST_TALK_TIME to Date(System.currentTimeMillis())
+                    )
+                )
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Timber.d("Add chatroom message and time complete")
@@ -364,6 +373,37 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
         return liveData
     }
 
+    override suspend fun getSearchCityGroup(city: String, type: String): Result<List<Group>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_GROUPS)
+                .whereEqualTo(KEY_CLASSIFICATION, type)
+//                .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
+//            .limit(10)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Group>()
+                        for (document in task.result) {
+                            Timber.d(document.id + " => " + document.data)
+
+                            val group = document.toObject(Group::class.java)
+                            if (group.address.contains(city)) {
+                                list.add(group)
+                            }
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
     override suspend fun getComments(id: String): Result<List<Comment>> {
         TODO("Not yet implemented")
     }
@@ -389,9 +429,6 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             .collection(PATH_USERS)
             .whereEqualTo(KEY_ID, id)
             .get()
-            .addOnSuccessListener {
-                Timber.d("checkUser addOnSuccessListener")
-            }
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Timber.d("getUser task=${task.result}")
@@ -437,5 +474,64 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 }
             }
     }
+
+    override suspend fun getOwner(ownerId: String): Result<User> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_USERS)
+                .whereEqualTo(KEY_ID, ownerId)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Timber.d("getOwner task=${task.result}")
+                        if (task.result.documents.isEmpty()) {
+                            Timber.d("getOwner task.result.documents is empty")
+                            continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                        } else {
+                            for (document in task.result) {
+                                Timber.d("document=${document}")
+                                val owner = document.toObject(User::class.java)
+                                Timber.d("owner=${owner}")
+                                continuation.resume(Result.Success(owner))
+                            }
+                        }
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getJoinGroup(userId: String): Result<List<Group>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_GROUPS)
+                .whereArrayContains(KEY_MEMBER, userId)
+//                .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
+//            .limit(10)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Group>()
+                        for (document in task.result) {
+                            Timber.d(document.id + " => " + document.data)
+                            val group = document.toObject(Group::class.java)
+                            list.add(group)
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
 
 }

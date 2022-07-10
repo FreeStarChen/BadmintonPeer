@@ -21,15 +21,18 @@ class ChatroomChatFragment : Fragment() {
         )
     }
 
+    lateinit var binding: ChatroomChatFragmentBinding
+
     companion object {
-        fun newInstace() = ChatroomChatFragment()
+        fun newInstance() = ChatroomChatFragment()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = ChatroomChatFragmentBinding.inflate(inflater)
+
+        binding = ChatroomChatFragmentBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
 
@@ -43,11 +46,24 @@ class ChatroomChatFragment : Fragment() {
             adapter.submitList(it)
         }
 
+        binding.imageChatSend.setOnClickListener {
+            if (binding.editTextChatInputMessage.text.toString() != "") {
+                val content = binding.editTextChatInputMessage.text.toString()
+                viewModel.sendMessageResult(content)
+                viewModel.addChatroomMessageAndTimeResult()
+            }
+            binding.editTextChatInputMessage.text.clear()
+        }
+
         binding.imageChatBack.setOnClickListener {
             findNavController().navigate(NavigationDirections.navigateToChatroomFragment())
         }
 
-
+        viewModel.liveChatItem.observe(viewLifecycleOwner) {
+            val chats = viewModel.chatToChatItem(it)
+            adapter.submitList(chats)
+            binding.recyclerViewChat.smoothScrollToPosition(chats.size)
+        }
 
         return binding.root
     }

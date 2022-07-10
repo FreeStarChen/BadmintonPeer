@@ -33,7 +33,7 @@ class ChatroomChatAdapter : ListAdapter<ChatItem, RecyclerView.ViewHolder>(DiffC
 
     companion object DiffCallback : DiffUtil.ItemCallback<ChatItem>() {
         override fun areItemsTheSame(oldItem: ChatItem, newItem: ChatItem): Boolean {
-            return oldItem === newItem
+            return oldItem.createdTime == newItem.createdTime
         }
 
         override fun areContentsTheSame(oldItem: ChatItem, newItem: ChatItem): Boolean {

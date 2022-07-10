@@ -71,6 +71,10 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.getLiveChats(chatroomId)
     }
 
+    override suspend fun getSearchCityGroup(city: String, type: String): Result<List<Group>> {
+        return remoteDataSource.getSearchCityGroup(city,type)
+    }
+
     override suspend fun getComments(id: String): Result<List<Comment>> {
         return remoteDataSource.getComments(id)
     }
@@ -97,5 +101,13 @@ class DefaultBadmintonPeerRepository(
 
     override suspend fun addUser(user: User): Result<Boolean> {
         return remoteDataSource.addUser(user)
+    }
+
+    override suspend fun getOwner(ownerId: String): Result<User> {
+        return remoteDataSource.getOwner(ownerId)
+    }
+
+    override suspend fun getJoinGroup(userId: String): Result<List<Group>> {
+        return remoteDataSource.getJoinGroup(userId)
     }
 }

@@ -51,6 +51,8 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
     private lateinit var mLocationProviderClient: FusedLocationProviderClient
     lateinit var addressLocation: List<Address>
 
+    lateinit var mainViewModel: MainViewModel
+
     //台北101
     private val defaultLocation = LatLng(25.0338483, 121.5645283)
 
@@ -123,7 +125,7 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
             (binding.recyclerViewGroupType.adapter as GroupTypeAdapter).submitList(it)
 //            (binding.recyclerViewGroupType.adapter as GroupTypeAdapter).notifyDataSetChanged()
             Timber.d("groups=${viewModel.groups.value}")
-
+            googleMap?.clear()
             //Add groups address Marker at google map
             viewModel.groups.value?.let { listGroups ->
                 val geoCoder: Geocoder? = Geocoder(context, Locale.getDefault())
@@ -144,16 +146,19 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
 
         binding.layoutSwipeRefreshGroupType.setOnRefreshListener {
             viewModel.refresh()
+            mainViewModel.spinnerReset()
+
             Timber.d("layoutSwipeRefreshGroupType refresh")
         }
 
         viewModel.refreshStatus.observe(viewLifecycleOwner) {
             it?.let {
                 binding.layoutSwipeRefreshGroupType.isRefreshing = it
+                mainViewModel.onSpinnerReset()
             }
         }
 
-        val mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         mainViewModel.refresh.observe(viewLifecycleOwner) {
             it?.let {
@@ -165,6 +170,10 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
         mainViewModel.switchStatus.observe(viewLifecycleOwner) {
             Log.i("TestW", "type=${getType()}, switchStatus=$it")
             viewModel._recyclerViewVisible.value = it
+        }
+
+        mainViewModel.city.observe(viewLifecycleOwner) {
+            viewModel.getSearchCityGroupResult(it)
         }
 
         viewModel.recyclerViewVisible.observe(viewLifecycleOwner) {
@@ -404,4 +413,5 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
         }
         return false
     }
+
 }

@@ -11,6 +11,7 @@ import com.mark.badmintonpeer.MainApplication
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.Group
 import com.mark.badmintonpeer.data.Result
+import com.mark.badmintonpeer.data.User
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.network.LoadApiStatus
@@ -84,6 +85,14 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
         }
     }
 
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User>
+        get() = _user
+
+    private val _owner = MutableLiveData<User>()
+    val owner: LiveData<User>
+        get() = _owner
+
     private var viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -97,13 +106,20 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
         Timber.d("------------------------------------------")
         Timber.d("$this")
         Timber.d("------------------------------------------")
+
+        getUserResult()
+        getOwnerResult()
     }
 
     fun addGroupMemberResult() {
 
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-            when (val result = group.value?.let { repository.addGroupMember(it.id,"4YrrM2lfgqz1QAPgn1r9")}) {
+            when (val result = group.value?.let { group ->
+                user.value?.let { user ->
+                repository.addGroupMember(group.id,
+                    user.id)
+            } }) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -129,7 +145,9 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
 
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-            when (val result = group.value?.let { repository.subtractNeedPeopleNumber(it.id,it.needPeopleNumber)}) {
+            when (val result = group.value?.let { repository.subtractNeedPeopleNumber(it.id,
+                it.needPeopleNumber!!
+            )}) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -146,6 +164,72 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
                 else -> {
                     _error.value = MainApplication.instance.getString(R.string.you_know_nothing)
                     _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    fun getUserResult() {
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+            Timber.d("getUserResult is start")
+
+            val result = UserManager.userId?.let { repository.getUser(it) }
+            _user.value = when (result) {
+
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+                    _error.value = MainApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+        }
+    }
+
+    fun getOwnerResult() {
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+            Timber.d("getUserResult is start")
+
+            val result = group.value?.let { repository.getOwner(it.ownerId) }
+            _owner.value = when (result) {
+
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+                    _error.value = MainApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                    null
                 }
             }
         }

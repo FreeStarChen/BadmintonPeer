@@ -57,8 +57,7 @@
     <string name="friends">我的好友</string>
     <string name="class_record">課程紀錄</string>
     <string name="competition_record">比賽紀錄</string>
-    
-    
+
 
     <!-- Login Dialog -->
     <string name="login_title">請先登入會員</string>

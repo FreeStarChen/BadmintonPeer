@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.mark.badmintonpeer.data.*
 import com.mark.badmintonpeer.data.source.BadmintonPeerDataSource
+import java.util.*
 
 /**
  * Concrete implementation of a Badminton Peer source as a db.
@@ -36,6 +37,14 @@ class BadmintonPeerLocalDataSource(val context: Context) : BadmintonPeerDataSour
         TODO("Not yet implemented")
     }
 
+    override suspend fun getGroupChatroom(groupId: String): Result<Chatroom> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun addChatroom(chatroom: Chatroom): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getAllChatroom(): Result<List<Chatroom>> {
         TODO("Not yet implemented")
     }
@@ -44,8 +53,27 @@ class BadmintonPeerLocalDataSource(val context: Context) : BadmintonPeerDataSour
         TODO("Not yet implemented")
     }
 
+    override suspend fun getChats(chatroomId: String): Result<List<Chat>> {
+        TODO("Not yet implemented")
+    }
 
-    override fun getLiveChats(id: String): MutableLiveData<List<Chat>> {
+    override suspend fun sendChat(chatroomId: String, chat: Chat): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun addChatroomMessageAndTime(
+        chatroomId: String,
+        message: String
+    ): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+
+    override fun getLiveChats(chatroomId: String): MutableLiveData<List<Chat>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getSearchCityGroup(city: String, type: String): Result<List<Group>> {
         TODO("Not yet implemented")
     }
 
@@ -69,11 +97,19 @@ class BadmintonPeerLocalDataSource(val context: Context) : BadmintonPeerDataSour
         TODO("Not yet implemented")
     }
 
-    override suspend fun checkUser(id: String): Result<User> {
+    override suspend fun getUser(id: String): Result<User> {
         TODO("Not yet implemented")
     }
 
     override suspend fun addUser(user: User): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getOwner(ownerId: String): Result<User> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getJoinGroup(userId: String): Result<List<Group>> {
         TODO("Not yet implemented")
     }
 }

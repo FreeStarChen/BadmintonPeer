@@ -5,8 +5,11 @@
 
     <data>
         <variable
-            name="user"
-            type="com.mark.badmintonpeer.data.User" />
+            name="UserManager"
+            type="com.mark.badmintonpeer.login.UserManager" />
+        <variable
+            name="viewModel"
+            type="com.mark.badmintonpeer.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +51,7 @@
                     android:layout_marginStart="8dp"
                     android:background="@drawable/bg_white_radius_30dip"
                     android:scaleType="centerCrop"
-                    app:imageUrlWithCircleCrop="@{user.image}"
+                    app:imageUrlWithCircleCrop="@{viewModel.user.image}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -60,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/noto_sans"
-                    android:text="Mark7766"
+                    android:text="@{viewModel.user.nickname}"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -92,11 +95,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout_top">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="409dp"
+                    android:layout_height="32dp"
+                    tools:layout_editor_absoluteX="1dp"
+                    tools:layout_editor_absoluteY="111dp">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint_group_record"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="32dp"
                     android:background="@drawable/bg_light_green_radius_10dip"
 
                     app:layout_constraintEnd_toStartOf="@+id/constraint_class_record"
@@ -120,6 +131,7 @@
                         android:id="@+id/text_group_record"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/group_record"
@@ -158,6 +170,7 @@
                         android:id="@+id/text_class_record"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/class_record"
@@ -197,6 +210,7 @@
                         android:id="@+id/text_competition_record"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/competition_record"
@@ -213,7 +227,7 @@
                     android:layout_height="80dp"
 
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="32dp"
                     android:background="@drawable/bg_light_green_radius_10dip"
                     app:layout_constraintEnd_toStartOf="@+id/constraint_comments"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -236,6 +250,7 @@
                         android:id="@+id/text_collections"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/collections"
@@ -252,12 +267,11 @@
                     android:layout_height="80dp"
 
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
                     android:background="@drawable/bg_light_green_radius_10dip"
                     app:layout_constraintEnd_toStartOf="@+id/constraint_friends"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/constraint_collections"
-                    app:layout_constraintTop_toBottomOf="@+id/constraint_class_record">
+                    app:layout_constraintTop_toTopOf="@+id/constraint_collections">
 
 
                     <ImageView
@@ -275,6 +289,7 @@
                         android:id="@+id/text_comments"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/comments"
@@ -291,13 +306,12 @@
                     android:layout_height="80dp"
 
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/bg_light_green_radius_10dip"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/constraint_comments"
-                    app:layout_constraintTop_toBottomOf="@+id/constraint_class_record">
+                    app:layout_constraintTop_toTopOf="@+id/constraint_collections">
 
 
                     <ImageView
@@ -315,6 +329,7 @@
                         android:id="@+id/text_friends"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/friends"
@@ -335,17 +350,32 @@
                     android:text="現正參與揪團"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraint_collections" />
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_profile"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_height="0dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_comments">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

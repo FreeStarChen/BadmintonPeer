@@ -43,19 +43,6 @@
                     app:layout_constraintStart_toStartOf="@+id/radioGroup"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
-                <TextView
-                    android:id="@+id/text_data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="揪團資料"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <RadioGroup
                     android:id="@+id/radioGroup"
                     android:layout_width="0dp"
@@ -66,7 +53,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_data">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <RadioButton
                         android:id="@+id/radioButton1"
@@ -259,7 +246,7 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.haveWaterDispenser()}"
                     app:layout_constraintStart_toStartOf="@+id/text_court_provide"
                     app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
@@ -297,7 +284,7 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.haveAirCondition()}"
                     app:layout_constraintStart_toEndOf="@+id/constraint_water_dispenser"
                     app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
@@ -335,7 +322,7 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.havePuGround()}"
                     app:layout_constraintStart_toEndOf="@+id/constraint_air_condition"
                     app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
@@ -373,7 +360,7 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.haveSpotlight()}"
                     app:layout_constraintStart_toEndOf="@+id/constraint_pu_ground"
                     app:layout_constraintTop_toBottomOf="@+id/text_court_provide">
@@ -410,7 +397,7 @@
                     android:layout_width="70dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.haveShower()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_water_dispenser"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
@@ -447,7 +434,7 @@
                     android:layout_width="70dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.haveParking()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_air_condition"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
@@ -484,7 +471,7 @@
                     android:layout_width="70dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.haveCutlery()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_pu_ground"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
@@ -521,7 +508,7 @@
                     android:layout_width="70dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.haveHairDryer()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_spotlight"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_water_dispenser">
@@ -584,7 +571,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.degree1()}"
                     app:layout_constraintStart_toStartOf="@+id/text_need_degree"
                     app:layout_constraintTop_toBottomOf="@+id/text_need_degree">
@@ -614,7 +601,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.degree2()}"
                     app:layout_constraintStart_toEndOf="@+id/constraint_degree_1"
                     app:layout_constraintTop_toBottomOf="@+id/text_need_degree">
@@ -644,7 +631,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.degree3()}"
                     app:layout_constraintStart_toEndOf="@+id/constraint_degree_2"
                     app:layout_constraintTop_toBottomOf="@+id/text_need_degree">
@@ -674,7 +661,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.degree4()}"
                     app:layout_constraintStart_toStartOf="@+id/text_need_degree"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_degree_1">
@@ -703,7 +690,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.degree5()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_degree_2"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_degree_1">
@@ -732,7 +719,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_white_radius_30dip"
+                    android:background="@drawable/bg_white_radius_10dip"
                     android:onClick="@{() -> viewModel.degree6()}"
                     app:layout_constraintStart_toStartOf="@+id/constraint_degree_3"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_degree_1">
@@ -784,7 +771,7 @@
                     android:id="@+id/text_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="130dp"
+                    android:layout_marginStart="125dp"
                     android:fontFamily="@font/noto_sans"
                     android:text="相關照片"
                     android:textSize="18sp"
@@ -986,7 +973,7 @@
                     android:id="@+id/constraint_photo"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_edit_text_selector"
                     app:layout_constraintStart_toStartOf="@+id/text_photo"
@@ -1011,6 +998,17 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/image_add_photo" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/image_show_photo"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="8dp"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/bg_edit_text_unfocused"
+                    app:layout_constraintStart_toEndOf="@+id/constraint_photo"
+                    app:layout_constraintTop_toTopOf="@+id/constraint_photo"
+                    tools:srcCompat="@tools:sample/avatars" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

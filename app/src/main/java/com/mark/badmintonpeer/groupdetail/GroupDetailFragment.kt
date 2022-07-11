@@ -131,7 +131,7 @@ class GroupDetailFragment : Fragment() {
 
         binding.imageDetailChat.setOnClickListener {
             if (viewModel.isLoggedIn){
-                findNavController().navigate(NavigationDirections.navigateToChatroomFragment())
+                findNavController().navigate(NavigationDirections.navigateToChatroomGroupChatFragment(viewModel.argument))
             }
             else {
                 findNavController().navigate(NavigationDirections.navigateToLoginDialog())

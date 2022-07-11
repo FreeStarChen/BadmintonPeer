@@ -7,12 +7,13 @@ import java.util.*
 
 @Parcelize
 data class Chatroom (
-    val id: String = "",
+    var id: String = "",
     val groupId: String = "",
     val member: List<String> = listOf(""),
     val image: String = "",
-    val lastTalkMessage: String = "",
-    val lastTalkTime: Date = Timestamp(0),
+    val lastTalkMessage: String? = null,
+    val lastTalkTime: Date? = null,
     val name: String = "",
-    val type: String = ""
+    val type: String = "",
+    val chats: List<Chat> = emptyList()
         ) : Parcelable

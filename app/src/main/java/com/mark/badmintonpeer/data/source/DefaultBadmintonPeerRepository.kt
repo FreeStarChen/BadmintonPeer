@@ -2,6 +2,7 @@ package com.mark.badmintonpeer.data.source
 
 import androidx.lifecycle.MutableLiveData
 import com.mark.badmintonpeer.data.*
+import java.util.*
 
 /**
  * Concrete implementation to load Publisher sources.
@@ -30,8 +31,19 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.addGroupMember(groupId, userId)
     }
 
-    override suspend fun subtractNeedPeopleNumber(groupId: String, needPeopleNumber: Int): Result<Boolean> {
+    override suspend fun subtractNeedPeopleNumber(
+        groupId: String,
+        needPeopleNumber: Int
+    ): Result<Boolean> {
         return remoteDataSource.subtractNeedPeopleNumber(groupId, needPeopleNumber)
+    }
+
+    override suspend fun getGroupChatroom(groupId: String): Result<Chatroom> {
+        return remoteDataSource.getGroupChatroom(groupId)
+    }
+
+    override suspend fun addChatroom(chatroom: Chatroom): Result<Boolean> {
+        return remoteDataSource.addChatroom(chatroom)
     }
 
     override suspend fun getAllChatroom(): Result<List<Chatroom>> {
@@ -42,9 +54,25 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.getTypeChatroom(type)
     }
 
+    override suspend fun getChats(chatroomId: String): Result<List<Chat>> {
+        return remoteDataSource.getChats(chatroomId)
+    }
 
-    override fun getLiveChats(id: String): MutableLiveData<List<Chat>> {
-        return remoteDataSource.getLiveChats(id)
+    override suspend fun sendChat(chatroomId: String, chat: Chat): Result<Boolean> {
+        return remoteDataSource.sendChat(chatroomId, chat)
+    }
+
+    override suspend fun addChatroomMessageAndTime(chatroomId: String, message: String): Result<Boolean> {
+        return remoteDataSource.addChatroomMessageAndTime(chatroomId, message)
+    }
+
+
+    override fun getLiveChats(chatroomId: String): MutableLiveData<List<Chat>> {
+        return remoteDataSource.getLiveChats(chatroomId)
+    }
+
+    override suspend fun getSearchCityGroup(city: String, type: String): Result<List<Group>> {
+        return remoteDataSource.getSearchCityGroup(city,type)
     }
 
     override suspend fun getComments(id: String): Result<List<Comment>> {
@@ -67,11 +95,19 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.deleteInvitation(id)
     }
 
-    override suspend fun checkUser(id: String): Result<User> {
-        return remoteDataSource.checkUser(id)
+    override suspend fun getUser(id: String): Result<User> {
+        return remoteDataSource.getUser(id)
     }
 
     override suspend fun addUser(user: User): Result<Boolean> {
         return remoteDataSource.addUser(user)
+    }
+
+    override suspend fun getOwner(ownerId: String): Result<User> {
+        return remoteDataSource.getOwner(ownerId)
+    }
+
+    override suspend fun getJoinGroup(userId: String): Result<List<Group>> {
+        return remoteDataSource.getJoinGroup(userId)
     }
 }

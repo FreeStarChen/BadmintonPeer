@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.mark.badmintonpeer.chatroom.ChatroomChatAdapter
+import com.mark.badmintonpeer.data.Chat
 import com.mark.badmintonpeer.groupdetail.GroupDetailCircleAdapter
 import com.mark.badmintonpeer.groupdetail.GroupDetailImageAdapter
 import com.mark.badmintonpeer.network.LoadApiStatus
@@ -159,3 +161,14 @@ fun bindApiErrorMessage(view: TextView, message: String?) {
         }
     }
 }
+
+//@BindingAdapter("chats")
+//fun bindRecyclerView(recyclerView: RecyclerView, chatItems: List<Chat>?) {
+//    chatItems?.let {
+//        recyclerView.adapter?.apply {
+//            when (this) {
+//                is ChatroomChatAdapter ->
+//            }
+//        }
+//    }
+//}

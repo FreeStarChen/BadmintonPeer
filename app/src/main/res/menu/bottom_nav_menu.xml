@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/navigation_group"
-        android:icon="@drawable/ic_group_2"
-        android:title=""/>
+        android:icon="@drawable/bottom_nav_item_selector_image_group"
+        android:title="揪團"/>
 
     <item
         android:id="@+id/navigation_chatroom"
-        android:icon="@drawable/ic_chat"
-        android:title=""/>
+        android:icon="@drawable/bottom_nav_item_selector_image_chatroom"
+        android:title="聊天"/>
 
     <item
         android:id="@+id/navigation_news"
-        android:icon="@drawable/ic_megaphone"
-        android:title=""/>
+        android:icon="@drawable/bottom_nav_item_selector_image_news"
+        android:title="公告"/>
 
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_user"
-        android:title=""/>
+        android:icon="@drawable/bottom_nav_item_selector_image_user"
+        android:title="會員"/>
 
 </menu>

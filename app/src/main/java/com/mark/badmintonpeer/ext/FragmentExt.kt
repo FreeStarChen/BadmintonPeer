@@ -14,9 +14,9 @@ fun Fragment.getVmFactory(type: String): StringTypeViewModelFactory {
     return StringTypeViewModelFactory(type, repository)
 }
 
-fun Fragment.getVmFactory(group: Group): GroupDetailViewModelFactory {
+fun Fragment.getVmFactory(group: Group): GroupViewModelFactory {
     val repository = (requireContext().applicationContext as MainApplication).repository
-    return GroupDetailViewModelFactory(group, repository)
+    return GroupViewModelFactory(group, repository)
 }
 
 fun Fragment.getVmFactory(): ViewModelFactory {

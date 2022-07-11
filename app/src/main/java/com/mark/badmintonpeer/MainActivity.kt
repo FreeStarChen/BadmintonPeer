@@ -11,17 +11,17 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mark.badmintonpeer.creategroup.CreateGroupFragment
 import com.mark.badmintonpeer.databinding.ActivityMainBinding
 import com.mark.badmintonpeer.ext.getVmFactory
+import com.mark.badmintonpeer.group.GroupTypeFragment
 import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.util.CurrentFragmentType
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
 //        val bottomNavigationView: BottomNavigationView = binding.bottomNavigationView
 
 //        NavigationUI.setupWithNavController(bottomNavigationView, navController)
-
 
 
 //        val list = listOf("1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1")
@@ -78,7 +77,10 @@ class MainActivity : AppCompatActivity() {
         binding.spinnerCities.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if (p2 != 0) {
-                    var selectedCity = binding.spinnerCities.selectedItem.toString()
+                    val selectedCity = binding.spinnerCities.selectedItem.toString()
+                    Timber.d("selectedCity=$selectedCity")
+
+                    viewModel.city.value = selectedCity
                 }
             }
 
@@ -86,6 +88,18 @@ class MainActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         }
+
+        viewModel.spinnerReset.observe(this) {
+           it?.let {
+               if (it) {
+                   Timber.d("viewModel.spinnerReset start")
+                   binding.spinnerCities.setSelection(0)
+               }
+           }
+
+        }
+
+
 
         binding.imageToolbarFilter.setOnClickListener {
             findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToFilterFragment())
@@ -134,7 +148,6 @@ class MainActivity : AppCompatActivity() {
                 .show()
 
 
-
 //            childFragment.callViewModelAddGroupResult()
 
 //            val createGroupViewModel = ViewModelProvider(
@@ -163,7 +176,7 @@ class MainActivity : AppCompatActivity() {
 
         setupNavController()
         setupBottomNav()
-        UserManager.clear()
+//        UserManager.clear()
 
     }
 
@@ -235,7 +248,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.filterFragment -> CurrentFragmentType.FILTER
                 R.id.createGroupFragment -> CurrentFragmentType.CREATE
                 R.id.groupDetailFragment -> CurrentFragmentType.DETAIL
-                R.id.chatroomDetailFragment -> CurrentFragmentType.CHAT
+                R.id.chatroomChatFragment -> CurrentFragmentType.CHAT
                 else -> viewModel.currentFragmentType.value
             }
         }

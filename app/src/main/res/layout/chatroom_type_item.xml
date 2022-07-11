@@ -37,15 +37,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/noto_sans"
             android:text="@{chatroom.name}"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/text_last_talk_time"
             app:layout_constraintStart_toEndOf="@+id/image_chatroom_photo"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_chatroom_photo"
             tools:text="快樂羽球團" />
 
         <TextView
@@ -56,7 +55,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/noto_sans"
             android:text="@{chatroom.lastTalkMessage}"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/image_chatroom_photo"
             app:layout_constraintTop_toBottomOf="@+id/text_chatroom_title"
@@ -69,11 +68,25 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/noto_sans"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="18:00" />
+
+        <TextView
+            android:id="@+id/text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/noto_sans"
+            android:text="(2)"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/text_chatroom_title"
+            app:layout_constraintStart_toEndOf="@+id/text_chatroom_title"
+            app:layout_constraintTop_toTopOf="@+id/text_chatroom_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -10,6 +10,7 @@
                 <stroke android:width="16dp" android:color="@color/gray_cccccc" />
             </shape>
         </rotate>
+
     </item>
     <item android:left="10dp">
         <shape android:shape="rectangle" >

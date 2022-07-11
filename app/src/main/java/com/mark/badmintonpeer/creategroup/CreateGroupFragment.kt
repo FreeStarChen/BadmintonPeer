@@ -293,7 +293,7 @@ class CreateGroupFragment : Fragment() {
         val startTime = binding.editTextStartTime.text.toString()
         val startTimeToLong = startTime.toTimeLong()
         viewModel.group.value?.startTime = Timestamp(startTimeToLong)
-        val endTime = binding.editTextStartTime.text.toString()
+        val endTime = binding.editTextEndTime.text.toString()
         val endTimeToLong = endTime.toTimeLong()
         viewModel.group.value?.endTime = Timestamp(endTimeToLong)
     }

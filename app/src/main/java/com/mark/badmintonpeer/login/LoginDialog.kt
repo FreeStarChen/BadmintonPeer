@@ -108,7 +108,7 @@ class LoginDialog : AppCompatDialogFragment() {
                 ).show()
             } catch (e: ApiException) {
                 Timber.tag("givemepass").i("signInResult:failed code=%s", e.statusCode)
-                Toast.makeText(requireContext(), getString(R.string.login_fail), Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), getString(R.string.signInResult_failed), Toast.LENGTH_SHORT)
                     .show()
             }
         } else {

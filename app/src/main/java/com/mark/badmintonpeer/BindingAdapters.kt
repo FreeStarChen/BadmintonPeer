@@ -48,9 +48,9 @@ fun bindImageTransform(imgView: ImageView, imgUrl: String?) {
             .transform(CenterCrop(), RoundedCorners(25))
             .apply(
                 RequestOptions()
+                    .transform(CenterCrop(), RoundedCorners(25))
                     .placeholder(R.drawable.ig_loading)
                     .error(R.drawable.ic_badminton_two_color)
-                    .transform(CenterCrop(), RoundedCorners(25))
             )
             .into(imgView)
     }
@@ -65,6 +65,7 @@ fun bindImageWithCircleCrop(imgView: ImageView, imgUrl: String?) {
             .circleCrop()
             .apply(
                 RequestOptions()
+                    .circleCrop()
                     .placeholder(R.drawable.ig_loading)
                     .error(R.drawable.ic_badminton_two_color)
             )

@@ -59,22 +59,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/text_toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/noto_sans"
-                android:letterSpacing="0.15"
-                android:text="@{viewModel.currentFragmentType.value}"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="159dp"
-                tools:layout_editor_absoluteY="16dp"
-                tools:visibility="visible" />
-
         </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/text_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="10dp"
+            android:fontFamily="@font/noto_sans"
+            android:letterSpacing="0.15"
+            android:text="@{viewModel.currentFragmentType.value}"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar"
+            tools:text="羽球同行"
+            tools:visibility="visible" />
 
         <Spinner
             android:id="@+id/spinner_cities"
@@ -106,7 +110,6 @@
             android:id="@+id/switch_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="14dp"
             android:fontFamily="@font/noto_sans"
             android:minHeight="48dp"
             android:text="地圖 "
@@ -116,6 +119,7 @@
             android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/image_toolbar_filter"
             app:layout_constraintEnd_toStartOf="@+id/image_toolbar_filter"
+            app:layout_constraintStart_toEndOf="@+id/text_toolbar_title"
             app:layout_constraintTop_toTopOf="@+id/image_toolbar_filter"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 

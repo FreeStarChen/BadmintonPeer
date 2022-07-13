@@ -95,14 +95,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout_top">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="409dp"
-                    android:layout_height="32dp"
-                    tools:layout_editor_absoluteX="1dp"
-                    tools:layout_editor_absoluteY="111dp">
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint_group_record"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -221,124 +213,124 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_collections"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/constraint_collections"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="80dp"-->
 
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
-                    android:background="@drawable/bg_light_green_radius_10dip"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_comments"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraint_group_record">
-
-
-                    <ImageView
-                        android:id="@+id/image_collections"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="8dp"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_love" />
-
-                    <TextView
-                        android:id="@+id/text_collections"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/noto_sans"
-                        android:text="@string/collections"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/image_collections" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_comments"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-
-                    android:layout_marginStart="16dp"
-                    android:background="@drawable/bg_light_green_radius_10dip"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_friends"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/constraint_collections"
-                    app:layout_constraintTop_toTopOf="@+id/constraint_collections">
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="32dp"-->
+<!--                    android:background="@drawable/bg_light_green_radius_10dip"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/constraint_comments"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/constraint_group_record">-->
 
 
-                    <ImageView
-                        android:id="@+id/image_comments"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="8dp"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_satisfaction" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/image_collections"-->
+<!--                        android:layout_width="45dp"-->
+<!--                        android:layout_height="45dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/ic_love" />-->
 
-                    <TextView
-                        android:id="@+id/text_comments"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/noto_sans"
-                        android:text="@string/comments"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/image_comments" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/text_collections"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="4dp"-->
+<!--                        android:layout_marginBottom="8dp"-->
+<!--                        android:fontFamily="@font/noto_sans"-->
+<!--                        android:text="@string/collections"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/image_collections" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_friends"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/constraint_comments"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="80dp"-->
 
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/bg_light_green_radius_10dip"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/constraint_comments"
-                    app:layout_constraintTop_toTopOf="@+id/constraint_collections">
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:background="@drawable/bg_light_green_radius_10dip"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/constraint_friends"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/constraint_collections"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/constraint_collections">-->
 
 
-                    <ImageView
-                        android:id="@+id/image_friends"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="8dp"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_friends" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/image_comments"-->
+<!--                        android:layout_width="45dp"-->
+<!--                        android:layout_height="45dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/ic_satisfaction" />-->
 
-                    <TextView
-                        android:id="@+id/text_friends"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/noto_sans"
-                        android:text="@string/friends"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/image_friends" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/text_comments"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="4dp"-->
+<!--                        android:layout_marginBottom="8dp"-->
+<!--                        android:fontFamily="@font/noto_sans"-->
+<!--                        android:text="@string/comments"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/image_comments" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/constraint_friends"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="80dp"-->
+
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:background="@drawable/bg_light_green_radius_10dip"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/constraint_comments"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/constraint_collections">-->
+
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/image_friends"-->
+<!--                        android:layout_width="45dp"-->
+<!--                        android:layout_height="45dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/ic_friends" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/text_friends"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="4dp"-->
+<!--                        android:layout_marginBottom="8dp"-->
+<!--                        android:fontFamily="@font/noto_sans"-->
+<!--                        android:text="@string/friends"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/image_friends" />-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 <TextView
                     android:id="@+id/textView3"
@@ -372,7 +364,7 @@
                     android:background="@color/gray_cccccc"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraint_comments">
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_class_record">
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

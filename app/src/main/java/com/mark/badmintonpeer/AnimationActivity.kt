@@ -23,6 +23,7 @@ class AnimationActivity : AppCompatActivity() {
           val intent = Intent(applicationContext, MainActivity::class.java)
 //            throw RuntimeException("Test Crash") // Force a crash
           startActivity(intent)
+          finish()
       },3000)
         
     }

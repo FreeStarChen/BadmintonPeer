@@ -10,258 +10,265 @@
             type="com.mark.badmintonpeer.data.Group" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/bg_light_green_radius_10dip">
+        android:background="@color/white"
+        android:elevation="8dp"
+        app:cardCornerRadius="10dp">
 
-        <TextView
-            android:id="@+id/text_court_number2"
-            android:layout_width="wrap_content"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans"
-            android:text="Lv."
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/recycler_view_degree"
-            app:layout_constraintStart_toStartOf="@+id/image_group"
-            app:layout_constraintTop_toTopOf="@+id/recycler_view_degree" />
+            android:background="@drawable/bg_light_green_radius_10dip">
 
-        <TextView
-            android:id="@+id/text_place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/noto_sans"
-            android:text="@{group.place}"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/image_location"
-            app:layout_constraintTop_toBottomOf="@+id/text_date"
-            tools:text="內湖運動中心" />
+            <TextView
+                android:id="@+id/text_court_number2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans"
+                android:text="Lv."
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/recycler_view_degree"
+                app:layout_constraintStart_toStartOf="@+id/image_group"
+                app:layout_constraintTop_toTopOf="@+id/recycler_view_degree" />
 
-        <TextView
-            android:id="@+id/text_sign_up_people_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/noto_sans"
-            android:text="@{String.valueOf(group.totalPeopleNumber-group.needPeopleNumber)}"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/image_group"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_view_degree"
-            tools:text="8" />
+            <TextView
+                android:id="@+id/text_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="@{group.place}"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/image_location"
+                app:layout_constraintTop_toBottomOf="@+id/text_date"
+                tools:text="內湖運動中心" />
 
-        <TextView
-            android:id="@+id/text_slash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/noto_sans"
-            android:text="/"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/text_sign_up_people_number"
-            app:layout_constraintTop_toTopOf="@+id/text_sign_up_people_number"
-            tools:text="/" />
+            <TextView
+                android:id="@+id/text_sign_up_people_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="@{String.valueOf(group.totalPeopleNumber-group.needPeopleNumber)}"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/image_group"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_degree"
+                tools:text="8" />
 
-        <TextView
-            android:id="@+id/text_total_people_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/noto_sans"
-            android:text="@{String.valueOf(group.totalPeopleNumber)}"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/text_slash"
-            app:layout_constraintTop_toTopOf="@+id/text_slash"
-            tools:text="16" />
+            <TextView
+                android:id="@+id/text_slash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="/"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/text_sign_up_people_number"
+                app:layout_constraintTop_toTopOf="@+id/text_sign_up_people_number"
+                tools:text="/" />
 
-        <TextView
-            android:id="@+id/text_court_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:fontFamily="@font/noto_sans"
-            android:text="@{String.valueOf(group.courtNumber)}"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView6"
-            app:layout_constraintTop_toTopOf="@+id/text_total_people_number"
-            tools:text="2" />
+            <TextView
+                android:id="@+id/text_total_people_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="@{String.valueOf(group.totalPeopleNumber)}"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/text_slash"
+                app:layout_constraintTop_toTopOf="@+id/text_slash"
+                tools:text="16" />
 
-        <ImageView
-            android:id="@+id/image_time"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/text_date"
-            app:layout_constraintStart_toStartOf="@+id/image_medal"
-            app:layout_constraintTop_toTopOf="@+id/text_date"
-            app:srcCompat="@drawable/ic_time_color_2" />
+            <TextView
+                android:id="@+id/text_court_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="@{String.valueOf(group.courtNumber)}"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="@+id/text_total_people_number"
+                tools:text="2" />
 
-        <ImageView
-            android:id="@+id/image_location"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/text_place"
-            app:layout_constraintStart_toStartOf="@+id/image_medal"
-            app:layout_constraintTop_toTopOf="@+id/text_place"
-            app:srcCompat="@drawable/ic_location_color" />
+            <ImageView
+                android:id="@+id/image_time"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_date"
+                app:layout_constraintStart_toStartOf="@+id/image_medal"
+                app:layout_constraintTop_toTopOf="@+id/text_date"
+                app:srcCompat="@drawable/ic_time_color_2" />
 
-        <ImageView
-            android:id="@+id/image_group"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginBottom="2dp"
-            app:layout_constraintBottom_toBottomOf="@+id/text_sign_up_people_number"
-            app:layout_constraintStart_toStartOf="@+id/image_medal"
-            app:layout_constraintTop_toTopOf="@+id/text_sign_up_people_number"
-            app:srcCompat="@drawable/ic_group_color" />
+            <ImageView
+                android:id="@+id/image_location"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_place"
+                app:layout_constraintStart_toStartOf="@+id/image_medal"
+                app:layout_constraintTop_toTopOf="@+id/text_place"
+                app:srcCompat="@drawable/ic_location_color" />
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="26dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="90dp"
-            android:rotation="90"
-            app:layout_constraintBottom_toBottomOf="@+id/image_group"
-            app:layout_constraintStart_toEndOf="@+id/image_group"
-            app:layout_constraintTop_toTopOf="@+id/image_group"
-            app:srcCompat="@drawable/ic_court_color" />
+            <ImageView
+                android:id="@+id/image_group"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_sign_up_people_number"
+                app:layout_constraintStart_toStartOf="@+id/image_medal"
+                app:layout_constraintTop_toTopOf="@+id/text_sign_up_people_number"
+                app:srcCompat="@drawable/ic_group_color" />
 
-        <ImageView
-            android:id="@+id/image_group_photo"
-            android:layout_width="110dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:scaleType="centerCrop"
-            app:imageUrlTransform="@{group.images[0]}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/badminton" />
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="26dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="90dp"
+                android:rotation="90"
+                app:layout_constraintBottom_toBottomOf="@+id/image_group"
+                app:layout_constraintStart_toEndOf="@+id/image_group"
+                app:layout_constraintTop_toTopOf="@+id/image_group"
+                app:srcCompat="@drawable/ic_court_color" />
 
-        <TextView
-            android:id="@+id/text_detail_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/noto_sans"
-            android:text="@{group.name}"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image_medal"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="快樂羽球團" />
+            <ImageView
+                android:id="@+id/image_group_photo"
+                android:layout_width="115dp"
+                android:layout_height="0dp"
+                android:background="@color/gray_cccccc"
+                android:scaleType="centerInside"
+                app:imageUrlTransform="@{group.images[0]}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_error" />
 
-        <TextView
-            android:id="@+id/text_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/noto_sans"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/image_time"
-            app:layout_constraintTop_toBottomOf="@+id/text_detail_title"
-            tools:text="2022/06/30 星期四" />
+            <TextView
+                android:id="@+id/text_detail_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="@{group.name}"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_medal"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="快樂羽球團" />
 
-        <ImageView
-            android:id="@+id/image_medal"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/image_group_photo"
-            app:layout_constraintTop_toTopOf="@+id/text_detail_title"
-            app:srcCompat="@drawable/ic_medal_color" />
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/image_time"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_title"
+                tools:text="2022/06/30 星期四" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="100dp"
-            android:layout_height="10dp"
-            android:scaleY="1.5"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
-            android:progressBackgroundTint="@color/greyish_brown"
-            android:progressTint="@color/court_green"
-            android:max="@{group.totalPeopleNumber}"
-            android:progress="@{group.totalPeopleNumber-group.needPeopleNumber}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/image_group"
-            app:layout_constraintTop_toBottomOf="@+id/text_total_people_number" />
+            <ImageView
+                android:id="@+id/image_medal"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/image_group_photo"
+                app:layout_constraintTop_toTopOf="@+id/text_detail_title"
+                app:srcCompat="@drawable/ic_medal_color" />
 
-        <TextView
-            android:id="@+id/text_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:fontFamily="@font/noto_sans"
-            android:textColor="#E91E63"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="$200" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="100dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:max="@{group.totalPeopleNumber}"
+                android:progress="@{group.totalPeopleNumber-group.needPeopleNumber}"
+                android:progressBackgroundTint="@color/greyish_brown"
+                android:progressTint="@color/court_green"
+                android:scaleY="1.5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/image_group"
+                app:layout_constraintTop_toBottomOf="@+id/text_total_people_number" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_degree"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="@+id/text_sign_up_people_number"
-            app:layout_constraintTop_toBottomOf="@+id/text_place"
-            tools:itemCount="3"
-            tools:listitem="@layout/group_type_item_degree" />
+            <TextView
+                android:id="@+id/text_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/noto_sans"
+                android:textColor="#E91E63"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="$200" />
 
-        <TextView
-            android:id="@+id/text_start_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/noto_sans"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/text_date"
-            app:layout_constraintTop_toTopOf="@+id/text_date"
-            tools:text="18:00" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_degree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="@+id/text_sign_up_people_number"
+                app:layout_constraintTop_toBottomOf="@+id/text_place"
+                tools:itemCount="3"
+                tools:listitem="@layout/group_type_item_degree" />
 
-        <TextView
-            android:id="@+id/text_wave_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans"
-            android:text="~"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/text_start_time"
-            app:layout_constraintTop_toTopOf="@+id/text_date" />
+            <TextView
+                android:id="@+id/text_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/noto_sans"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/text_date"
+                app:layout_constraintTop_toTopOf="@+id/text_date"
+                tools:text="18:00" />
 
-        <TextView
-            android:id="@+id/text_end_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/text_wave_line"
-            app:layout_constraintTop_toTopOf="@+id/text_date"
-            tools:text="20:00" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/text_wave_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans"
+                android:text="~"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/text_start_time"
+                app:layout_constraintTop_toTopOf="@+id/text_date" />
+
+            <TextView
+                android:id="@+id/text_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/text_wave_line"
+                app:layout_constraintTop_toTopOf="@+id/text_date"
+                tools:text="20:00" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

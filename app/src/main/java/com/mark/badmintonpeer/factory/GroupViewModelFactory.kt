@@ -18,6 +18,7 @@ class GroupViewModelFactory(
             when {
                 isAssignableFrom(GroupDetailViewModel::class.java) ->
                     GroupDetailViewModel(group, repository)
+
                 isAssignableFrom(ChatroomGroupChatViewModel::class.java) ->
                     ChatroomGroupChatViewModel(group, repository)
                 else ->

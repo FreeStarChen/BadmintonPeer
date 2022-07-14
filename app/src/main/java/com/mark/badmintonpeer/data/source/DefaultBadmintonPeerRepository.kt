@@ -38,6 +38,15 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.subtractNeedPeopleNumber(groupId, needPeopleNumber)
     }
 
+    override suspend fun getAlmostFullGroups(): Result<List<Group>> {
+        return remoteDataSource.getAlmostFullGroups()
+    }
+
+    override suspend fun getNews(): Result<List<News>> {
+        return remoteDataSource.getNews()
+    }
+
+
     override suspend fun getGroupChatroom(groupId: String): Result<Chatroom> {
         return remoteDataSource.getGroupChatroom(groupId)
     }

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -14,9 +15,13 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.mark.badmintonpeer.NavigationDirections
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.databinding.GroupFragmentBinding
+import com.mark.badmintonpeer.ext.getVmFactory
+import com.mark.badmintonpeer.filter.FilterViewModel
 import com.mark.badmintonpeer.login.UserManager
 
 class GroupFragment : Fragment() {
+
+    private val viewModel by viewModels<GroupViewModel> {getVmFactory()}
 
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var viewPager: ViewPager2
@@ -32,6 +37,9 @@ class GroupFragment : Fragment() {
     ): View? {
         val binding = GroupFragmentBinding.inflate(inflater)
 
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
         binding.imageAddGroup.setOnClickListener {
             if (UserManager.isLoggedIn) {
                 findNavController().navigate(NavigationDirections.navigateToCreateGroupFragment())
@@ -40,6 +48,8 @@ class GroupFragment : Fragment() {
                 findNavController().navigate(NavigationDirections.navigateToLoginDialog())
             }
         }
+
+
 
         return binding.root
 

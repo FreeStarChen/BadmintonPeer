@@ -33,7 +33,7 @@ object TimeCalculator {
     @SuppressLint("SimpleDateFormat")
     fun getDateAndWeek(time: Long): String {
         return if (android.os.Build.VERSION.SDK_INT >= 24) {
-            SimpleDateFormat("YYYY/MM/dd EE").format(time)
+            SimpleDateFormat("YYYY/MM/dd (E)").format(time)
         } else {
             val tms = Calendar.getInstance()
             tms.get(Calendar.DAY_OF_MONTH).toString() + "/" +

@@ -61,8 +61,8 @@
 
 
     <!-- Login Dialog -->
-    <string name="login_title">請先登入會員</string>
-    <string name="login_description">登入會員後即可使用個人功能。</string>
+    <string name="login_title">請先登入</string>
+    <string name="login_description">登入後即可使用聊天及個人功能。\n登入即代表您同意隱私權政策。</string>
     <string name="login_facebook_text">Facebook 登入</string>
 
 </resources>

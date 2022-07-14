@@ -177,7 +177,10 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
         }
 
         viewModel.recyclerViewVisible.observe(viewLifecycleOwner) {
-            Log.i("TestW", "type=${getType()}, recyclerViewVisible=$it")
+
+            ViewModelProvider(requireParentFragment()).get(GroupViewModel::class.java)._addGroupImageViewVisible.value =
+                it
+
         }
 
         return binding.root

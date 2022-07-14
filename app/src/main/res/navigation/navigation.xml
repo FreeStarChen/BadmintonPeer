@@ -111,4 +111,20 @@
     <action
         android:id="@+id/navigate_to_chatroom_group_chat_fragment"
         app:destination="@+id/chatroomGroupChatFragment" />
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.mark.badmintonpeer.newsdetail.NewsDetailFragment"
+        android:label="NewsDetailFragment" >
+
+        <argument
+            android:name="newKey"
+            app:argType="com.mark.badmintonpeer.data.News"
+            app:nullable="false" />
+    </fragment>
+
+    <action
+        android:id="@+id/navigate_to_news_detail_fragment"
+        app:destination="@+id/newsDetailFragment" />
+
+
 </navigation>

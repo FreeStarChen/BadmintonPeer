@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import com.mark.badmintonpeer.MainApplication
 import com.mark.badmintonpeer.data.Chatroom
 import com.mark.badmintonpeer.data.Group
+import com.mark.badmintonpeer.data.News
 import com.mark.badmintonpeer.factory.*
 
 /**
@@ -27,4 +28,11 @@ fun Fragment.getVmFactory(): ViewModelFactory {
 fun Fragment.getVmFactory(chatroom: Chatroom): ChatroomChatViewModelFactory {
     val repository = (requireContext().applicationContext as MainApplication).repository
     return ChatroomChatViewModelFactory(chatroom, repository)
+
+}
+
+fun Fragment.getVmFactory(news: News): NewsViewModelFactory {
+    val repository = (requireContext().applicationContext as MainApplication).repository
+    return NewsViewModelFactory(news, repository)
+
 }

@@ -12,6 +12,7 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -20,6 +21,7 @@ import com.mark.badmintonpeer.data.Chat
 import com.mark.badmintonpeer.groupdetail.GroupDetailCircleAdapter
 import com.mark.badmintonpeer.groupdetail.GroupDetailImageAdapter
 import com.mark.badmintonpeer.network.LoadApiStatus
+import com.mark.badmintonpeer.news.NewsCircleAdapter
 import com.mark.badmintonpeer.util.Util.getColor
 
 /**
@@ -124,6 +126,9 @@ fun bindRecyclerViewByCount(recyclerView: RecyclerView, count: Int?) {
                 is GroupDetailCircleAdapter -> {
                     submitCount(it)
                 }
+                is NewsCircleAdapter -> {
+                    submitCount(it)
+                }
             }
         }
     }
@@ -163,7 +168,7 @@ fun bindNewsCircleStatus(imageView: ImageView, isSelected: Boolean = false) {
     imageView.background = ShapeDrawable(object : Shape() {
         override fun draw(canvas: Canvas, paint: Paint) {
 
-            paint.color = getColor(R.color.gray_888888)
+            paint.color = getColor(R.color.black)
             paint.isAntiAlias = true
 
             when (isSelected) {
@@ -197,6 +202,18 @@ fun bindApiStatus(view: ProgressBar, status: LoadApiStatus?) {
         LoadApiStatus.DONE, LoadApiStatus.ERROR -> view.visibility = View.GONE
     }
 }
+
+/**
+ * According to [LoadApiStatus] to decide the visibility of [LottieAnimationView]
+ */
+@BindingAdapter("setupApiStatusForLottie")
+fun bindApiStatusForLottie(view: LottieAnimationView, status: LoadApiStatus?) {
+    when (status) {
+        LoadApiStatus.LOADING -> view.visibility = View.VISIBLE
+        LoadApiStatus.DONE, LoadApiStatus.ERROR -> view.visibility = View.GONE
+    }
+}
+
 
 /**
  * According to [message] to decide the visibility of [ProgressBar]

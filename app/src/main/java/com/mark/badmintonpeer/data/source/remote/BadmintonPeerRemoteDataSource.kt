@@ -10,7 +10,6 @@ import com.mark.badmintonpeer.data.*
 import com.mark.badmintonpeer.data.source.BadmintonPeerDataSource
 import com.mark.badmintonpeer.login.UserManager
 import timber.log.Timber
-import java.sql.Timestamp
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -216,9 +215,9 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                             } else {
                                 for (document in task.result) {
                                     Timber.d("document=${document}")
-                                    val user = document.toObject(Chatroom::class.java)
-                                    Timber.d("user=${user}")
-                                    continuation.resume(Result.Success(user))
+                                    val chatroom = document.toObject(Chatroom::class.java)
+                                    Timber.d("user=${chatroom}")
+                                    continuation.resume(Result.Success(chatroom))
                                 }
                             }
                         } else {

@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         ArrayAdapter.createFromResource(
             this,
             R.array.cities,
-            android.R.layout.simple_spinner_item
+            R.layout.spinner_item
         ).also { adapter ->
             adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
             binding.spinnerCities.adapter = adapter
@@ -159,9 +159,13 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        binding.switchMap.setOnCheckedChangeListener { compoundButton, b ->
-            compoundButton.isChecked.let {
-                viewModel.switchStatus.value = it
+        binding.buttonMap.setOnClickListener {
+            viewModel.switchStatus.value = viewModel.switchStatus.value == false
+        }
+
+//        binding.switchMap.setOnCheckedChangeListener { compoundButton, b ->
+//            compoundButton.isChecked.let {
+//                viewModel.switchStatus.value = it
 //                getLocationPermission()
 
 //                val groupTypeViewModel by viewModels<GroupTypeViewModel> { getVmFactory(viewModel.type.value!!) }
@@ -171,12 +175,12 @@ class MainActivity : AppCompatActivity() {
 //                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
 //                val groupTypeFragment = fragment?.childFragmentManager?.primaryNavigationFragment as GroupTypeFragment
 //                groupTypeFragment.setRecyclerViewVisible(it)
-            }
-        }
+//            }
+//        }
 
         setupNavController()
         setupBottomNav()
-//        UserManager.clear()
+        UserManager.clear()
 
     }
 

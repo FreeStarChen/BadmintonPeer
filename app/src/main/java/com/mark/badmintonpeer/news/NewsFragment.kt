@@ -48,14 +48,16 @@ class NewsFragment : Fragment() {
 
         binding.recyclerViewNewsCircles.adapter = NewsCircleAdapter()
 
+        viewModel.news.observe(viewLifecycleOwner) {
+            (binding.recyclerViewNews.adapter as NewsItemAdapter).submitList(it)
 
+            viewModel.news.value?.let { news ->
+                binding.recyclerViewNews.scrollToPosition(news.size)
 
-        viewModel.news.value?.let { news ->
-            binding.recyclerViewNews.scrollToPosition(news.size)
-
-            viewModel.snapPosition.observe(viewLifecycleOwner) {
-                (binding.recyclerViewNewsCircles.adapter as NewsCircleAdapter).selectedPosition.value =
-                    (it % news.size)
+                viewModel.snapPosition.observe(viewLifecycleOwner) { position ->
+                    (binding.recyclerViewNewsCircles.adapter as NewsCircleAdapter).selectedPosition.value =
+                        (position % news.size)
+                }
             }
         }
 
@@ -82,7 +84,8 @@ class NewsFragment : Fragment() {
         )
 
         val manager = LinearLayoutManager(
-            requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            requireContext(), LinearLayoutManager.HORIZONTAL, false
+        )
 
         recyclerNews.run {
             adapter = newsAdapter
@@ -132,9 +135,7 @@ class NewsFragment : Fragment() {
             }
         }
 
-        viewModel.news.observe(viewLifecycleOwner) {
-            (binding.recyclerViewNews.adapter as NewsItemAdapter).submitList(it)
-        }
+
 
         return binding.root
     }

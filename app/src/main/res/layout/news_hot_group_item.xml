@@ -24,7 +24,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_light_green_radius_10dip"
+            android:background="@color/light_green"
             android:elevation="8dp">
 
             <TextView

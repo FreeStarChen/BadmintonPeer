@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mark.badmintonpeer.filter.FilterViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="@{() -> viewModel.leave()}"
+        tools:context=".filter.FilterDialog">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_radius_15dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_night_time"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:background="@{viewModel.nightTime == true ? @drawable/bg_light_blue_radius_10dip : @drawable/bg_white_radius_10dip}"
+                android:onClick="@{() -> viewModel.nightTime()}"
+                app:layout_constraintStart_toEndOf="@+id/constraint_afternoon_time"
+                app:layout_constraintTop_toTopOf="@+id/text_need_degree5">
+
+                <TextView
+                    android:id="@+id/text_time3_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18:00"
+                    android:textColor="@{viewModel.nightTime == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/text_time3_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/text_time3_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/text_time3_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_time3_1" />
+
+                <TextView
+                    android:id="@+id/text_time3_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24:00"
+                    android:textColor="@{viewModel.nightTime == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_time3_2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_afternoon_time"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:background="@{viewModel.afternoonTime == true ? @drawable/bg_light_blue_radius_10dip : @drawable/bg_white_radius_10dip}"
+                android:onClick="@{() -> viewModel.afternoonTime()}"
+                app:layout_constraintStart_toEndOf="@+id/constraint_morning_time"
+                app:layout_constraintTop_toTopOf="@+id/text_need_degree5">
+
+                <TextView
+                    android:id="@+id/text_time2_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12:00"
+                    android:textColor="@{viewModel.afternoonTime == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/text_time2_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/text_time2_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/text_time2_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_time2_1" />
+
+                <TextView
+                    android:id="@+id/text_time2_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18:00"
+                    android:textColor="@{viewModel.afternoonTime == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_time2_2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_morning_time"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:background="@{viewModel.morningTime == true ? @drawable/bg_light_blue_radius_10dip : @drawable/bg_white_radius_10dip}"
+                android:onClick="@{() -> viewModel.morningTime()}"
+                app:layout_constraintStart_toEndOf="@+id/text_need_degree5"
+                app:layout_constraintTop_toTopOf="@+id/text_need_degree5">
+
+                <TextView
+                    android:id="@+id/text_time1_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="06:00"
+                    android:textColor="@{viewModel.morningTime == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/text_time1_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/text_time1_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/text_time1_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_time1_1" />
+
+                <TextView
+                    android:id="@+id/text_time1_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12:00"
+                    android:textColor="@{viewModel.morningTime == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_time1_2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Spinner
+                android:id="@+id/spinner_cities"
+                android:layout_width="105dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/spinner_cities_layer_list_black"
+                app:elevation="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_need_degree3"
+                app:layout_constraintStart_toEndOf="@+id/text_need_degree3"
+                app:layout_constraintTop_toTopOf="@+id/text_need_degree3" />
+
+            <Spinner
+                android:id="@+id/spinner_towns"
+                android:layout_width="105dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/spinner_cities_layer_list_black"
+                app:elevation="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_need_degree4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_need_degree4"
+                app:layout_constraintTop_toTopOf="@+id/text_need_degree4" />
+
+            <TextView
+                android:id="@+id/text_need_degree2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="需求程度"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraint_morning_time" />
+
+            <TextView
+                android:id="@+id/text_need_degree5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="時間"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_need_degree6" />
+
+            <TextView
+                android:id="@+id/text_need_degree8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="費用"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraint_degree_4" />
+
+            <EditText
+                android:id="@+id/edit_text_price"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bg_edit_text_selector"
+                android:ems="5"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:paddingStart="8dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_need_degree8"
+                app:layout_constraintStart_toEndOf="@+id/text_need_degree8"
+                app:layout_constraintTop_toTopOf="@+id/text_need_degree8" />
+
+            <EditText
+                android:id="@+id/edit_text_price2"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_edit_text_selector"
+                android:ems="5"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:paddingStart="8dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_text_price"
+                app:layout_constraintStart_toEndOf="@+id/text_wave_line_create"
+                app:layout_constraintTop_toTopOf="@+id/edit_text_price"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/text_wave_line_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="～"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_text_price"
+                app:layout_constraintStart_toEndOf="@+id/edit_text_price"
+                app:layout_constraintTop_toTopOf="@+id/edit_text_price" />
+
+            <TextView
+                android:id="@+id/text_need_degree6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="日期"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_need_degree3" />
+
+            <EditText
+                android:id="@+id/edit_text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bg_edit_text_selector"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none"
+                android:minHeight="48dp"
+                android:paddingStart="8dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_need_degree6"
+                app:layout_constraintStart_toEndOf="@+id/text_need_degree6"
+                app:layout_constraintTop_toTopOf="@+id/text_need_degree6" />
+
+            <TextView
+                android:id="@+id/text_need_degree3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="縣市"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+            <TextView
+                android:id="@+id/text_need_degree4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="地區"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/spinner_cities"
+                app:layout_constraintStart_toEndOf="@+id/spinner_cities"
+                app:layout_constraintTop_toTopOf="@+id/spinner_cities" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_degree_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@{viewModel.degree1 == true ? @drawable/bg_orange_radius_10dip : @drawable/bg_white_radius_10dip}"
+                android:onClick="@{() -> viewModel.degree1()}"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/text_need_degree2"
+                app:layout_constraintTop_toTopOf="@+id/text_need_degree2">
+
+                <TextView
+                    android:id="@+id/text_degree_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:text="新手"
+                    android:textColor="@{viewModel.degree1 == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_degree_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@{viewModel.degree2 == true ? @drawable/bg_orange_radius_10dip : @drawable/bg_white_radius_10dip}"
+                android:onClick="@{() -> viewModel.degree2()}"
+                app:layout_constraintStart_toEndOf="@+id/constraint_degree_1"
+                app:layout_constraintTop_toTopOf="@+id/constraint_degree_1">
+
+                <TextView
+                    android:id="@+id/text_degree_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:text="初階"
+                    android:textColor="@{viewModel.degree2 == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_degree_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@{viewModel.degree3 == true ? @drawable/bg_orange_radius_10dip : @drawable/bg_white_radius_10dip}"
+                android:onClick="@{() -> viewModel.degree3()}"
+                app:layout_constraintStart_toEndOf="@+id/constraint_degree_2"
+                app:layout_constraintTop_toTopOf="@+id/constraint_degree_2">
+
+                <TextView
+                    android:id="@+id/text_degree_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:text="初中"
+                    android:textColor="@{viewModel.degree3 == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_degree_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@{viewModel.degree4 == true ? @drawable/bg_orange_radius_10dip : @drawable/bg_white_radius_10dip}"
+                android:onClick="@{() -> viewModel.degree4()}"
+                app:layout_constraintStart_toStartOf="@+id/constraint_degree_1"
+                app:layout_constraintTop_toBottomOf="@+id/constraint_degree_1">
+
+                <TextView
+                    android:id="@+id/text_degree_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:text="中階"
+                    android:textColor="@{viewModel.degree4 == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_degree_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@{viewModel.degree5 == true ? @drawable/bg_orange_radius_10dip : @drawable/bg_white_radius_10dip}"
+                android:onClick="@{() -> viewModel.degree5()}"
+                app:layout_constraintStart_toEndOf="@+id/constraint_degree_4"
+                app:layout_constraintTop_toTopOf="@+id/constraint_degree_4">
+
+                <TextView
+                    android:id="@+id/text_degree_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:text="中上"
+                    android:textColor="@{viewModel.degree5 == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/button_reset"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_red_radius_10dip"
+                android:text="重置"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_filter"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_price" />
+
+            <Button
+                android:id="@+id/button_filter"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_light_green_radius_10dip"
+                android:elevation="8dp"
+                android:text="開始搜尋"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button_reset"
+                app:layout_constraintTop_toTopOf="@+id/button_reset" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_degree_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@{viewModel.degree6 == true ? @drawable/bg_orange_radius_10dip : @drawable/bg_white_radius_10dip}"
+                android:onClick="@{() -> viewModel.degree6()}"
+                app:layout_constraintStart_toEndOf="@+id/constraint_degree_5"
+                app:layout_constraintTop_toTopOf="@+id/constraint_degree_5">
+
+                <TextView
+                    android:id="@+id/text_degree_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:text="高階"
+                    android:textColor="@{viewModel.degree6 == true ? @color/black : @color/gray_888888}"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_green_top_radius_15dip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="篩選"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

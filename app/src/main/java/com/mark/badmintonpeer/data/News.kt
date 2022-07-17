@@ -12,5 +12,6 @@ data class News (
     val author: String = "",
     val postTime: Date = Timestamp(0),
     val image: String = "",
-    val content: String = ""
+    val content: String = "",
+    val type: String = ""
         ) : Parcelable

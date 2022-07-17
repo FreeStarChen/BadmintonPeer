@@ -29,6 +29,10 @@
         <item>連江縣</item>
     </string-array>
 
+    <string-array name="towns">
+        <item>選擇地區</item>
+    </string-array>
+
     <!-- Page Title Name -->
     <string name="group">羽球同行</string>
     <string name="chatroom">聊天室</string>

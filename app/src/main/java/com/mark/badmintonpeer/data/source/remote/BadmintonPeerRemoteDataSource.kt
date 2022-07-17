@@ -20,7 +20,7 @@ import kotlin.coroutines.suspendCoroutine
 object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
 
     private const val PATH_GROUPS = "groups"
-    private const val KEY_START_TIME = "startTime"
+    private const val KEY_DATE = "date"
     private const val KEY_CLASSIFICATION = "classification"
     private const val KEY_MEMBER = "member"
     private const val KEY_NEED_PEOPLE_NUMBER = "needPeopleNumber"
@@ -45,8 +45,8 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection(PATH_GROUPS)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
                 .whereEqualTo(KEY_CLASSIFICATION, type)
-                .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
 //            .limit(10)
                 .get()
                 .addOnCompleteListener { task ->
@@ -147,7 +147,8 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection(PATH_GROUPS)
-                .whereLessThanOrEqualTo(KEY_NEED_PEOPLE_NUMBER,2)
+//                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
+                .whereLessThanOrEqualTo(KEY_NEED_PEOPLE_NUMBER, 2)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -261,7 +262,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection(PATH_CHATROOM)
-//            .orderBy(KEY_LAST_TALK_TIME,Query.Direction.ASCENDING)
+                .orderBy(KEY_LAST_TALK_TIME, Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -289,7 +290,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             FirebaseFirestore.getInstance()
                 .collection(PATH_CHATROOM)
                 .whereEqualTo(KEY_TYPE, type)
-//            .orderBy(KEY_LAST_TALK_TIME,Query.Direction.ASCENDING)
+                .orderBy(KEY_LAST_TALK_TIME, Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -566,8 +567,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             FirebaseFirestore.getInstance()
                 .collection(PATH_GROUPS)
                 .whereArrayContains(KEY_MEMBER, userId)
-//                .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
-//            .limit(10)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {

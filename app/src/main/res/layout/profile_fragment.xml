@@ -78,9 +78,11 @@
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/bg_light_green_radius_10dip"
                     android:elevation="8dp"
+                    android:fontFamily="@font/noto_sans"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     android:text="修改會員資訊"
+                    android:textColor="@color/greyish_brown"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -97,8 +99,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint_group_record"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/bg_light_green_radius_10dip"
@@ -112,8 +114,8 @@
 
                     <ImageView
                         android:id="@+id/image_group_record"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginTop="8dp"
                         android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +127,7 @@
                         android:id="@+id/text_group_record"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/group_record"
@@ -138,8 +140,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint_class_record"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
 
                     android:layout_marginStart="16dp"
                     android:background="@drawable/bg_light_green_radius_10dip"
@@ -152,8 +154,8 @@
 
                     <ImageView
                         android:id="@+id/image_class_record"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginTop="8dp"
                         android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +167,7 @@
                         android:id="@+id/text_class_record"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/class_record"
@@ -178,8 +180,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint_competition_record"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
 
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
@@ -193,8 +195,8 @@
 
                     <ImageView
                         android:id="@+id/image_competition_record"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginTop="8dp"
                         android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -206,7 +208,7 @@
                         android:id="@+id/text_competition_record"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/competition_record"

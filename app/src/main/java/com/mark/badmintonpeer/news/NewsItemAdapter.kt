@@ -18,7 +18,7 @@ class NewsItemAdapter(private val onClickListener: OnClickListener) :
         @SuppressLint("SetTextI18n")
         fun bind(news: News) {
             binding.news = news
-            binding.textPostTimeNewsItem.text = TimeCalculator.getDate(news.postTime.time)
+            binding.textPostTimeNewsItem.text = TimeCalculator.getDateAndYear(news.postTime.time)
 
             binding.executePendingBindings()
         }

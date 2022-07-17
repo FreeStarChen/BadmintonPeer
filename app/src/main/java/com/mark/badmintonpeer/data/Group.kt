@@ -24,7 +24,7 @@ data class Group (
     var ball: String = "",
     var price: Int? = null,
     var degree: List<String> = listOf(""),
-    var contactNumber: Long? = null,
+    var contactNumber: String = "",
     var courtNumber: Int? = null,
     var other: String = ""
         ) : Parcelable

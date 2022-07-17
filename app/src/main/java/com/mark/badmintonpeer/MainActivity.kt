@@ -18,8 +18,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mark.badmintonpeer.creategroup.CreateGroupFragment
 import com.mark.badmintonpeer.databinding.ActivityMainBinding
 import com.mark.badmintonpeer.ext.getVmFactory
-import com.mark.badmintonpeer.group.GroupTypeFragment
-import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.util.CurrentFragmentType
 import timber.log.Timber
 
@@ -67,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         ArrayAdapter.createFromResource(
             this,
             R.array.cities,
-            R.layout.spinner_item
+            R.layout.spinner_item_white
         ).also { adapter ->
             adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
             binding.spinnerCities.adapter = adapter
@@ -180,7 +178,7 @@ class MainActivity : AppCompatActivity() {
 
         setupNavController()
         setupBottomNav()
-        UserManager.clear()
+//        UserManager.clear()
 
     }
 
@@ -249,10 +247,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_chatroom -> CurrentFragmentType.CHATROOM
                 R.id.navigation_news -> CurrentFragmentType.NEWS
                 R.id.navigation_profile -> CurrentFragmentType.PROFILE
-                R.id.filterFragment -> CurrentFragmentType.FILTER
+                R.id.filterDialog -> CurrentFragmentType.FILTER
                 R.id.createGroupFragment -> CurrentFragmentType.CREATE
                 R.id.groupDetailFragment -> CurrentFragmentType.DETAIL
                 R.id.chatroomChatFragment -> CurrentFragmentType.CHAT
+                R.id.newsDetailFragment -> CurrentFragmentType.DETAIL
                 else -> viewModel.currentFragmentType.value
             }
         }

@@ -47,9 +47,25 @@ object TimeCalculator {
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun getDate(time: Long): String {
+    fun getDateAndYear(time: Long): String {
         return if (android.os.Build.VERSION.SDK_INT >= 24) {
             SimpleDateFormat("YYYY/MM/dd").format(time)
+        } else {
+            val tms = Calendar.getInstance()
+            tms.get(Calendar.DAY_OF_MONTH).toString() + "/" +
+                    tms.get(Calendar.MONTH).toString() + "/" +
+                    tms.get(Calendar.YEAR).toString() + " " +
+                    tms.get(Calendar.DAY_OF_MONTH).toString() + " " +
+                    tms.get(Calendar.HOUR_OF_DAY).toString() + ":" +
+                    tms.get(Calendar.MINUTE).toString() + ":" +
+                    tms.get(Calendar.SECOND).toString()
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun getDate(time: Long): String {
+        return if (android.os.Build.VERSION.SDK_INT >= 24) {
+            SimpleDateFormat("MM/dd").format(time)
         } else {
             val tms = Calendar.getInstance()
             tms.get(Calendar.DAY_OF_MONTH).toString() + "/" +

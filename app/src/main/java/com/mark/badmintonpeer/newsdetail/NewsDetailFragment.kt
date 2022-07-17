@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.mark.badmintonpeer.NavigationDirections
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.databinding.NewsDetailFragmentBinding
 import com.mark.badmintonpeer.ext.getVmFactory
@@ -40,8 +42,9 @@ class NewsDetailFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-
-
+        binding.imageNewsDetailBack.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToNewsFragment())
+        }
 
         return binding.root
     }

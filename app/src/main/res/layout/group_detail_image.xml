@@ -18,12 +18,13 @@
             android:id="@+id/image_group_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@color/gray_cccccc"
             android:scaleType="centerCrop"
-            app:imageUrl="@{imageUrl}"
+            app:imageUrlTransform="@{imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ig_loading"/>
+            tools:src="@drawable/ig_loading" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

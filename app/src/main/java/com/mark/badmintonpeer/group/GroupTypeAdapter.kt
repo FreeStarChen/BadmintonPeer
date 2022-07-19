@@ -18,7 +18,7 @@ class GroupTypeAdapter(private val onClickListener: OnClickListener) :
         @SuppressLint("SetTextI18n")
         fun bind(group: Group) {
             binding.group = group
-            binding.textDate.text = TimeCalculator.getDateAndWeek(group.date.time)
+            binding.textDate.text = TimeCalculator.getDateAndWeek(group.date.time).replace("週","")
             binding.textStartTime.text = TimeCalculator.getTime(group.startTime.time)
             binding.textEndTime.text = TimeCalculator.getTime(group.endTime.time)
             binding.textPrice.text = "$${group.price}"

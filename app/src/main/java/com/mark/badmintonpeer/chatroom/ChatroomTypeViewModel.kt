@@ -100,8 +100,9 @@ class ChatroomTypeViewModel(val type: String, val repository: BadmintonPeerRepos
 
     fun refresh() {
         if (MainApplication.instance.isLiveDataDesign()) {
-            _status.value = LoadApiStatus.DONE
-            _refreshStatus.value = false
+            getChatroomResult()
+//            _status.value = LoadApiStatus.DONE
+//            _refreshStatus.value = false
 
         } else {
             if (status.value != LoadApiStatus.LOADING) {

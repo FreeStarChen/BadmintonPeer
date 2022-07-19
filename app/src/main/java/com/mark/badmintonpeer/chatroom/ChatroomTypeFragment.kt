@@ -56,6 +56,7 @@ class ChatroomTypeFragment : Fragment() {
         viewModel.navigateToChatroomDetail.observe(viewLifecycleOwner) {
             it?.let {
                 findNavController().navigate(NavigationDirections.navigateToChatroomChatFragment(it))
+                viewModel.onChatroomDetailNavigated()
             }
         }
 

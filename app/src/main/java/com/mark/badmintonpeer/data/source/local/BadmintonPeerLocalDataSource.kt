@@ -37,6 +37,14 @@ class BadmintonPeerLocalDataSource(val context: Context) : BadmintonPeerDataSour
         TODO("Not yet implemented")
     }
 
+    override suspend fun getAlmostFullGroups(): Result<List<Group>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getNews(): Result<List<News>> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getGroupChatroom(groupId: String): Result<Chatroom> {
         TODO("Not yet implemented")
     }

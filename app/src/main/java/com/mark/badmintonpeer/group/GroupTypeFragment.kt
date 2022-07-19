@@ -27,6 +27,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -138,7 +139,7 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
                     val stopLongitude = addressLocation[0].longitude
                     val groupLocation = LatLng(stopLatitude, stopLongitude)
                     googleMap?.addMarker(
-                        MarkerOptions().position(groupLocation).draggable(true).title(group.name)
+                        MarkerOptions().position(groupLocation).title(group.name).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_badminton_app_icon))
                     )
                 }
             }
@@ -177,7 +178,10 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
         }
 
         viewModel.recyclerViewVisible.observe(viewLifecycleOwner) {
-            Log.i("TestW", "type=${getType()}, recyclerViewVisible=$it")
+
+            ViewModelProvider(requireParentFragment()).get(GroupViewModel::class.java)._addGroupImageViewVisible.value =
+                it
+
         }
 
         return binding.root

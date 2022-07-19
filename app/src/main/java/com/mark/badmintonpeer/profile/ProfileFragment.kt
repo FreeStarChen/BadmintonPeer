@@ -58,6 +58,10 @@ class ProfileFragment : Fragment() {
             (binding.recyclerViewProfile.adapter as GroupTypeAdapter).submitList(it)
         }
 
+        binding.constraintGroupRecord.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToRecordFragment())
+        }
+
 
 
 

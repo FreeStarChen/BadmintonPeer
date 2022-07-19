@@ -30,11 +30,11 @@
         android:name="com.mark.badmintonpeer.creategroup.CreateGroupFragment"
         android:label="create_group_fragment"
         tools:layout="@layout/create_group_fragment" />
-    <fragment
-        android:id="@+id/filterFragment"
-        android:name="com.mark.badmintonpeer.filter.FilterFragment"
+    <dialog
+        android:id="@+id/filterDialog"
+        android:name="com.mark.badmintonpeer.filter.FilterDialog"
         android:label="filter_fragment"
-        tools:layout="@layout/filter_fragment" />
+        tools:layout="@layout/filter_dialog" />
     <fragment
         android:id="@+id/groupDetailFragment"
         android:name="com.mark.badmintonpeer.groupdetail.GroupDetailFragment"
@@ -49,7 +49,7 @@
 
     <action
         android:id="@+id/navigate_to_filter_fragment"
-        app:destination="@id/filterFragment" />
+        app:destination="@id/filterDialog" />
     <action
         android:id="@+id/navigate_to_create_group_fragment"
         app:destination="@id/createGroupFragment" />
@@ -111,4 +111,30 @@
     <action
         android:id="@+id/navigate_to_chatroom_group_chat_fragment"
         app:destination="@+id/chatroomGroupChatFragment" />
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.mark.badmintonpeer.newsdetail.NewsDetailFragment"
+        android:label="NewsDetailFragment" >
+
+        <argument
+            android:name="newKey"
+            app:argType="com.mark.badmintonpeer.data.News"
+            app:nullable="false" />
+    </fragment>
+
+    <action
+        android:id="@+id/navigate_to_news_detail_fragment"
+        app:destination="@+id/newsDetailFragment" />
+
+    <fragment
+        android:id="@+id/recordFragment"
+        android:name="com.mark.badmintonpeer.record.RecordFragment"
+        android:label="record_fragment"
+        tools:layout="@layout/record_fragment" />
+
+    <action
+        android:id="@+id/navigate_to_record_fragment"
+        app:destination="@+id/recordFragment" />
+
+
 </navigation>

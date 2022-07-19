@@ -21,6 +21,10 @@ interface BadmintonPeerDataSource {
 
     suspend fun subtractNeedPeopleNumber(groupId: String, needPeopleNumber: Int) : Result<Boolean>
 
+    suspend fun getAlmostFullGroups(): Result<List<Group>>
+
+    suspend fun getNews(): Result<List<News>>
+
     suspend fun getGroupChatroom(groupId: String): Result<Chatroom>
 
     suspend fun addChatroom(chatroom: Chatroom): Result<Boolean>

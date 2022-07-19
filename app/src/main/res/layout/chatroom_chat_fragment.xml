@@ -19,7 +19,6 @@
             android:id="@+id/constraintLayout_chat_top"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:layout_marginEnd="1dp"
             android:background="@color/court_green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

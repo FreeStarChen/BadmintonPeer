@@ -32,6 +32,8 @@ class GroupDetailFragment : Fragment() {
         )
     }
 
+    private lateinit var binding: GroupDetailFragmentBinding
+
     companion object {
         fun newInstance() = GroupDetailFragment()
     }
@@ -40,7 +42,8 @@ class GroupDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = GroupDetailFragmentBinding.inflate(inflater)
+
+        binding = GroupDetailFragmentBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
 
@@ -110,8 +113,7 @@ class GroupDetailFragment : Fragment() {
                         dialog.dismiss()
                     }
                     .show()
-            }
-            else {
+            } else {
                 findNavController().navigate(NavigationDirections.navigateToLoginDialog())
             }
 
@@ -130,10 +132,13 @@ class GroupDetailFragment : Fragment() {
         }
 
         binding.imageDetailChat.setOnClickListener {
-            if (viewModel.isLoggedIn){
-                findNavController().navigate(NavigationDirections.navigateToChatroomGroupChatFragment(viewModel.argument))
-            }
-            else {
+            if (viewModel.isLoggedIn) {
+                findNavController().navigate(
+                    NavigationDirections.navigateToChatroomGroupChatFragment(
+                        viewModel.argument
+                    )
+                )
+            } else {
                 findNavController().navigate(NavigationDirections.navigateToLoginDialog())
             }
 

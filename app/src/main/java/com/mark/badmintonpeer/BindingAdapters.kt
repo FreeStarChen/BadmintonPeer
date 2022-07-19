@@ -11,6 +11,8 @@ import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -19,6 +21,7 @@ import com.mark.badmintonpeer.data.Chat
 import com.mark.badmintonpeer.groupdetail.GroupDetailCircleAdapter
 import com.mark.badmintonpeer.groupdetail.GroupDetailImageAdapter
 import com.mark.badmintonpeer.network.LoadApiStatus
+import com.mark.badmintonpeer.news.NewsCircleAdapter
 import com.mark.badmintonpeer.util.Util.getColor
 
 /**
@@ -26,14 +29,24 @@ import com.mark.badmintonpeer.util.Util.getColor
  */
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
+
+    val drawable = CircularProgressDrawable(imgView.context)
+    drawable.setColorSchemeColors(
+        R.color.court_green,
+        R.color.teal_200,
+    )
+    drawable.centerRadius = 50f
+    drawable.strokeWidth = 10f
+    drawable.start()
+
     imgUrl?.let {
         val imgUri = it.toUri().buildUpon().build()
         GlideApp.with(imgView.context)
             .load(imgUri)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.ig_loading)
-                    .error(R.drawable.ic_badminton_two_color)
+                    .placeholder(drawable)
+                    .error(R.drawable.ic_error)
             )
             .into(imgView)
     }
@@ -41,16 +54,27 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 
 @BindingAdapter("imageUrlTransform")
 fun bindImageTransform(imgView: ImageView, imgUrl: String?) {
+
+    val drawable = CircularProgressDrawable(imgView.context)
+    drawable.setColorSchemeColors(
+        R.color.court_green,
+        R.color.teal_200,
+    )
+    drawable.centerRadius = 50f
+    drawable.strokeWidth = 10f
+    drawable.start()
+
     imgUrl?.let {
         val imgUri = it.toUri().buildUpon().build()
         GlideApp.with(imgView.context)
             .load(imgUri)
-            .transform(CenterCrop(), RoundedCorners(25))
+            .centerCrop()
+//            .transform(CenterCrop(), RoundedCorners(25))
             .apply(
                 RequestOptions()
-                    .transform(CenterCrop(), RoundedCorners(25))
-                    .placeholder(R.drawable.ig_loading)
-                    .error(R.drawable.ic_badminton_two_color)
+//                    .transform(CenterCrop(), RoundedCorners(25))
+                    .placeholder(drawable)
+                    .error(R.drawable.ic_error)
             )
             .into(imgView)
     }
@@ -102,6 +126,9 @@ fun bindRecyclerViewByCount(recyclerView: RecyclerView, count: Int?) {
                 is GroupDetailCircleAdapter -> {
                     submitCount(it)
                 }
+                is NewsCircleAdapter -> {
+                    submitCount(it)
+                }
             }
         }
     }
@@ -136,6 +163,35 @@ fun bindDetailCircleStatus(imageView: ImageView, isSelected: Boolean = false) {
     })
 }
 
+@BindingAdapter("circleStatusGrey")
+fun bindNewsCircleStatus(imageView: ImageView, isSelected: Boolean = false) {
+    imageView.background = ShapeDrawable(object : Shape() {
+        override fun draw(canvas: Canvas, paint: Paint) {
+
+            paint.color = getColor(R.color.black)
+            paint.isAntiAlias = true
+
+            when (isSelected) {
+                true -> {
+                    paint.style = Paint.Style.FILL
+                }
+                false -> {
+                    paint.style = Paint.Style.STROKE
+                    paint.strokeWidth = MainApplication.instance.resources
+                        .getDimensionPixelSize(R.dimen.edge_detail_circle).toFloat()
+                }
+            }
+
+            canvas.drawCircle(
+                this.width / 2, this.height / 2,
+                MainApplication.instance.resources
+                    .getDimensionPixelSize(R.dimen.radius_detail_circle).toFloat(),
+                paint
+            )
+        }
+    })
+}
+
 /**
  * According to [LoadApiStatus] to decide the visibility of [ProgressBar]
  */
@@ -146,6 +202,18 @@ fun bindApiStatus(view: ProgressBar, status: LoadApiStatus?) {
         LoadApiStatus.DONE, LoadApiStatus.ERROR -> view.visibility = View.GONE
     }
 }
+
+/**
+ * According to [LoadApiStatus] to decide the visibility of [LottieAnimationView]
+ */
+@BindingAdapter("setupApiStatusForLottie")
+fun bindApiStatusForLottie(view: LottieAnimationView, status: LoadApiStatus?) {
+    when (status) {
+        LoadApiStatus.LOADING -> view.visibility = View.VISIBLE
+        LoadApiStatus.DONE, LoadApiStatus.ERROR -> view.visibility = View.GONE
+    }
+}
+
 
 /**
  * According to [message] to decide the visibility of [ProgressBar]

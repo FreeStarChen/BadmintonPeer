@@ -2,7 +2,9 @@ package com.mark.badmintonpeer.login
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Html
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +16,13 @@ import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.ktx.Firebase
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.User
 import com.mark.badmintonpeer.databinding.LoginDialogBinding
 import com.mark.badmintonpeer.ext.getVmFactory
 import com.mark.badmintonpeer.ext.setTouchDelegate
-import com.mark.badmintonpeer.profile.ProfileFragment
 import timber.log.Timber
+
 
 class LoginDialog : AppCompatDialogFragment() {
 
@@ -43,13 +44,26 @@ class LoginDialog : AppCompatDialogFragment() {
     ): View? {
 
         binding = LoginDialogBinding.inflate(inflater)
-        binding.layoutLogin.startAnimation(AnimationUtils.loadAnimation(context, R.anim.anim_slide_up))
+        binding.layoutLogin.startAnimation(
+            AnimationUtils.loadAnimation(
+                context,
+                R.anim.anim_slide_up
+            )
+        )
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         binding.buttonLoginClose.setTouchDelegate()
 
-        binding.signInButton.setOnClickListener {
+        val text = binding.textLoginPrivacy
+//        Linkify.addLinks(text,Linkify.ALL)
+        text.setMovementMethod(LinkMovementMethod.getInstance())
+
+//        binding.signInButton.setOnClickListener {
+//            signIn()
+//        }
+
+        binding.buttonLogin.setOnClickListener {
             signIn()
         }
 
@@ -89,18 +103,20 @@ class LoginDialog : AppCompatDialogFragment() {
                 UserManager.userId = id
                 Timber.d("userToken=${token}")
 
-               viewModel.userFromGooglelogin.value =
-                   id?.let { id ->
-                       name?.let { name ->
-                           email?.let { email ->
-                               User(id, name, email,"",picture,"", listOf("")) }
-                       }
-                   }
+                viewModel.userFromGooglelogin.value =
+                    id?.let { id ->
+                        name?.let { name ->
+                            email?.let { email ->
+                                User(id, name, email, "", picture, "", listOf(""))
+                            }
+                        }
+                    }
                 Timber.d("viewModel.userFromGooglelogin.value=${viewModel.userFromGooglelogin.value}")
 
                 viewModel.checkUserResult()
 
-                Timber.tag("givemepass").i("email:$email, token:$token, picture:$picture, id:$id, name:$name")
+                Timber.tag("givemepass")
+                    .i("email:$email, token:$token, picture:$picture, id:$id, name:$name")
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.login_success),
@@ -108,7 +124,11 @@ class LoginDialog : AppCompatDialogFragment() {
                 ).show()
             } catch (e: ApiException) {
                 Timber.tag("givemepass").i("signInResult:failed code=%s", e.statusCode)
-                Toast.makeText(requireContext(), getString(R.string.signInResult_failed), Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.signInResult_failed),
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
         } else {
@@ -119,8 +139,6 @@ class LoginDialog : AppCompatDialogFragment() {
 
 //        dismiss()
     }
-
-
 
 
 }

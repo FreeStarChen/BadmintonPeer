@@ -12,18 +12,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/bg_light_green_radius_10dip">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/image_chatroom_photo"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/bg_white_radius_30dip"
             android:scaleType="centerCrop"
             app:imageUrlWithCircleCrop="@{chatroom.image}"
@@ -37,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:fontFamily="@font/noto_sans"
             android:text="@{chatroom.name}"
             android:textColor="@color/black"
@@ -52,26 +49,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="2dp"
             android:fontFamily="@font/noto_sans"
             android:text="@{chatroom.lastTalkMessage}"
             android:textSize="14sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/image_chatroom_photo"
             app:layout_constraintStart_toEndOf="@+id/image_chatroom_photo"
-            app:layout_constraintTop_toBottomOf="@+id/text_chatroom_title"
             tools:text="哈囉" />
 
         <TextView
             android:id="@+id/text_last_talk_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="10dp"
             android:fontFamily="@font/noto_sans"
             android:textSize="12sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/text_2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_2"
             tools:text="18:00" />
 
         <TextView

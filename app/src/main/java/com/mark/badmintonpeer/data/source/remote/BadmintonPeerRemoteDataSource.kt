@@ -10,7 +10,6 @@ import com.mark.badmintonpeer.data.*
 import com.mark.badmintonpeer.data.source.BadmintonPeerDataSource
 import com.mark.badmintonpeer.login.UserManager
 import timber.log.Timber
-import java.sql.Timestamp
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -21,7 +20,7 @@ import kotlin.coroutines.suspendCoroutine
 object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
 
     private const val PATH_GROUPS = "groups"
-    private const val KEY_START_TIME = "startTime"
+    private const val KEY_DATE = "date"
     private const val KEY_CLASSIFICATION = "classification"
     private const val KEY_MEMBER = "member"
     private const val KEY_NEED_PEOPLE_NUMBER = "needPeopleNumber"
@@ -35,6 +34,8 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
     private const val KEY_CREATED_TIME = "createdTime"
     private const val KEY_LAST_TALK_MESSAGE = "lastTalkMessage"
     private const val KEY_ADDRESS = "address"
+    private const val PATH_NEWS = "news"
+    private const val KEY_POST_TIME = "postTime"
 
     override suspend fun login(id: String): Result<User> {
         TODO("Not yet implemented")
@@ -44,8 +45,8 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection(PATH_GROUPS)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
                 .whereEqualTo(KEY_CLASSIFICATION, type)
-//                .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
 //            .limit(10)
                 .get()
                 .addOnCompleteListener { task ->
@@ -142,6 +143,61 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             }
     }
 
+    override suspend fun getAlmostFullGroups(): Result<List<Group>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_GROUPS)
+//                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
+                .whereLessThanOrEqualTo(KEY_NEED_PEOPLE_NUMBER, 2)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Group>()
+                        for (document in task.result) {
+                            Timber.d(document.id + " => " + document.data)
+
+                            val group = document.toObject(Group::class.java)
+                            list.add(group)
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getNews(): Result<List<News>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_NEWS)
+                .orderBy(KEY_POST_TIME, Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<News>()
+                        for (document in task.result) {
+                            Timber.d(document.id + " => " + document.data)
+
+                            val news = document.toObject(News::class.java)
+                            list.add(news)
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
     override suspend fun getGroupChatroom(groupId: String): Result<Chatroom> =
         suspendCoroutine { continuation ->
             UserManager.userId?.let { id ->
@@ -160,9 +216,9 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                             } else {
                                 for (document in task.result) {
                                     Timber.d("document=${document}")
-                                    val user = document.toObject(Chatroom::class.java)
-                                    Timber.d("user=${user}")
-                                    continuation.resume(Result.Success(user))
+                                    val chatroom = document.toObject(Chatroom::class.java)
+                                    Timber.d("user=${chatroom}")
+                                    continuation.resume(Result.Success(chatroom))
                                 }
                             }
                         } else {
@@ -206,7 +262,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection(PATH_CHATROOM)
-//            .orderBy(KEY_LAST_TALK_TIME,Query.Direction.ASCENDING)
+                .orderBy(KEY_LAST_TALK_TIME, Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -234,7 +290,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             FirebaseFirestore.getInstance()
                 .collection(PATH_CHATROOM)
                 .whereEqualTo(KEY_TYPE, type)
-//            .orderBy(KEY_LAST_TALK_TIME,Query.Direction.ASCENDING)
+                .orderBy(KEY_LAST_TALK_TIME, Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -378,8 +434,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             FirebaseFirestore.getInstance()
                 .collection(PATH_GROUPS)
                 .whereEqualTo(KEY_CLASSIFICATION, type)
-//                .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
-//            .limit(10)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -511,8 +566,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             FirebaseFirestore.getInstance()
                 .collection(PATH_GROUPS)
                 .whereArrayContains(KEY_MEMBER, userId)
-//                .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
-//            .limit(10)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {

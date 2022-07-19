@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_toolbar"
             android:background="@color/court_green"
-            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.DETAIL || viewModel.currentFragmentType == CurrentFragmentType.CHAT ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.DETAIL || viewModel.currentFragmentType == CurrentFragmentType.CHAT || viewModel.currentFragmentType == CurrentFragmentType.RECORD ? View.GONE : View.VISIBLE}"
             app:elevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -82,11 +82,11 @@
 
         <Spinner
             android:id="@+id/spinner_cities"
-            android:layout_width="110dp"
+            android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
+            android:background="@drawable/spinner_cities_layer_list_white"
             android:spinnerMode="dialog"
-            android:background="@drawable/spinner_cities_layer_list"
             android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP ? View.VISIBLE : View.GONE}"
             app:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
@@ -104,24 +104,25 @@
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:srcCompat="@drawable/ic_filter" />
+            app:srcCompat="@drawable/ic_baseline_manage_search_24"
+            app:tint="@color/white" />
 
-        <Switch
-            android:id="@+id/switch_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans"
-            android:minHeight="48dp"
-            android:text="地圖 "
-            android:textSize="16sp"
-            android:thumb="@drawable/switch_thumb"
-            android:track="@drawable/switch_track"
-            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@+id/image_toolbar_filter"
-            app:layout_constraintEnd_toStartOf="@+id/image_toolbar_filter"
-            app:layout_constraintStart_toEndOf="@+id/text_toolbar_title"
-            app:layout_constraintTop_toTopOf="@+id/image_toolbar_filter"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+<!--        <Switch-->
+<!--            android:id="@+id/switch_map"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/noto_sans"-->
+<!--            android:minHeight="48dp"-->
+<!--            android:text="@string/switch_map"-->
+<!--            android:textSize="16sp"-->
+<!--            android:thumb="@drawable/switch_thumb"-->
+<!--            android:track="@drawable/switch_track"-->
+<!--            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP ? View.VISIBLE : View.GONE}"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/image_toolbar_filter"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/image_toolbar_filter"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/text_toolbar_title"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/image_toolbar_filter"-->
+<!--            tools:ignore="UseSwitchCompatOrMaterialXml" />-->
 
         <Button
             android:id="@+id/button_create_group"
@@ -129,8 +130,9 @@
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/bg_light_green_radius_10dip"
+            android:elevation="8dp"
             android:fontFamily="@font/noto_sans"
-            android:text="創建"
+            android:text="@string/create_group"
             android:textSize="16sp"
             android:textStyle="bold"
             android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.CREATE ? View.VISIBLE : View.GONE}"
@@ -145,7 +147,7 @@
             android:layout_marginStart="8dp"
             android:background="@drawable/bg_red_radius_10dip"
             android:fontFamily="@font/noto_sans"
-            android:text="取消"
+            android:text="@string/cancel_button_text"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -153,6 +155,25 @@
             app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_map"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_green_radius_10dip"
+            android:drawableStart="@{viewModel.switchStatus == true ? @drawable/ic_baseline_view_list_24 : @drawable/ic_baseline_map_24}"
+            android:elevation="8dp"
+            android:fontFamily="@font/noto_sans"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="@{viewModel.switchStatus == true ? @string/switch_list : @string/switch_map}"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.GROUP ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/text_toolbar_title"
+            app:layout_constraintEnd_toStartOf="@+id/image_toolbar_filter"
+            app:layout_constraintStart_toEndOf="@+id/text_toolbar_title"
+            app:layout_constraintTop_toTopOf="@+id/text_toolbar_title" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,10 @@
         <item>連江縣</item>
     </string-array>
 
+    <string-array name="towns">
+        <item>選擇地區</item>
+    </string-array>
+
     <!-- Page Title Name -->
     <string name="group">羽球同行</string>
     <string name="chatroom">聊天室</string>
@@ -61,8 +65,15 @@
 
 
     <!-- Login Dialog -->
-    <string name="login_title">請先登入會員</string>
-    <string name="login_description">登入會員後即可使用個人功能。</string>
+    <string name="login_title">請先登入</string>
+    <string name="login_description">登入後即可使用聊天及個人功能。</string>
     <string name="login_facebook_text">Facebook 登入</string>
+    <string name="hyperlink">登入即代表您同意<a href="https://www.privacypolicies.com/live/a18a2ee1-26bf-46e8-82ba-840eaf44013f">隱私權政策</a>。</string>
+
+    <!-- activity main -->
+    <string name="create_group">創建</string>
+    <string name="cancel_button_text">取消</string>
+    <string name="switch_map">地圖</string>
+    <string name="switch_list">條列</string>
 
 </resources>

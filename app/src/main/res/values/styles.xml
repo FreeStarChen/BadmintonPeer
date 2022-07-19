@@ -17,4 +17,8 @@
         <item name="colorAccent">@color/court_green</item>
     </style>
 
+    <style name="FilterDialog">
+        <item name="android:windowBackground">@color/translucent_40</item>
+    </style>
+
 </resources>

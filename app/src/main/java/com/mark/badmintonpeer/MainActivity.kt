@@ -252,6 +252,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.groupDetailFragment -> CurrentFragmentType.DETAIL
                 R.id.chatroomChatFragment -> CurrentFragmentType.CHAT
                 R.id.newsDetailFragment -> CurrentFragmentType.DETAIL
+                R.id.recordFragment -> CurrentFragmentType.RECORD
                 else -> viewModel.currentFragmentType.value
             }
         }

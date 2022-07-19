@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mark.badmintonpeer.chatroom.ChatroomTypeViewModel
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.group.GroupTypeViewModel
+import com.mark.badmintonpeer.record.RecordTypeViewModel
 import java.lang.IllegalArgumentException
 
 /**
@@ -21,8 +22,12 @@ class StringTypeViewModelFactory(
             when {
                 isAssignableFrom(GroupTypeViewModel::class.java) ->
                     GroupTypeViewModel(type, repository)
+
                 isAssignableFrom(ChatroomTypeViewModel::class.java) ->
                     ChatroomTypeViewModel(type, repository)
+
+                isAssignableFrom(RecordTypeViewModel::class.java) ->
+                    RecordTypeViewModel(type, repository)
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

@@ -12,5 +12,6 @@ enum class CurrentFragmentType(val value: String) {
     FILTER(""),
     CREATE(getString(R.string.create)),
     CHAT(""),
+    RECORD("")
 
 }

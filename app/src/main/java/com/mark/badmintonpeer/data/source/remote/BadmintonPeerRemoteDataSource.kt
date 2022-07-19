@@ -434,8 +434,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             FirebaseFirestore.getInstance()
                 .collection(PATH_GROUPS)
                 .whereEqualTo(KEY_CLASSIFICATION, type)
-//                .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
-//            .limit(10)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {

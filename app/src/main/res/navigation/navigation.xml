@@ -126,5 +126,15 @@
         android:id="@+id/navigate_to_news_detail_fragment"
         app:destination="@+id/newsDetailFragment" />
 
+    <fragment
+        android:id="@+id/recordFragment"
+        android:name="com.mark.badmintonpeer.record.RecordFragment"
+        android:label="record_fragment"
+        tools:layout="@layout/record_fragment" />
+
+    <action
+        android:id="@+id/navigate_to_record_fragment"
+        app:destination="@+id/recordFragment" />
+
 
 </navigation>

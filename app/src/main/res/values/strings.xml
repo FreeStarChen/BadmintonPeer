@@ -76,4 +76,10 @@
     <string name="switch_map">地圖</string>
     <string name="switch_list">條列</string>
 
+    <!-- group detail page -->
+    <string name="group_owner">團主</string>
+    <string name="already_sign_up">已報名</string>
+    <string name="sign_up">報名</string>
+    <string name="full">已額滿</string>
+
 </resources>

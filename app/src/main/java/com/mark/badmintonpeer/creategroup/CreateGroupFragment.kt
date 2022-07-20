@@ -60,7 +60,7 @@ class CreateGroupFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.editTextDate.transformIntoDatePicker(requireContext(), "MM/dd/yyyy")
+        binding.editTextDate.transformIntoDatePicker(requireContext(), "yyyy/MM/dd")
         binding.editTextStartTime.transformIntoTimePicker(requireContext(), "HH:mm")
         binding.editTextEndTime.transformIntoTimePicker(requireContext(), "HH:mm")
 

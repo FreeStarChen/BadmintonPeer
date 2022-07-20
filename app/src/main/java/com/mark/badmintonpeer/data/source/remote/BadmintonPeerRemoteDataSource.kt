@@ -9,6 +9,8 @@ import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.*
 import com.mark.badmintonpeer.data.source.BadmintonPeerDataSource
 import com.mark.badmintonpeer.login.UserManager
+import com.mark.badmintonpeer.util.TimeCalculator
+import com.mark.badmintonpeer.util.TimeCalculator.toDateLong
 import timber.log.Timber
 import java.util.*
 import kotlin.coroutines.resume
@@ -52,11 +54,18 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
                         for (document in task.result) {
                             Timber.d(document.id + " => " + document.data)
 
                             val group = document.toObject(Group::class.java)
-                            list.add(group)
+
+                            if (group.date.time >= todayTime) {
+                                Timber.d("todayTime = $todayTime")
+                                Timber.d("group.date.time = ${group.date.time}")
+                                list.add(group)
+                            }
                         }
                         continuation.resume(Result.Success(list))
                     } else {
@@ -153,11 +162,15 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
                         for (document in task.result) {
                             Timber.d(document.id + " => " + document.data)
 
                             val group = document.toObject(Group::class.java)
-                            list.add(group)
+                            if (group.date.time >= todayTime) {
+                                list.add(group)
+                            }
                         }
                         continuation.resume(Result.Success(list))
                     } else {
@@ -439,11 +452,13 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
                         for (document in task.result) {
                             Timber.d(document.id + " => " + document.data)
 
                             val group = document.toObject(Group::class.java)
-                            if (group.address.contains(city)) {
+                            if (group.address.contains(city) && group.date.time >= todayTime) {
                                 list.add(group)
                             }
                         }
@@ -571,10 +586,15 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
+
                         for (document in task.result) {
                             Timber.d(document.id + " => " + document.data)
                             val group = document.toObject(Group::class.java)
-                            list.add(group)
+                            if (group.date.time >= todayTime) {
+                                list.add(group)
+                            }
                         }
                         continuation.resume(Result.Success(list))
                     } else {

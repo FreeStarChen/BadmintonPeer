@@ -42,7 +42,7 @@ class FilterDialog : AppCompatDialogFragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.editTextDate.transformIntoDatePicker(requireContext(), "MM/dd/yyyy")
+        binding.editTextDate.transformIntoDatePicker(requireContext(), "yyyy/MM/dd")
 
         ArrayAdapter.createFromResource(
             requireContext(),

@@ -84,6 +84,10 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.getSearchCityGroup(city,type)
     }
 
+    override suspend fun getFilterGroup(filter: Filter, type: String): Result<List<Group>> {
+        return remoteDataSource.getFilterGroup(filter,type)
+    }
+
     override suspend fun getComments(id: String): Result<List<Comment>> {
         return remoteDataSource.getComments(id)
     }

@@ -241,7 +241,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraint_degree_4" />
 
             <EditText
-                android:id="@+id/edit_text_price"
+                android:id="@+id/edit_text_price_low"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
@@ -256,7 +256,7 @@
                 app:layout_constraintTop_toTopOf="@+id/text_need_degree8" />
 
             <EditText
-                android:id="@+id/edit_text_price2"
+                android:id="@+id/edit_text_price_high"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
@@ -266,9 +266,9 @@
                 android:minHeight="48dp"
                 android:paddingStart="8dp"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/edit_text_price"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_text_price_low"
                 app:layout_constraintStart_toEndOf="@+id/text_wave_line_create"
-                app:layout_constraintTop_toTopOf="@+id/edit_text_price"
+                app:layout_constraintTop_toTopOf="@+id/edit_text_price_low"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -279,9 +279,9 @@
                 android:text="～"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/edit_text_price"
-                app:layout_constraintStart_toEndOf="@+id/edit_text_price"
-                app:layout_constraintTop_toTopOf="@+id/edit_text_price" />
+                app:layout_constraintBottom_toBottomOf="@+id/edit_text_price_low"
+                app:layout_constraintStart_toEndOf="@+id/edit_text_price_low"
+                app:layout_constraintTop_toTopOf="@+id/edit_text_price_low" />
 
             <TextView
                 android:id="@+id/text_need_degree6"
@@ -502,7 +502,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/button_filter"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_text_price" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_price_low" />
 
             <Button
                 android:id="@+id/button_filter"

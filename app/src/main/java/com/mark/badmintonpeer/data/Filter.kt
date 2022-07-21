@@ -10,8 +10,8 @@ data class  Filter (
     val city: String,
     val town: String,
     val date: Date,
-    val wantTimes: List<Date>,
+    val wantPeriods: List<String>,
     val wantDegrees: List<String>,
     val priceLow: Int,
-    val priceHigh: Int
+    val priceHigh: Int,
         ) : Parcelable

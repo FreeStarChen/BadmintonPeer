@@ -21,7 +21,15 @@ import com.mark.badmintonpeer.login.UserManager
 
 class GroupFragment : Fragment() {
 
-    private val viewModel by viewModels<GroupViewModel> {getVmFactory()}
+    private val viewModel by viewModels<GroupViewModel> {
+        getVmFactory(
+//            arguments?.let {
+                GroupFragmentArgs.fromBundle(
+                    requireArguments()
+                ).filterKey
+//            }
+        )
+    }
 
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var viewPager: ViewPager2
@@ -43,8 +51,7 @@ class GroupFragment : Fragment() {
         binding.imageAddGroup.setOnClickListener {
             if (UserManager.isLoggedIn) {
                 findNavController().navigate(NavigationDirections.navigateToCreateGroupFragment())
-            }
-            else {
+            } else {
                 findNavController().navigate(NavigationDirections.navigateToLoginDialog())
             }
         }
@@ -61,11 +68,11 @@ class GroupFragment : Fragment() {
         viewPager.adapter = viewPagerAdapter
 
         val tabLayoutArray = arrayOf(
-            "零打","季打","課程","比賽"
+            "零打", "季打", "課程", "比賽"
         )
 
         tabLayout = view.findViewById(R.id.tabs_group)
-        TabLayoutMediator(tabLayout, viewPager) {tab,position ->
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = tabLayoutArray[position]
         }.attach()
     }

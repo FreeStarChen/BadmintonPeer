@@ -9,7 +9,15 @@
         android:id="@+id/navigation_group"
         android:name="com.mark.badmintonpeer.group.GroupFragment"
         android:label="group_fragment"
-        tools:layout="@layout/group_fragment" />
+        tools:layout="@layout/group_fragment" >
+
+        <argument
+            android:name="filterKey"
+            app:argType="com.mark.badmintonpeer.data.Filter"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+
+    </fragment>
     <fragment
         android:id="@+id/navigation_chatroom"
         android:name="com.mark.badmintonpeer.chatroom.ChatroomFragment"

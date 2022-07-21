@@ -26,5 +26,6 @@ data class Group (
     var degree: List<String> = listOf(""),
     var contactNumber: String = "",
     var courtNumber: Int? = null,
-    var other: String = ""
+    var other: String = "",
+    var period: String = ""
         ) : Parcelable

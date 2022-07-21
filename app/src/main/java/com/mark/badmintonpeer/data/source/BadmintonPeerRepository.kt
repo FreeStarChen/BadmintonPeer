@@ -42,6 +42,8 @@ interface BadmintonPeerRepository {
 
     suspend fun getSearchCityGroup(city: String, type: String) : Result<List<Group>>
 
+    suspend fun getFilterGroup(filter: Filter, type: String) : Result<List<Group>>
+
     suspend fun getComments(id: String): Result<List<Comment>>
 
     suspend fun addComment(): Result<Comment>

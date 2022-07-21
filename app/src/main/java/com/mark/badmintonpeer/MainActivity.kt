@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity() {
                         fragment?.childFragmentManager?.primaryNavigationFragment as CreateGroupFragment
                     createGroupFragment.callViewModelAddGroupResult()
 
-                    findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToGroupFragment())
+                    findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToGroupFragment(null))
 
                     Toast.makeText(this, "已成功創建揪團", Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
@@ -191,7 +191,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
 
                 R.id.navigation_group -> {
-                    findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToGroupFragment())
+                    findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToGroupFragment(null))
                     return@setOnItemSelectedListener true
                 }
 

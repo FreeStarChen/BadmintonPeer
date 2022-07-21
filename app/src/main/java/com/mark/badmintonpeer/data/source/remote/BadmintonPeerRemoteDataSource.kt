@@ -12,6 +12,7 @@ import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.util.TimeCalculator
 import com.mark.badmintonpeer.util.TimeCalculator.toDateLong
 import timber.log.Timber
+import java.sql.Timestamp
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -460,6 +461,110 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                             val group = document.toObject(Group::class.java)
                             if (group.address.contains(city) && group.date.time >= todayTime) {
                                 list.add(group)
+                            }
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getFilterGroup(filter: Filter, type: String): Result<List<Group>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_GROUPS)
+                .whereEqualTo(KEY_CLASSIFICATION, type)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
+
+                        for (document in task.result) {
+                            Timber.d(document.id + " => " + document.data)
+                            val group = document.toObject(Group::class.java)
+
+                            if (filter.town == "選擇地區") {
+                                if (filter.date.time == Timestamp(0L).time) {
+                                    if (group.address.contains(filter.city) &&
+                                        group.date.time >= todayTime &&
+                                        group.price!! >= filter.priceLow &&
+                                        group.price!! <= filter.priceHigh
+                                    ) {
+                                        for (period in filter.wantPeriods) {
+                                            if (group.period == period) {
+                                                for (degree in filter.wantDegrees) {
+                                                    if (group.degree.contains(degree)) {
+                                                        list.add(group)
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    if (group.address.contains(filter.city) &&
+                                        group.date.time == filter.date.time &&
+                                        group.price!! >= filter.priceLow &&
+                                        group.price!! <= filter.priceHigh
+                                    ) {
+                                        for (period in filter.wantPeriods) {
+                                            if (group.period == period) {
+                                                for (degree in filter.wantDegrees) {
+                                                    if (group.degree.contains(degree)) {
+                                                        list.add(group)
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (filter.date.time == Timestamp(0L).time) {
+                                    if (group.address.contains(filter.city) &&
+                                        group.date.time >= todayTime &&
+                                        group.price!! >= filter.priceLow &&
+                                        group.price!! <= filter.priceHigh
+                                    ) {
+                                        for (period in filter.wantPeriods) {
+                                            if (group.period == period) {
+                                                for (degree in filter.wantDegrees) {
+                                                    if (group.degree.contains(degree)) {
+                                                        list.add(group)
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                } else {
+                                    if (group.address.contains(filter.city) &&
+                                        group.date.time == filter.date.time &&
+                                        group.price!! >= filter.priceLow &&
+                                        group.price!! <= filter.priceHigh
+                                    ) {
+                                        for (period in filter.wantPeriods) {
+                                            if (group.period == period) {
+                                                for (degree in filter.wantDegrees) {
+                                                    if (group.degree.contains(degree)) {
+                                                        list.add(group)
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                         continuation.resume(Result.Success(list))

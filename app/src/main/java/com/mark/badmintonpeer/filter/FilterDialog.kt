@@ -1,5 +1,7 @@
 package com.mark.badmintonpeer.filter
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,13 +40,15 @@ class FilterDialog : AppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.FilterDialog)
+//        setStyle(DialogFragment.STYLE_NOs_FRAME, R.style.FilterDialog)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding = FilterDialogBinding.inflate(inflater)
 
@@ -88,32 +92,6 @@ class FilterDialog : AppCompatDialogFragment() {
         }
 
         setDefaultCityWithTown()
-
-
-//        ArrayAdapter.createFromResource(
-//            requireContext(),
-//            R.array.towns,
-//            R.layout.spinner_item_gray
-//        ).also { adapter ->
-//            adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
-//            binding.spinnerTowns.adapter = adapter
-//
-//        }
-//
-//        binding.spinnerTowns.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                if (p2 != 0) {
-//                    val selectedTown = binding.spinnerTowns.selectedItem.toString()
-//                    Timber.d("selectedCity=$selectedTown")
-//
-////                    viewModel.city.value = selectedCity
-//                }
-//            }
-//
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//                TODO("Not yet implemented")
-//            }
-//        }
 
         viewModel.leave.observe(viewLifecycleOwner) {
             it?.let {
@@ -203,19 +181,19 @@ class FilterDialog : AppCompatDialogFragment() {
             Timber.d("date = $date")
             when {
                 currentCity == "選擇縣市" -> {
-                    Toast.makeText(context,"請選擇縣市",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "請選擇縣市", Toast.LENGTH_SHORT).show()
                 }
                 wantPeriods.isEmpty() -> {
-                    Toast.makeText(context,"請選擇時間",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "請選擇時間", Toast.LENGTH_SHORT).show()
                 }
                 wantDegrees.isEmpty() -> {
-                    Toast.makeText(context,"請選擇需求程度",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "請選擇需求程度", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
 
                     val dateToLong: Long = if (date == "") {
                         0L
-                    }else {
+                    } else {
                         date.toDateLong()
                     }
 
@@ -245,8 +223,23 @@ class FilterDialog : AppCompatDialogFragment() {
                     findNavController().navigate(NavigationDirections.navigateToGroupFragment(filter))
                 }
             }
+        }
 
-
+        binding.buttonReset.setOnClickListener {
+            binding.spinnerCities.setSelection(0)
+            binding.spinnerTowns.setSelection(0)
+            binding.editTextDate.text.clear()
+            viewModel.resetMorningTime()
+            viewModel.resetAfternoonTime()
+            viewModel.resetNightTime()
+            viewModel.resetDegree1()
+            viewModel.resetDegree2()
+            viewModel.resetDegree3()
+            viewModel.resetDegree4()
+            viewModel.resetDegree5()
+            viewModel.resetDegree6()
+            binding.editTextPriceLow.text.clear()
+            binding.editTextPriceHigh.text.clear()
         }
 
         return binding.root

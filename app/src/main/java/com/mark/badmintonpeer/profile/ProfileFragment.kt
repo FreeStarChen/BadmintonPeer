@@ -58,11 +58,21 @@ class ProfileFragment : Fragment() {
             (binding.recyclerViewProfile.adapter as GroupTypeAdapter).submitList(it)
         }
 
-        binding.constraintGroupRecord.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToRecordFragment())
+        binding.constraintTemporaryGroupRecord.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToRecordFragment("零打"))
         }
 
+        binding.constraintSeasonGroupRecord.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToRecordFragment("季打"))
+        }
 
+        binding.constraintClassRecord.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToRecordFragment("課程"))
+        }
+
+        binding.constraintCompetitionRecord.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToRecordFragment("比賽"))
+        }
 
 
 

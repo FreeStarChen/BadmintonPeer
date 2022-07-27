@@ -53,6 +53,7 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
     lateinit var addressLocation: List<Address>
 
     lateinit var mainViewModel: MainViewModel
+    lateinit var groupViewModel: GroupViewModel
 
     //台北101
     private val defaultLocation = LatLng(25.0338483, 121.5645283)
@@ -139,7 +140,8 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
                     val stopLongitude = addressLocation[0].longitude
                     val groupLocation = LatLng(stopLatitude, stopLongitude)
                     googleMap?.addMarker(
-                        MarkerOptions().position(groupLocation).title(group.name).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_badminton_app_icon))
+                        MarkerOptions().position(groupLocation).title(group.name)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_badminton_app_icon))
                     )
                 }
             }
@@ -169,7 +171,7 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
         }
 
         mainViewModel.switchStatus.observe(viewLifecycleOwner) {
-            Log.i("TestW", "type=${getType()}, switchStatus=$it")
+            Timber.i("type=" + getType() + ", switchStatus=" + it)
             viewModel._recyclerViewVisible.value = it
         }
 
@@ -182,6 +184,14 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
             ViewModelProvider(requireParentFragment()).get(GroupViewModel::class.java)._addGroupImageViewVisible.value =
                 it
 
+        }
+
+        groupViewModel = ViewModelProvider(requireParentFragment()).get(GroupViewModel::class.java)
+        groupViewModel.filter.observe(viewLifecycleOwner) {
+            Timber.d("groupViewModel.filter = ${groupViewModel.filter.value}")
+            it?.let {
+                viewModel.getFilterGroupResult(it)
+            }
         }
 
         return binding.root

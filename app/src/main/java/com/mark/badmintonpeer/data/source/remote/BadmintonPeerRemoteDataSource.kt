@@ -9,7 +9,10 @@ import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.*
 import com.mark.badmintonpeer.data.source.BadmintonPeerDataSource
 import com.mark.badmintonpeer.login.UserManager
+import com.mark.badmintonpeer.util.TimeCalculator
+import com.mark.badmintonpeer.util.TimeCalculator.toDateLong
 import timber.log.Timber
+import java.sql.Timestamp
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -36,6 +39,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
     private const val KEY_ADDRESS = "address"
     private const val PATH_NEWS = "news"
     private const val KEY_POST_TIME = "postTime"
+    private const val KEY_OWNER_ID = "ownerId"
 
     override suspend fun login(id: String): Result<User> {
         TODO("Not yet implemented")
@@ -52,11 +56,18 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
                         for (document in task.result) {
                             Timber.d(document.id + " => " + document.data)
 
                             val group = document.toObject(Group::class.java)
-                            list.add(group)
+
+                            if (group.date.time >= todayTime) {
+                                Timber.d("todayTime = $todayTime")
+                                Timber.d("group.date.time = ${group.date.time}")
+                                list.add(group)
+                            }
                         }
                         continuation.resume(Result.Success(list))
                     } else {
@@ -153,11 +164,15 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
                         for (document in task.result) {
                             Timber.d(document.id + " => " + document.data)
 
                             val group = document.toObject(Group::class.java)
-                            list.add(group)
+                            if (group.date.time >= todayTime) {
+                                list.add(group)
+                            }
                         }
                         continuation.resume(Result.Success(list))
                     } else {
@@ -439,12 +454,118 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
                         for (document in task.result) {
                             Timber.d(document.id + " => " + document.data)
 
                             val group = document.toObject(Group::class.java)
-                            if (group.address.contains(city)) {
+                            if (group.address.contains(city) && group.date.time >= todayTime) {
                                 list.add(group)
+                            }
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getFilterGroup(filter: Filter, type: String): Result<List<Group>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_GROUPS)
+                .whereEqualTo(KEY_CLASSIFICATION, type)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
+
+                        for (document in task.result) {
+                            Timber.d(document.id + " => " + document.data)
+                            val group = document.toObject(Group::class.java)
+
+                            if (filter.town == "選擇地區") {
+                                if (filter.date.time == Timestamp(0L).time) {
+                                    if (group.address.contains(filter.city) &&
+                                        group.date.time >= todayTime &&
+                                        group.price!! >= filter.priceLow &&
+                                        group.price!! <= filter.priceHigh
+                                    ) {
+                                        for (period in filter.wantPeriods) {
+                                            if (group.period == period) {
+                                                for (degree in filter.wantDegrees) {
+                                                    if (group.degree.contains(degree)) {
+                                                        list.add(group)
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    if (group.address.contains(filter.city) &&
+                                        group.date.time == filter.date.time &&
+                                        group.price!! >= filter.priceLow &&
+                                        group.price!! <= filter.priceHigh
+                                    ) {
+                                        for (period in filter.wantPeriods) {
+                                            if (group.period == period) {
+                                                for (degree in filter.wantDegrees) {
+                                                    if (group.degree.contains(degree)) {
+                                                        list.add(group)
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (filter.date.time == Timestamp(0L).time) {
+                                    if (group.address.contains(filter.city) &&
+                                        group.date.time >= todayTime &&
+                                        group.price!! >= filter.priceLow &&
+                                        group.price!! <= filter.priceHigh
+                                    ) {
+                                        for (period in filter.wantPeriods) {
+                                            if (group.period == period) {
+                                                for (degree in filter.wantDegrees) {
+                                                    if (group.degree.contains(degree)) {
+                                                        list.add(group)
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                } else {
+                                    if (group.address.contains(filter.city) &&
+                                        group.date.time == filter.date.time &&
+                                        group.price!! >= filter.priceLow &&
+                                        group.price!! <= filter.priceHigh
+                                    ) {
+                                        for (period in filter.wantPeriods) {
+                                            if (group.period == period) {
+                                                for (degree in filter.wantDegrees) {
+                                                    if (group.degree.contains(degree)) {
+                                                        list.add(group)
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                         continuation.resume(Result.Success(list))
@@ -571,10 +692,84 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
+
                         for (document in task.result) {
                             Timber.d(document.id + " => " + document.data)
                             val group = document.toObject(Group::class.java)
-                            list.add(group)
+                            if (group.date.time >= todayTime) {
+                                list.add(group)
+                            }
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getRecordOfCreatedGroup(
+        type: String,
+        ownerId: String
+    ): Result<List<Group>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_GROUPS)
+                .whereEqualTo(KEY_CLASSIFICATION, type)
+                .whereEqualTo(KEY_OWNER_ID,ownerId)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
+
+                        for (document in task.result) {
+                            Timber.d(document.id + " => " + document.data)
+                            val group = document.toObject(Group::class.java)
+                            if (group.date.time < todayTime) {
+                                list.add(group)
+                            }
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getRecordOfJoinGroup(type: String, userId: String): Result<List<Group>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_GROUPS)
+                .whereEqualTo(KEY_CLASSIFICATION, type)
+                .whereArrayContains(KEY_MEMBER, userId)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
+
+                        for (document in task.result) {
+                            Timber.d(document.id + " => " + document.data)
+                            val group = document.toObject(Group::class.java)
+                            if (group.date.time < todayTime) {
+                                list.add(group)
+                            }
                         }
                         continuation.resume(Result.Success(list))
                     } else {

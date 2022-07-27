@@ -45,7 +45,7 @@
     <string name="water_dispenser">飲水機</string>
     <string name="air_condition">冷氣</string>
 
-    <string name="google_maps_key"></string>
+    <string name="google_maps_key">AIzaSyDMWOOoI_obo3gas-KC2P0fW5CSEdFvajA</string>
 
     <!-- google sign in -->
     <string name="login_success">登入成功</string>
@@ -57,7 +57,8 @@
     <!--Profile-->
     <string name="profile_mystic_information">Into the Unknown~</string>
     <string name="collections">我的收藏</string>
-    <string name="group_record">揪團紀錄</string>
+    <string name="temporary_group_record">零打紀錄</string>
+    <string name="season_group_record">季打紀錄</string>
     <string name="comments">我的評價</string>
     <string name="friends">我的好友</string>
     <string name="class_record">課程紀錄</string>
@@ -75,5 +76,11 @@
     <string name="cancel_button_text">取消</string>
     <string name="switch_map">地圖</string>
     <string name="switch_list">條列</string>
+
+    <!-- group detail page -->
+    <string name="group_owner">團主</string>
+    <string name="already_sign_up">已報名</string>
+    <string name="sign_up">報名</string>
+    <string name="full">已額滿</string>
 
 </resources>

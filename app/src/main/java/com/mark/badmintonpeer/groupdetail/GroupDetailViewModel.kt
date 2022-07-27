@@ -22,14 +22,15 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class GroupDetailViewModel(val argument: Group,private val repository: BadmintonPeerRepository) : ViewModel() {
+class GroupDetailViewModel(val argument: Group, private val repository: BadmintonPeerRepository) :
+    ViewModel() {
 
 
     private val _group = MutableLiveData<Group>().apply {
         value = argument
     }
     val group: LiveData<Group>
-    get() = _group
+        get() = _group
 
     // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
@@ -65,6 +66,9 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
     // check user login status
     val isLoggedIn
         get() = UserManager.isLoggedIn
+
+    val userId
+        get() = UserManager.userId
 
     val decoration = object : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(
@@ -109,6 +113,7 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
 
         getUserResult()
         getOwnerResult()
+        checkIsMember()
     }
 
     fun addGroupMemberResult() {
@@ -117,9 +122,12 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
             _status.value = LoadApiStatus.LOADING
             when (val result = group.value?.let { group ->
                 user.value?.let { user ->
-                repository.addGroupMember(group.id,
-                    user.id)
-            } }) {
+                    repository.addGroupMember(
+                        group.id,
+                        user.id
+                    )
+                }
+            }) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -145,9 +153,12 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
 
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-            when (val result = group.value?.let { repository.subtractNeedPeopleNumber(it.id,
-                it.needPeopleNumber!!
-            )}) {
+            when (val result = group.value?.let {
+                repository.subtractNeedPeopleNumber(
+                    it.id,
+                    it.needPeopleNumber!!
+                )
+            }) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -233,6 +244,19 @@ class GroupDetailViewModel(val argument: Group,private val repository: Badminton
                 }
             }
         }
+    }
+
+    fun checkIsMember(): Boolean {
+        for (member in group.value?.member!!) {
+            if (member == UserManager.userId) {
+//                signUpStatus.value = R.string.already_sign_up.toString()
+//                Timber.d("signUpStatus.value =${signUpStatus.value }")
+                return true
+            }
+        }
+//        signUpStatus.value = R.string.sign_up.toString()
+//        Timber.d("signUpStatus.value =${signUpStatus.value }")
+        return false
     }
 
     fun leave(needRefresh: Boolean = false) {

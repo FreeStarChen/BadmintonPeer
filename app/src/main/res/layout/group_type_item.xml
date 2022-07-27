@@ -8,6 +8,8 @@
         <variable
             name="group"
             type="com.mark.badmintonpeer.data.Group" />
+
+        <import type="android.view.View" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -269,6 +271,29 @@
                 app:layout_constraintStart_toEndOf="@+id/text_wave_line"
                 app:layout_constraintTop_toTopOf="@+id/text_date"
                 tools:text="20:00" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#82000000"
+                android:visibility="@{group.needPeopleNumber == 0 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/image_group_photo"
+                app:layout_constraintEnd_toEndOf="@+id/image_group_photo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/image_full"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/fully_booked" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -144,7 +144,7 @@ object TimeCalculator {
         }
     }
 
-    fun String.toDateLong(pattern: String = "MM/dd/yyyy") : Long {
+    fun String.toDateLong(pattern: String = "yyyy/MM/dd") : Long {
         @SuppressLint("SimpleDateFormat")
         val dateFormat = SimpleDateFormat(pattern)
         var date: Date? = Date()

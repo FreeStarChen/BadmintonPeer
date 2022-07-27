@@ -43,6 +43,8 @@ interface BadmintonPeerDataSource {
 
     suspend fun getSearchCityGroup(city: String, type: String) : Result<List<Group>>
 
+    suspend fun getFilterGroup(filter: Filter, type: String) : Result<List<Group>>
+
     suspend fun getComments(id: String) : Result<List<Comment>>
 
     suspend fun addComment() : Result<Comment>
@@ -60,5 +62,9 @@ interface BadmintonPeerDataSource {
     suspend fun getOwner(ownerId: String): Result<User>
 
     suspend fun getJoinGroup(userId: String): Result<List<Group>>
+
+    suspend fun getRecordOfCreatedGroup(type: String, ownerId: String): Result<List<Group>>
+
+    suspend fun getRecordOfJoinGroup(type: String, userId: String): Result<List<Group>>
 
 }

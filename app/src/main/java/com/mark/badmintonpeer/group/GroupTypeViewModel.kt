@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mark.badmintonpeer.MainApplication
 import com.mark.badmintonpeer.R
+import com.mark.badmintonpeer.data.Filter
 import com.mark.badmintonpeer.data.Group
 import com.mark.badmintonpeer.data.Result
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
@@ -15,7 +16,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class GroupTypeViewModel(val type: String,private val repository: BadmintonPeerRepository) : ViewModel() {
+class GroupTypeViewModel(val type: String, private val repository: BadmintonPeerRepository) :
+    ViewModel() {
 
     // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
@@ -108,7 +110,41 @@ class GroupTypeViewModel(val type: String,private val repository: BadmintonPeerR
 
             _status.value = LoadApiStatus.LOADING
 
-            val result = repository.getSearchCityGroup(city,type)
+            val result = repository.getSearchCityGroup(city, type)
+            Timber.d("type=$type")
+
+            _groups.value = when (result) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+                    _error.value = MainApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+            _refreshStatus.value = false
+        }
+    }
+
+    fun getFilterGroupResult(filter: Filter) {
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            val result = repository.getFilterGroup(filter, type)
             Timber.d("type=$type")
 
             _groups.value = when (result) {

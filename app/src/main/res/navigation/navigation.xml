@@ -9,7 +9,15 @@
         android:id="@+id/navigation_group"
         android:name="com.mark.badmintonpeer.group.GroupFragment"
         android:label="group_fragment"
-        tools:layout="@layout/group_fragment" />
+        tools:layout="@layout/group_fragment" >
+
+        <argument
+            android:name="filterKey"
+            app:argType="com.mark.badmintonpeer.data.Filter"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+
+    </fragment>
     <fragment
         android:id="@+id/navigation_chatroom"
         android:name="com.mark.badmintonpeer.chatroom.ChatroomFragment"
@@ -130,7 +138,13 @@
         android:id="@+id/recordFragment"
         android:name="com.mark.badmintonpeer.record.RecordFragment"
         android:label="record_fragment"
-        tools:layout="@layout/record_fragment" />
+        tools:layout="@layout/record_fragment" >
+
+    <argument
+        android:name="typeKey"
+        app:argType="string"
+        app:nullable="false" />
+    </fragment>
 
     <action
         android:id="@+id/navigate_to_record_fragment"

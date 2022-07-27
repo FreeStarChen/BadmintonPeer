@@ -100,7 +100,11 @@ class GroupDetailFragment : Fragment() {
 
                         viewModel.addGroupMemberResult()
                         viewModel.subtractNeedPeopleNumberResult()
-                        findNavController().navigate(NavigationDirections.navigateToGroupFragment())
+                        findNavController().navigate(
+                            NavigationDirections.navigateToGroupFragment(
+                                null
+                            )
+                        )
 
                         Toast.makeText(
                             requireContext(),

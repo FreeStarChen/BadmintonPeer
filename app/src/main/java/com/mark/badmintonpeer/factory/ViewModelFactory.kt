@@ -24,9 +24,6 @@ class ViewModelFactory constructor(
                 isAssignableFrom(MainViewModel::class.java) ->
                     MainViewModel(repository)
 
-                isAssignableFrom(GroupViewModel::class.java) ->
-                    GroupViewModel(repository)
-
                 isAssignableFrom(ChatroomViewModel::class.java) ->
                     ChatroomViewModel(repository)
 

@@ -918,7 +918,7 @@
                     app:layout_constraintTop_toTopOf="@+id/text_court_number_create" />
 
                 <EditText
-                    android:id="@+id/edit_text_price"
+                    android:id="@+id/edit_text_price_low"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"

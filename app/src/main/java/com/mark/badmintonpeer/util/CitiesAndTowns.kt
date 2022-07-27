@@ -3,20 +3,25 @@ package com.mark.badmintonpeer.util
 object CitiesAndTowns {
 
     private val cities = listOf(
-        "基隆市", "臺北市", "新北市",
+        "選擇縣市",
+        "基隆市", "台北市", "新北市",
         "桃園市", "新竹市", "新竹縣",
-        "苗栗縣", "臺中市", "彰化縣",
+        "苗栗縣", "台中市", "彰化縣",
         "南投縣", "雲林縣", "嘉義市",
-        "嘉義縣", "臺南市", "高雄市",
-        "屏東縣", "臺東縣", "花蓮縣",
+        "嘉義縣", "台南市", "高雄市",
+        "屏東縣", "台東縣", "花蓮縣",
         "宜蘭縣", "澎湖縣", "金門縣",
         "連江縣"
     )
 
     private val towns =
         listOf(
+            listOf(
+                "選擇地區"
+            ),
             //基隆市
             listOf(
+                "選擇地區",
                 "中正區",
                 "七堵區",
                 "暖暖區",
@@ -27,6 +32,7 @@ object CitiesAndTowns {
             ),
             //臺北市
             listOf(
+                "選擇地區",
                 "北投區",
                 "中山區",
                 "信義區",
@@ -42,6 +48,7 @@ object CitiesAndTowns {
             ),
             //新北市
             listOf(
+                "選擇地區",
                 "三峽區",
                 "淡水區",
                 "新店區",
@@ -74,6 +81,7 @@ object CitiesAndTowns {
             ),
             //桃園市
             listOf(
+                "選擇地區",
                 "龜山區",
                 "八德區",
                 "蘆竹區",
@@ -90,12 +98,14 @@ object CitiesAndTowns {
             ),
             //新竹市
             listOf(
+                "選擇地區",
                 "東區",
                 "北區",
                 "香山區"
             ),
             //新竹縣
             listOf(
+                "選擇地區",
                 "新豐鄉",
                 "芎林鄉",
                 "竹北市",
@@ -112,6 +122,7 @@ object CitiesAndTowns {
             ),
             //苗栗縣
             listOf(
+                "選擇地區",
                 "苗栗市",
                 "卓蘭鎮",
                 "大湖鄉",
@@ -133,6 +144,7 @@ object CitiesAndTowns {
             ),
             //臺中市
             listOf(
+                "選擇地區",
                 "梧棲區",
                 "東勢區",
                 "大甲區",
@@ -165,6 +177,7 @@ object CitiesAndTowns {
             ),
             //彰化縣
             listOf(
+                "選擇地區",
                 "和美鎮",
                 "北斗鎮",
                 "彰化市",
@@ -195,6 +208,7 @@ object CitiesAndTowns {
 
             //南投縣
             listOf(
+                "選擇地區",
                 "南投市",
                 "埔里鎮",
                 "草屯鎮",
@@ -211,6 +225,7 @@ object CitiesAndTowns {
             ),
             //雲林縣
             listOf(
+                "選擇地區",
                 "斗南鎮",
                 "口湖鄉",
                 "斗六市",
@@ -234,11 +249,13 @@ object CitiesAndTowns {
             ),
             //嘉義市
             listOf(
+                "選擇地區",
                 "西區",
                 "東區"
             ),
             //嘉義縣
             listOf(
+                "選擇地區",
                 "大林鎮",
                 "民雄鄉",
                 "溪口鄉",
@@ -260,6 +277,7 @@ object CitiesAndTowns {
             ),
             //臺南市
             listOf(
+                "選擇地區",
                 "中西區",
                 "東區",
                 "歸仁區",
@@ -300,6 +318,7 @@ object CitiesAndTowns {
             ),
             //高雄市
             listOf(
+                "選擇地區",
                 "彌陀區",
                 "內門區",
                 "梓官區",
@@ -341,6 +360,7 @@ object CitiesAndTowns {
             ),
             //屏東縣
             listOf(
+                "選擇地區",
                 "屏東市",
                 "新園鄉",
                 "林邊鄉",
@@ -377,6 +397,7 @@ object CitiesAndTowns {
             ),
             //臺東縣
             listOf(
+                "選擇地區",
                 "臺東市",
                 "關山鎮",
                 "鹿野鄉",
@@ -396,6 +417,7 @@ object CitiesAndTowns {
             ),
             //花蓮縣
             listOf(
+                "選擇地區",
                 "玉里鎮",
                 "新城鄉",
                 "吉安鄉",
@@ -412,6 +434,7 @@ object CitiesAndTowns {
             ),
             //宜蘭縣
             listOf(
+                "選擇地區",
                 "羅東鎮",
                 "宜蘭市",
                 "員山鄉",
@@ -427,6 +450,7 @@ object CitiesAndTowns {
             ),
             //澎湖縣
             listOf(
+                "選擇地區",
                 "西嶼鄉",
                 "馬公市",
                 "湖西鄉",
@@ -436,6 +460,7 @@ object CitiesAndTowns {
             ),
             //金門縣
             listOf(
+                "選擇地區",
                 "金城鎮",
                 "金沙鎮",
                 "金湖鎮",
@@ -444,6 +469,7 @@ object CitiesAndTowns {
             ),
             //連江縣
             listOf(
+                "選擇地區",
                 "北竿鄉",
                 "莒光鄉",
                 "東引鄉",
@@ -455,17 +481,17 @@ object CitiesAndTowns {
      * 獲取所有縣市名稱
      * @return 返回所有縣市名稱
      */
-    fun getAllCountiesName(): List<Any> {
+    fun getAllCitiesName(): List<Any> {
         return cities
     }
 
     /**
      * 透過縣市名稱，獲取特定鄉鎮名稱
-     * @param countyName 縣市名稱
+     * @param cityName 縣市名稱
      * @return 返回該縣市的所有鄉鎮名稱
      */
-    fun getTownsByCountyName(countyName: String): List<Any> {
-        val index = cities.indexOf(countyName)
+    fun getTownsByCityName(cityName: String): List<Any> {
+        val index = cities.indexOf(cityName)
         return towns[index]
     }
 
@@ -473,16 +499,16 @@ object CitiesAndTowns {
      * 獲取縣市索引值
      * @return 返回縣市索引值
      */
-    fun getCountyIndexByName(countyName:String): Int {
-        return cities.indexOf(countyName)
+    fun getCityIndexByName(cityName: String): Int {
+        return cities.indexOf(cityName)
     }
 
     /**
      * 獲取鄉鎮索引值
      * @return 返回鄉鎮索引值
      */
-    fun getTownIndexByName(countyName:String,townName:String): Int {
-        val index = cities.indexOf(countyName)
+    fun getTownIndexByName(cityName: String, townName: String): Int {
+        val index = cities.indexOf(cityName)
         return towns[index].indexOf(townName)
     }
 }

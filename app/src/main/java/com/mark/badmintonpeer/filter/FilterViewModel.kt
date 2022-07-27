@@ -89,42 +89,79 @@ class FilterViewModel(private val repository: BadmintonPeerRepository) : ViewMod
         _leave.value = null
     }
 
-    fun morningTime() {
+    fun setMorningTime() {
         _morningTime.value = _morningTime.value != true
     }
 
-    fun afternoonTime() {
+    fun setAfternoonTime() {
         _afternoonTime.value = _afternoonTime.value != true
     }
 
-    fun nightTime() {
+    fun setNightTime() {
         _nightTime.value = _nightTime.value != true
     }
 
-    fun degree1() {
+    fun setDegree1() {
         _degree1.value = _degree1.value != true
     }
 
-    fun degree2() {
+    fun setDegree2() {
         _degree2.value = _degree2.value != true
     }
 
-    fun degree3() {
+    fun setDegree3() {
         _degree3.value = _degree3.value != true
     }
 
-    fun degree4() {
+    fun setDegree4() {
         _degree4.value = _degree4.value != true
     }
 
-    fun degree5() {
+    fun setDegree5() {
         _degree5.value = _degree5.value != true
     }
 
-
-    fun degree6() {
+    fun setDegree6() {
         _degree6.value = _degree6.value != true
     }
+
+    fun resetMorningTime() {
+        _morningTime.value = false
+    }
+
+    fun resetAfternoonTime() {
+        _afternoonTime.value = false
+    }
+
+    fun resetNightTime() {
+        _nightTime.value = false
+    }
+
+    fun resetDegree1() {
+        _degree1.value = false
+    }
+
+    fun resetDegree2() {
+        _degree2.value = false
+    }
+
+    fun resetDegree3() {
+        _degree3.value = false
+    }
+
+    fun resetDegree4() {
+        _degree4.value = false
+    }
+
+    fun resetDegree5() {
+        _degree5.value = false
+    }
+
+    fun resetDegree6() {
+        _degree6.value = false
+    }
+
+
 
 
 }

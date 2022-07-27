@@ -8,6 +8,9 @@
         <variable
             name="viewModel"
             type="com.mark.badmintonpeer.groupdetail.GroupDetailViewModel" />
+        <variable
+            name="userManager"
+            type="com.mark.badmintonpeer.login.UserManager" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -344,7 +347,6 @@
                         android:id="@+id/text_detail_total_people_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@{String.valueOf(viewModel.group.totalPeopleNumber)}"
                         android:textSize="16sp"
@@ -357,7 +359,6 @@
                         android:id="@+id/text_detail_slash"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
                         android:fontFamily="@font/noto_sans"
                         android:text="/"
                         android:textSize="16sp"
@@ -488,12 +489,13 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_red_radius_10dip"
+                android:background="@{viewModel.group.ownerId.equals(viewModel.userId) || viewModel.checkIsMember() || viewModel.group.needPeopleNumber == 0 ? @drawable/bg_grey_radius_10dip : @drawable/bg_red_radius_10dip}"
                 android:fontFamily="@font/noto_sans"
-                android:text="報名"
+                android:text="@{viewModel.group.ownerId.equals(viewModel.userId) ? @string/group_owner : viewModel.group.needPeopleNumber == 0 ? @string/full : viewModel.checkIsMember() ? @string/already_sign_up : @string/sign_up}"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:clickable="@{viewModel.group.ownerId.equals(viewModel.userId) || viewModel.checkIsMember() || viewModel.group.needPeopleNumber == 0 ? false : true}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

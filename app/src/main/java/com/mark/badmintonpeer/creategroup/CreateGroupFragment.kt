@@ -60,7 +60,7 @@ class CreateGroupFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.editTextDate.transformIntoDatePicker(requireContext(), "MM/dd/yyyy")
+        binding.editTextDate.transformIntoDatePicker(requireContext(), "yyyy/MM/dd")
         binding.editTextStartTime.transformIntoTimePicker(requireContext(), "HH:mm")
         binding.editTextEndTime.transformIntoTimePicker(requireContext(), "HH:mm")
 
@@ -291,11 +291,26 @@ class CreateGroupFragment : Fragment() {
         val dateToLong = date.toDateLong()
         viewModel.group.value?.date = Timestamp(dateToLong)
         val startTime = binding.editTextStartTime.text.toString()
+        getPeriod(startTime)
         val startTimeToLong = startTime.toTimeLong()
         viewModel.group.value?.startTime = Timestamp(startTimeToLong)
         val endTime = binding.editTextEndTime.text.toString()
         val endTimeToLong = endTime.toTimeLong()
         viewModel.group.value?.endTime = Timestamp(endTimeToLong)
+    }
+
+    fun getPeriod(startTime: String) {
+        val hour = startTime.subSequence(0,1)
+        val hourToInt = hour.toString().toInt()
+        if (hourToInt in 6..11) {
+            viewModel.group.value?.period = "早上"
+        }else if (hourToInt in 12..17) {
+            viewModel.group.value?.period = "下午"
+        }else if (hourToInt in 18..23) {
+            viewModel.group.value?.period = "晚上"
+        }else {
+            viewModel.group.value?.period = "凌晨"
+        }
     }
 
     fun callViewModelAddGroupResult() {

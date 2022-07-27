@@ -7,8 +7,8 @@ import com.mark.badmintonpeer.chatroom.ChatroomTypeFragment
 class RecordViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     var fragments: ArrayList<Fragment> = arrayListOf(
-        RecordTypeFragment.newInstance("過往揪團紀錄"),
-        RecordTypeFragment.newInstance("過往參團紀錄"),
+        RecordTypeFragment.newInstance("過往揪團"),
+        RecordTypeFragment.newInstance("過往參團"),
 
         )
 

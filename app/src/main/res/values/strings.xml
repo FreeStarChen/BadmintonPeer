@@ -57,7 +57,8 @@
     <!--Profile-->
     <string name="profile_mystic_information">Into the Unknown~</string>
     <string name="collections">我的收藏</string>
-    <string name="group_record">揪團紀錄</string>
+    <string name="temporary_group_record">零打紀錄</string>
+    <string name="season_group_record">季打紀錄</string>
     <string name="comments">我的評價</string>
     <string name="friends">我的好友</string>
     <string name="class_record">課程紀錄</string>

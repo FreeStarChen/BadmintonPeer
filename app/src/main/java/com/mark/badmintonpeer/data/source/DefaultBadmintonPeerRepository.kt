@@ -71,7 +71,10 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.sendChat(chatroomId, chat)
     }
 
-    override suspend fun addChatroomMessageAndTime(chatroomId: String, message: String): Result<Boolean> {
+    override suspend fun addChatroomMessageAndTime(
+        chatroomId: String,
+        message: String
+    ): Result<Boolean> {
         return remoteDataSource.addChatroomMessageAndTime(chatroomId, message)
     }
 
@@ -81,11 +84,11 @@ class DefaultBadmintonPeerRepository(
     }
 
     override suspend fun getSearchCityGroup(city: String, type: String): Result<List<Group>> {
-        return remoteDataSource.getSearchCityGroup(city,type)
+        return remoteDataSource.getSearchCityGroup(city, type)
     }
 
     override suspend fun getFilterGroup(filter: Filter, type: String): Result<List<Group>> {
-        return remoteDataSource.getFilterGroup(filter,type)
+        return remoteDataSource.getFilterGroup(filter, type)
     }
 
     override suspend fun getComments(id: String): Result<List<Comment>> {
@@ -122,5 +125,16 @@ class DefaultBadmintonPeerRepository(
 
     override suspend fun getJoinGroup(userId: String): Result<List<Group>> {
         return remoteDataSource.getJoinGroup(userId)
+    }
+
+    override suspend fun getRecordOfCreatedGroup(
+        type: String,
+        ownerId: String
+    ): Result<List<Group>> {
+        return remoteDataSource.getRecordOfCreatedGroup(type, ownerId)
+    }
+
+    override suspend fun getRecordOfJoinGroup(type: String, userId: String): Result<List<Group>> {
+        return remoteDataSource.getRecordOfJoinGroup(type, userId)
     }
 }

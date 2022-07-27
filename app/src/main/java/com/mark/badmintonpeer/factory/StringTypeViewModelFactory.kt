@@ -6,6 +6,7 @@ import com.mark.badmintonpeer.chatroom.ChatroomTypeViewModel
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.group.GroupTypeViewModel
 import com.mark.badmintonpeer.record.RecordTypeViewModel
+import com.mark.badmintonpeer.record.RecordViewModel
 import java.lang.IllegalArgumentException
 
 /**
@@ -28,6 +29,9 @@ class StringTypeViewModelFactory(
 
                 isAssignableFrom(RecordTypeViewModel::class.java) ->
                     RecordTypeViewModel(type, repository)
+
+                isAssignableFrom(RecordViewModel::class.java) ->
+                    RecordViewModel(type, repository)
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

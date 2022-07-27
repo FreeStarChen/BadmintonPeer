@@ -39,6 +39,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
     private const val KEY_ADDRESS = "address"
     private const val PATH_NEWS = "news"
     private const val KEY_POST_TIME = "postTime"
+    private const val KEY_OWNER_ID = "ownerId"
 
     override suspend fun login(id: String): Result<User> {
         TODO("Not yet implemented")
@@ -698,6 +699,75 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                             Timber.d(document.id + " => " + document.data)
                             val group = document.toObject(Group::class.java)
                             if (group.date.time >= todayTime) {
+                                list.add(group)
+                            }
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getRecordOfCreatedGroup(
+        type: String,
+        ownerId: String
+    ): Result<List<Group>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_GROUPS)
+                .whereEqualTo(KEY_CLASSIFICATION, type)
+                .whereEqualTo(KEY_OWNER_ID,ownerId)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
+
+                        for (document in task.result) {
+                            Timber.d(document.id + " => " + document.data)
+                            val group = document.toObject(Group::class.java)
+                            if (group.date.time < todayTime) {
+                                list.add(group)
+                            }
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            Timber.e("Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getRecordOfJoinGroup(type: String, userId: String): Result<List<Group>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_GROUPS)
+                .whereEqualTo(KEY_CLASSIFICATION, type)
+                .whereArrayContains(KEY_MEMBER, userId)
+                .orderBy(KEY_DATE, Query.Direction.ASCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Group>()
+                        val todayTime =
+                            TimeCalculator.getDateAndYear(System.currentTimeMillis()).toDateLong()
+
+                        for (document in task.result) {
+                            Timber.d(document.id + " => " + document.data)
+                            val group = document.toObject(Group::class.java)
+                            if (group.date.time < todayTime) {
                                 list.add(group)
                             }
                         }

@@ -138,7 +138,13 @@
         android:id="@+id/recordFragment"
         android:name="com.mark.badmintonpeer.record.RecordFragment"
         android:label="record_fragment"
-        tools:layout="@layout/record_fragment" />
+        tools:layout="@layout/record_fragment" >
+
+    <argument
+        android:name="typeKey"
+        app:argType="string"
+        app:nullable="false" />
+    </fragment>
 
     <action
         android:id="@+id/navigate_to_record_fragment"

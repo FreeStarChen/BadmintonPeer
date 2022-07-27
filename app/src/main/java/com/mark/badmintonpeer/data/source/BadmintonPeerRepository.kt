@@ -62,4 +62,8 @@ interface BadmintonPeerRepository {
 
     suspend fun getJoinGroup(userId: String): Result<List<Group>>
 
+    suspend fun getRecordOfCreatedGroup(type: String, ownerId: String): Result<List<Group>>
+
+    suspend fun getRecordOfJoinGroup(type: String, userId: String): Result<List<Group>>
+
 }

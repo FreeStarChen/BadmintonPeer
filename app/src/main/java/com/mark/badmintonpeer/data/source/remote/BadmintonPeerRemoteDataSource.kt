@@ -546,7 +546,6 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                                                 }
                                             }
                                         }
-
                                     }
                                 } else {
                                     if (group.address.contains(filter.city) &&
@@ -722,7 +721,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             FirebaseFirestore.getInstance()
                 .collection(PATH_GROUPS)
                 .whereEqualTo(KEY_CLASSIFICATION, type)
-                .whereEqualTo(KEY_OWNER_ID,ownerId)
+                .whereEqualTo(KEY_OWNER_ID, ownerId)
                 .orderBy(KEY_DATE, Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener { task ->

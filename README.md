@@ -67,8 +67,10 @@ Password: test9527
 
 # Implementation
 ### Design Pattern
+* OOP
 * MVVM
-* Factory
+* Observer
+* Singleton
 ### Android JetPack
 * ViewModel
 * LiveData

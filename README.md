@@ -27,7 +27,7 @@ Password: test9527
 * 透過縣市篩選及詳細篩選來加速找到適合的團
 * Allow users to filter through cities and other detailed features to find suitable groups quickly
 
-<img src="https://github.com/FreeStarChen/BadmintonPeer/blob/develop/images/f7a7d84f-8518-4f0a-967f-2e2430a48ed8_AdobeExpress.gif?raw=true" width="200" />    <img src="https://github.com/FreeStarChen/BadmintonPeer/blob/develop/images/7a3b9d97-a7d6-45e7-b3cb-9d5f43ae8991_AdobeExpress.gif?raw=true" width="200" />
+<img src="https://github.com/FreeStarChen/BadmintonPeer/blob/develop/images/f7a7d84f-8518-4f0a-967f-2e2430a48ed8_AdobeExpress.gif?raw=true" width="200" />　<img src="https://github.com/FreeStarChen/BadmintonPeer/blob/develop/images/7a3b9d97-a7d6-45e7-b3cb-9d5f43ae8991_AdobeExpress.gif?raw=true" width="200" />
 
 #### 地圖模式 Map mode
 * 可以切換到地圖模式查看離自己最近的團

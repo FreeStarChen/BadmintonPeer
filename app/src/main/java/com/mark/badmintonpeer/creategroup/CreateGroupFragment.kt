@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.location.Address
+import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -14,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +34,7 @@ import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.sql.Timestamp
+import java.util.*
 
 class CreateGroupFragment : Fragment() {
 
@@ -300,17 +304,96 @@ class CreateGroupFragment : Fragment() {
     }
 
     fun getPeriod(startTime: String) {
-        val hour = startTime.subSequence(0,1)
+        val hour = startTime.subSequence(0, 1)
         val hourToInt = hour.toString().toInt()
         if (hourToInt in 6..11) {
             viewModel.group.value?.period = "早上"
-        }else if (hourToInt in 12..17) {
+        } else if (hourToInt in 12..17) {
             viewModel.group.value?.period = "下午"
-        }else if (hourToInt in 18..23) {
+        } else if (hourToInt in 18..23) {
             viewModel.group.value?.period = "晚上"
-        }else {
+        } else {
             viewModel.group.value?.period = "凌晨"
         }
+    }
+
+    fun checkCreateGroupValue(): Boolean {
+        val date = binding.editTextDate.text.toString()
+        val startTime = binding.editTextStartTime.text.toString()
+        val endTime = binding.editTextEndTime.text.toString()
+        val needPeopleNumber = binding.editTextNeedNumber.text.toString()
+        val totalPeopleNumber = binding.editTextTotalNumber.text.toString()
+        val courtNumber = binding.editTextCourtNumber.text.toString()
+        val price = binding.editTextPriceLow.text.toString()
+
+        when {
+            viewModel.group.value?.classification == "" -> {
+                Toast.makeText(context, "請選擇揪團分類", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            viewModel.group.value?.name == "" -> {
+                Toast.makeText(context, "請輸入揪團名稱", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            date == "" -> {
+                Toast.makeText(context, "請輸入打球日期", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            startTime == "" -> {
+                Toast.makeText(context, "請輸入打球開始時間", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            endTime == "" -> {
+                Toast.makeText(context, "請輸入打球結束時間", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            viewModel.group.value?.place == "" -> {
+                Toast.makeText(context, "請輸入場館名稱", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            viewModel.group.value?.address == "" -> {
+                Toast.makeText(context, "請輸入場館地址", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            viewModel.group.value?.address?.let { checkAddress(it).isEmpty() } == true -> {
+                Toast.makeText(context, "請確認輸入場館地址正確", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            needPeopleNumber == "0" || needPeopleNumber == "" -> {
+                Toast.makeText(context, "請輸入需求人數", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            totalPeopleNumber == "0" || totalPeopleNumber == "" -> {
+                Toast.makeText(context, "請輸入總人數", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            viewModel.group.value?.ball == "" -> {
+                Toast.makeText(context, "請輸入球種", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            courtNumber == "0" || courtNumber == "" -> {
+                Toast.makeText(context, "請輸入場地數量", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            price == "0" || price == "" -> {
+                Toast.makeText(context, "請輸入費用", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            viewModel.group.value?.degree == listOf("") -> {
+                Toast.makeText(context, "請輸入需求程度", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            viewModel.group.value?.contactNumber == "" -> {
+                Toast.makeText(context, "請輸入連絡電話", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        }
+        return true
+    }
+
+    fun checkAddress(address: String): List<Address> {
+        val geoCoder: Geocoder? = Geocoder(context, Locale.getDefault())
+        return geoCoder!!.getFromLocationName(address, 1)
     }
 
     fun callViewModelAddGroupResult() {

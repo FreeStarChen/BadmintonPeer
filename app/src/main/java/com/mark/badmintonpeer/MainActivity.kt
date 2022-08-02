@@ -133,12 +133,19 @@ class MainActivity : AppCompatActivity() {
                         supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
                     val createGroupFragment =
                         fragment?.childFragmentManager?.primaryNavigationFragment as CreateGroupFragment
-                    createGroupFragment.callViewModelAddGroupResult()
 
-                    findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToGroupFragment(null))
+                    if (createGroupFragment.checkCreateGroupValue()) {
+                        createGroupFragment.callViewModelAddGroupResult()
 
-                    Toast.makeText(this, "已成功創建揪團", Toast.LENGTH_SHORT).show()
-                    dialog.dismiss()
+                        findNavController(R.id.nav_host_fragment).navigate(
+                            NavigationDirections.navigateToGroupFragment(
+                                null
+                            )
+                        )
+
+                        Toast.makeText(this, "已成功創建揪團", Toast.LENGTH_SHORT).show()
+                        dialog.dismiss()
+                    }
                 }
                 .setNeutralButton("取消") { dialog, _ ->
                     dialog.dismiss()

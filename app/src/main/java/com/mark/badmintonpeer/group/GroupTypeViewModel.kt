@@ -1,5 +1,6 @@
 package com.mark.badmintonpeer.group
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,6 +52,10 @@ class GroupTypeViewModel(val type: String, private val repository: BadmintonPeer
     var _recyclerViewVisible = MutableLiveData<Boolean>()
     val recyclerViewVisible: LiveData<Boolean>
         get() = _recyclerViewVisible
+
+    private val _noFilterGroupToast = MutableLiveData<Boolean>()
+    val noFilterGroupToast: LiveData<Boolean>
+        get() = _noFilterGroupToast
 
     private var viewModelJob = Job()
 
@@ -168,6 +173,9 @@ class GroupTypeViewModel(val type: String, private val repository: BadmintonPeer
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
+            }
+            if (_groups.value?.isEmpty() == true) {
+                _noFilterGroupToast.value = true
             }
             _refreshStatus.value = false
         }

@@ -18,6 +18,17 @@
         android:layout_height="match_parent"
         tools:context=".group.GroupTypeFragment">
 
+        <TextView
+            android:id="@+id/text_no_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/no_group"
+            android:visibility="@{viewModel.groups.empty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/layout_swipe_refresh_group_type"
             android:layout_width="match_parent"

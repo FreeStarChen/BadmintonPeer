@@ -91,7 +91,7 @@ fun bindImageWithCircleCrop(imgView: ImageView, imgUrl: String?) {
                 RequestOptions()
                     .circleCrop()
                     .placeholder(R.drawable.ig_loading)
-                    .error(R.drawable.ic_badminton_two_color)
+                    .error(R.drawable.ic_error)
             )
             .into(imgView)
     }

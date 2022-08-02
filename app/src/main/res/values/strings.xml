@@ -63,6 +63,7 @@
     <string name="friends">我的好友</string>
     <string name="class_record">課程紀錄</string>
     <string name="competition_record">比賽紀錄</string>
+    <string name="no_join_group">目前尚無參加揪團</string>
 
 
     <!-- Login Dialog -->
@@ -83,4 +84,17 @@
     <string name="sign_up">報名</string>
     <string name="full">已額滿</string>
 
+    <!-- group type page -->
+    <string name="no_group">目前無此分類揪團</string>
+    <string name="no_filter_group">無此篩選揪團</string>
+
+    <!-- chat room type page -->
+    <string name="no_chat_room">目前無此分類聊天室</string>
+
+    <!-- news page -->
+    <string name="no_hot_group">目前無熱門揪團</string>
+
+    <!-- record type page -->
+    <string name="no_create_group_record">目前無過往揪團紀錄</string>
+    <string name="no_join_group_record">目前無過往參團紀錄</string>
 </resources>

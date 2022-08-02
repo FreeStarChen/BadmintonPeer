@@ -10,6 +10,8 @@
         <variable
             name="viewModel"
             type="com.mark.badmintonpeer.profile.ProfileViewModel" />
+
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -428,6 +430,17 @@
                     app:lottie_rawRes="@raw/loading_animation_1"
                     app:lottie_speed="3"
                     app:setupApiStatusForLottie="@{viewModel.status}" />
+
+                <TextView
+                    android:id="@+id/text_no_join_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/no_join_group"
+                    android:visibility="@{viewModel.groups.empty ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/recycler_view_profile" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

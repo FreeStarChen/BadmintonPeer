@@ -125,6 +125,17 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <TextView
+                    android:id="@+id/text_no_hot_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/no_hot_group"
+                    android:visibility="@{viewModel.groups.empty ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/recycler_view_hot_group" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

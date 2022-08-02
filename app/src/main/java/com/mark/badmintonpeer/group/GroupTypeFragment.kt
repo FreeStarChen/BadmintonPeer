@@ -147,6 +147,12 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
             }
         }
 
+        viewModel.noFilterGroupToast.observe(viewLifecycleOwner) {
+            if (it) {
+                Toast.makeText(context,"無符合篩選的揪團",Toast.LENGTH_SHORT).show()
+            }
+        }
+
         binding.layoutSwipeRefreshGroupType.setOnRefreshListener {
             viewModel.refresh()
             mainViewModel.spinnerReset()

@@ -275,57 +275,63 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
 
     override suspend fun getAllChatroom(): Result<List<Chatroom>> =
         suspendCoroutine { continuation ->
-            FirebaseFirestore.getInstance()
-                .collection(PATH_CHATROOM)
-                .orderBy(KEY_LAST_TALK_TIME, Query.Direction.DESCENDING)
-                .get()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val list = mutableListOf<Chatroom>()
-                        for (document in task.result) {
-                            Timber.d(document.id + " => " + document.data)
+            UserManager.userId?.let { id ->
+                FirebaseFirestore.getInstance()
+                    .collection(PATH_CHATROOM)
+                    .whereArrayContains(KEY_MEMBER, id)
+                    .orderBy(KEY_LAST_TALK_TIME, Query.Direction.DESCENDING)
+                    .get()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val list = mutableListOf<Chatroom>()
+                            for (document in task.result) {
+                                Timber.d(document.id + " => " + document.data)
 
-                            val chatroom = document.toObject(Chatroom::class.java)
-                            list.add(chatroom)
+                                val chatroom = document.toObject(Chatroom::class.java)
+                                list.add(chatroom)
+                            }
+                            continuation.resume(Result.Success(list))
+                        } else {
+                            task.exception?.let {
+                                Timber.e("Error getting documents. ${it.message}")
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                            continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
                         }
-                        continuation.resume(Result.Success(list))
-                    } else {
-                        task.exception?.let {
-                            Timber.e("Error getting documents. ${it.message}")
-                            continuation.resume(Result.Error(it))
-                            return@addOnCompleteListener
-                        }
-                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
                     }
-                }
+            }
         }
 
     override suspend fun getTypeChatroom(type: String): Result<List<Chatroom>> =
         suspendCoroutine { continuation ->
-            FirebaseFirestore.getInstance()
-                .collection(PATH_CHATROOM)
-                .whereEqualTo(KEY_TYPE, type)
-                .orderBy(KEY_LAST_TALK_TIME, Query.Direction.DESCENDING)
-                .get()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val list = mutableListOf<Chatroom>()
-                        for (document in task.result) {
-                            Timber.d(document.id + " => " + document.data)
+            UserManager.userId?.let {
+                FirebaseFirestore.getInstance()
+                    .collection(PATH_CHATROOM)
+                    .whereEqualTo(KEY_TYPE, type)
+                    .whereArrayContains(KEY_MEMBER, it)
+                    .orderBy(KEY_LAST_TALK_TIME, Query.Direction.DESCENDING)
+                    .get()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val list = mutableListOf<Chatroom>()
+                            for (document in task.result) {
+                                Timber.d(document.id + " => " + document.data)
 
-                            val chatroom = document.toObject(Chatroom::class.java)
-                            list.add(chatroom)
+                                val chatroom = document.toObject(Chatroom::class.java)
+                                list.add(chatroom)
+                            }
+                            continuation.resume(Result.Success(list))
+                        } else {
+                            task.exception?.let {
+                                Timber.e("Error getting documents. ${it.message}")
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                            continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
                         }
-                        continuation.resume(Result.Success(list))
-                    } else {
-                        task.exception?.let {
-                            Timber.e("Error getting documents. ${it.message}")
-                            continuation.resume(Result.Error(it))
-                            return@addOnCompleteListener
-                        }
-                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
                     }
-                }
+            }
         }
 
     override suspend fun getChats(chatroomId: String): Result<List<Chat>> =
@@ -532,6 +538,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                             } else {
                                 if (filter.date.time == Timestamp(0L).time) {
                                     if (group.address.contains(filter.city) &&
+                                        group.address.contains(filter.town) &&
                                         group.date.time >= todayTime &&
                                         group.price!! >= filter.priceLow &&
                                         group.price!! <= filter.priceHigh
@@ -549,6 +556,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                                     }
                                 } else {
                                     if (group.address.contains(filter.city) &&
+                                        group.address.contains(filter.town) &&
                                         group.date.time == filter.date.time &&
                                         group.price!! >= filter.priceLow &&
                                         group.price!! <= filter.priceHigh

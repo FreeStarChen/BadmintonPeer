@@ -8,6 +8,8 @@
             name="viewModel"
             type="com.mark.badmintonpeer.record.RecordTypeViewModel" />
 
+        <import type="android.view.View"/>
+
     </data>
 
 
@@ -24,6 +26,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_no_record_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text='@{viewModel.type == "過往揪團" ? @string/no_create_group_record : @string/no_join_group_record}'
+            android:visibility="@{viewModel.groups.empty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recycler_view_record_type" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

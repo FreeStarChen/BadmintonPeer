@@ -19,7 +19,7 @@ object CitiesAndTowns {
             listOf(
                 "選擇地區"
             ),
-            //基隆市
+            // 基隆市
             listOf(
                 "選擇地區",
                 "中正區",
@@ -30,7 +30,7 @@ object CitiesAndTowns {
                 "中山區",
                 "安樂區"
             ),
-            //臺北市
+            // 臺北市
             listOf(
                 "選擇地區",
                 "北投區",
@@ -46,7 +46,7 @@ object CitiesAndTowns {
                 "中正區",
                 "內湖區"
             ),
-            //新北市
+            // 新北市
             listOf(
                 "選擇地區",
                 "三峽區",
@@ -79,7 +79,7 @@ object CitiesAndTowns {
                 "萬里區",
                 "烏來區"
             ),
-            //桃園市
+            // 桃園市
             listOf(
                 "選擇地區",
                 "龜山區",
@@ -96,14 +96,14 @@ object CitiesAndTowns {
                 "大溪區",
                 "復興區"
             ),
-            //新竹市
+            // 新竹市
             listOf(
                 "選擇地區",
                 "東區",
                 "北區",
                 "香山區"
             ),
-            //新竹縣
+            // 新竹縣
             listOf(
                 "選擇地區",
                 "新豐鄉",
@@ -120,7 +120,7 @@ object CitiesAndTowns {
                 "峨眉鄉",
                 "五峰鄉"
             ),
-            //苗栗縣
+            // 苗栗縣
             listOf(
                 "選擇地區",
                 "苗栗市",
@@ -142,7 +142,7 @@ object CitiesAndTowns {
                 "獅潭鄉",
                 "泰安鄉"
             ),
-            //臺中市
+            // 臺中市
             listOf(
                 "選擇地區",
                 "梧棲區",
@@ -175,7 +175,7 @@ object CitiesAndTowns {
                 "外埔區",
                 "大安區"
             ),
-            //彰化縣
+            // 彰化縣
             listOf(
                 "選擇地區",
                 "和美鎮",
@@ -206,7 +206,7 @@ object CitiesAndTowns {
                 "大城鄉"
             ),
 
-            //南投縣
+            // 南投縣
             listOf(
                 "選擇地區",
                 "南投市",
@@ -223,7 +223,7 @@ object CitiesAndTowns {
                 "鹿谷鄉",
                 "信義鄉"
             ),
-            //雲林縣
+            // 雲林縣
             listOf(
                 "選擇地區",
                 "斗南鎮",
@@ -247,13 +247,13 @@ object CitiesAndTowns {
                 "虎尾鎮",
                 "臺西鄉"
             ),
-            //嘉義市
+            // 嘉義市
             listOf(
                 "選擇地區",
                 "西區",
                 "東區"
             ),
-            //嘉義縣
+            // 嘉義縣
             listOf(
                 "選擇地區",
                 "大林鎮",
@@ -275,7 +275,7 @@ object CitiesAndTowns {
                 "大埔鄉",
                 "阿里山鄉"
             ),
-            //臺南市
+            // 臺南市
             listOf(
                 "選擇地區",
                 "中西區",
@@ -316,7 +316,7 @@ object CitiesAndTowns {
                 "南化區",
                 "龍崎區"
             ),
-            //高雄市
+            // 高雄市
             listOf(
                 "選擇地區",
                 "彌陀區",
@@ -358,7 +358,7 @@ object CitiesAndTowns {
                 "桃源區",
                 "那瑪夏區"
             ),
-            //屏東縣
+            // 屏東縣
             listOf(
                 "選擇地區",
                 "屏東市",
@@ -395,7 +395,7 @@ object CitiesAndTowns {
                 "獅子鄉",
                 "牡丹鄉"
             ),
-            //臺東縣
+            // 臺東縣
             listOf(
                 "選擇地區",
                 "臺東市",
@@ -415,7 +415,7 @@ object CitiesAndTowns {
                 "金峰鄉",
                 "蘭嶼鄉"
             ),
-            //花蓮縣
+            // 花蓮縣
             listOf(
                 "選擇地區",
                 "玉里鎮",
@@ -432,7 +432,7 @@ object CitiesAndTowns {
                 "卓溪鄉",
                 "豐濱鄉"
             ),
-            //宜蘭縣
+            // 宜蘭縣
             listOf(
                 "選擇地區",
                 "羅東鎮",
@@ -448,7 +448,7 @@ object CitiesAndTowns {
                 "南澳鄉",
                 "大同鄉"
             ),
-            //澎湖縣
+            // 澎湖縣
             listOf(
                 "選擇地區",
                 "西嶼鄉",
@@ -458,7 +458,7 @@ object CitiesAndTowns {
                 "望安鄉",
                 "七美鄉"
             ),
-            //金門縣
+            // 金門縣
             listOf(
                 "選擇地區",
                 "金城鎮",
@@ -467,7 +467,7 @@ object CitiesAndTowns {
                 "金寧鄉",
                 "烈嶼鄉"
             ),
-            //連江縣
+            // 連江縣
             listOf(
                 "選擇地區",
                 "北竿鄉",

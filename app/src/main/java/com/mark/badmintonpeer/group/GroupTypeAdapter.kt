@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mark.badmintonpeer.util.TimeCalculator
 import com.mark.badmintonpeer.data.Group
 import com.mark.badmintonpeer.databinding.GroupTypeItemBinding
+import com.mark.badmintonpeer.util.TimeCalculator
 
 class GroupTypeAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Group, GroupTypeAdapter.GroupViewHolder>(DiffCallback) {
@@ -18,7 +18,7 @@ class GroupTypeAdapter(private val onClickListener: OnClickListener) :
         @SuppressLint("SetTextI18n")
         fun bind(group: Group) {
             binding.group = group
-            binding.textDate.text = TimeCalculator.getDateAndWeek(group.date.time).replace("週","")
+            binding.textDate.text = TimeCalculator.getDateAndWeek(group.date.time).replace("週", "")
             binding.textStartTime.text = TimeCalculator.getTime(group.startTime.time)
             binding.textEndTime.text = TimeCalculator.getTime(group.endTime.time)
             binding.textPrice.text = "$${group.price}"
@@ -28,7 +28,6 @@ class GroupTypeAdapter(private val onClickListener: OnClickListener) :
             adapter.submitList(group.degree)
             binding.executePendingBindings()
         }
-
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Group>() {
@@ -39,7 +38,6 @@ class GroupTypeAdapter(private val onClickListener: OnClickListener) :
         override fun areContentsTheSame(oldItem: Group, newItem: Group): Boolean {
             return oldItem.id == newItem.id
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {

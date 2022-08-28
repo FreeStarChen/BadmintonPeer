@@ -59,15 +59,10 @@ class MainViewModel(private val repository: BadmintonPeerRepository) : ViewModel
     }
 
     fun spinnerReset() {
-            _spinnerReset.value = true
-
+        _spinnerReset.value = true
     }
 
     fun onSpinnerReset() {
-            _spinnerReset.value = null
-
+        _spinnerReset.value = null
     }
-
-
-
 }

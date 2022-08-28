@@ -1,6 +1,5 @@
 package com.mark.badmintonpeer.groupdetail
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -12,7 +11,6 @@ import com.mark.badmintonpeer.util.CharacteristicDrawable
 class GroupDetailCharacteristicAdapter :
     ListAdapter<String, GroupDetailCharacteristicAdapter.CharacteristicViewHolder>(DiffCallback) {
 
-
     class CharacteristicViewHolder(private var binding: GroupDetailCharacteristicBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(characteristic: String) {
@@ -21,7 +19,6 @@ class GroupDetailCharacteristicAdapter :
                 ?.let { binding.imageCharacteristic.setImageResource(it) }
             binding.executePendingBindings()
         }
-
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<String>() {
@@ -32,8 +29,6 @@ class GroupDetailCharacteristicAdapter :
         override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
             return oldItem == newItem
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacteristicViewHolder {

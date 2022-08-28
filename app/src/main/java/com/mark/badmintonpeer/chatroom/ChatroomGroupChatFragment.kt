@@ -1,10 +1,10 @@
 package com.mark.badmintonpeer.chatroom
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mark.badmintonpeer.MainApplication
@@ -29,7 +29,8 @@ class ChatroomGroupChatFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -52,7 +53,6 @@ class ChatroomGroupChatFragment : Fragment() {
                 val content = binding.editTextGroupChatInputMessage.text.toString()
                 viewModel.sendMessageResult(content)
                 viewModel.addChatroomMessageAndTimeResult()
-                Timber.d("binding.imageGroupChatSend.setOnClickListener")
             }
             binding.editTextGroupChatInputMessage.text.clear()
         }
@@ -65,7 +65,7 @@ class ChatroomGroupChatFragment : Fragment() {
             if (it == null) {
                 viewModel.addChatroomResult()
                 viewModel.getGroupChatroomResult()
-            }else{
+            } else {
                 if (MainApplication.instance.isLiveDataDesign()) {
                     viewModel.getLiveChatsResult()
                 } else {
@@ -83,12 +83,9 @@ class ChatroomGroupChatFragment : Fragment() {
                     adapter.submitList(chats)
                     binding.recyclerViewGroupChat.smoothScrollToPosition(chats.size)
                 }
-
-
             }
         }
 
         return binding.root
     }
-
 }

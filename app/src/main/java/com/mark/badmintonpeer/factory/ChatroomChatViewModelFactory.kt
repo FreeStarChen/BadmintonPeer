@@ -7,6 +7,7 @@ import com.mark.badmintonpeer.data.Chatroom
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import java.lang.IllegalArgumentException
 
+@Suppress("UNCHECKED_CAST")
 class ChatroomChatViewModelFactory(
     private val chatroom: Chatroom,
     private val repository: BadmintonPeerRepository

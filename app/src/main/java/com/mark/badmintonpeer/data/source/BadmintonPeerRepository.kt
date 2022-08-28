@@ -2,7 +2,6 @@ package com.mark.badmintonpeer.data.source
 
 import androidx.lifecycle.MutableLiveData
 import com.mark.badmintonpeer.data.*
-import java.util.*
 
 /**
  * Interface to the Badminton Peer layers.
@@ -40,9 +39,9 @@ interface BadmintonPeerRepository {
 
     fun getLiveChats(chatroomId: String): MutableLiveData<List<Chat>>
 
-    suspend fun getSearchCityGroup(city: String, type: String) : Result<List<Group>>
+    suspend fun getSearchCityGroup(city: String, type: String): Result<List<Group>>
 
-    suspend fun getFilterGroup(filter: Filter, type: String) : Result<List<Group>>
+    suspend fun getFilterGroup(filter: Filter, type: String): Result<List<Group>>
 
     suspend fun getComments(id: String): Result<List<Comment>>
 
@@ -65,5 +64,4 @@ interface BadmintonPeerRepository {
     suspend fun getRecordOfCreatedGroup(type: String, ownerId: String): Result<List<Group>>
 
     suspend fun getRecordOfJoinGroup(type: String, userId: String): Result<List<Group>>
-
 }

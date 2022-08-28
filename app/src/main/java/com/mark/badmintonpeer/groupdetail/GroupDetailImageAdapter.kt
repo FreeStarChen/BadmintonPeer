@@ -19,7 +19,7 @@ class GroupDetailImageAdapter :
 
     class ImageViewHolder(private var binding: GroupDetailImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(context: Context,imageUrl: String) {
+        fun bind(context: Context, imageUrl: String) {
             imageUrl.let {
                 binding.imageUrl = it
 
@@ -50,7 +50,7 @@ class GroupDetailImageAdapter :
      */
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         images?.let {
-            holder.bind(context,it[getRealPosition(position)])
+            holder.bind(context, it[getRealPosition(position)])
         }
     }
 
@@ -60,7 +60,7 @@ class GroupDetailImageAdapter :
 
     private fun getRealPosition(position: Int): Int = images?.let {
         position % it.size
-    } ?:0
+    } ?: 0
 
     /**
      * Submit data list and refresh adapter by [notifyDataSetChanged]

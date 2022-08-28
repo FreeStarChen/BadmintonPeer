@@ -35,12 +35,9 @@ fun Fragment.getVmFactory(group: Group): GroupViewModelFactory {
 fun Fragment.getVmFactory(chatroom: Chatroom): ChatroomChatViewModelFactory {
     val repository = (requireContext().applicationContext as MainApplication).repository
     return ChatroomChatViewModelFactory(chatroom, repository)
-
 }
 
 fun Fragment.getVmFactory(news: News): NewsViewModelFactory {
     val repository = (requireContext().applicationContext as MainApplication).repository
     return NewsViewModelFactory(news, repository)
-
 }
-

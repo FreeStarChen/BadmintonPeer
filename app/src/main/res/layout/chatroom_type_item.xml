@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="chatroom"
             type="com.mark.badmintonpeer.data.Chatroom" />
@@ -46,15 +47,18 @@
 
         <TextView
             android:id="@+id/text_last_talk_message"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="2dp"
+            android:ellipsize="end"
             android:fontFamily="@font/noto_sans"
+            android:maxLines="1"
             android:text="@{chatroom.lastTalkMessage}"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/image_chatroom_photo"
+            app:layout_constraintEnd_toStartOf="@+id/text_last_talk_time"
             app:layout_constraintStart_toEndOf="@+id/image_chatroom_photo"
             tools:text="哈囉" />
 

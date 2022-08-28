@@ -30,24 +30,24 @@ import com.mark.badmintonpeer.util.TimeCalculator.toDateLong
 import com.mark.badmintonpeer.util.TimeCalculator.toTimeLong
 import com.mark.badmintonpeer.util.TimeCalculator.transformIntoDatePicker
 import com.mark.badmintonpeer.util.TimeCalculator.transformIntoTimePicker
-import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.sql.Timestamp
-import java.util.*
+import java.util.Locale
+import timber.log.Timber
 
 class CreateGroupFragment : Fragment() {
 
     private val viewModel by viewModels<CreateGroupViewModel> { getVmFactory() }
     lateinit var binding: CreateGroupFragmentBinding
 
-    //for upload image
-    var uri: Uri? = null
-    var PICK_CONTACT_REQUEST = 1
-    var REQUEST_CODE = 42
+    // for upload image
+    private var uri: Uri? = null
+    private var PICK_CONTACT_REQUEST = 1
+    private var REQUEST_CODE = 42
     var img1: ImageView? = null
-    var img2: ImageView? = null
-    val FILE_NAME = "photo.jpg"
+//    var img2: ImageView? = null
+//    val FILE_NAME = "photo.jpg"
     var photoFile: File? = null
 
     companion object {
@@ -55,7 +55,8 @@ class CreateGroupFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -71,7 +72,7 @@ class CreateGroupFragment : Fragment() {
         viewModel.leave.observe(viewLifecycleOwner) {
             it?.let { needRefresh ->
                 if (needRefresh) {
-                    ViewModelProvider(requireActivity()).get(MainViewModel::class.java).apply {
+                    ViewModelProvider(requireActivity())[MainViewModel::class.java].apply {
                         refresh()
                     }
                 }
@@ -85,11 +86,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.haveWaterDispenser.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintWaterDispenser.setBackgroundResource(R.drawable.bg_light_blue_radius_10dip)
+                binding.constraintWaterDispenser.setBackgroundResource(
+                    R.drawable.bg_light_blue_radius_10dip
+                )
                 characteristics.add("飲水機")
                 viewModel.group.value?.characteristic = characteristics
             } else {
-                binding.constraintWaterDispenser.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintWaterDispenser.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 characteristics.remove("飲水機")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -97,11 +102,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.haveAirCondition.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintAirCondition.setBackgroundResource(R.drawable.bg_light_blue_radius_10dip)
+                binding.constraintAirCondition.setBackgroundResource(
+                    R.drawable.bg_light_blue_radius_10dip
+                )
                 characteristics.add("冷氣")
                 viewModel.group.value?.characteristic = characteristics
             } else {
-                binding.constraintAirCondition.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintAirCondition.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 characteristics.remove("冷氣")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -109,11 +118,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.havePuGround.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintPuGround.setBackgroundResource(R.drawable.bg_light_blue_radius_10dip)
+                binding.constraintPuGround.setBackgroundResource(
+                    R.drawable.bg_light_blue_radius_10dip
+                )
                 characteristics.add("PU地面")
                 viewModel.group.value?.characteristic = characteristics
             } else {
-                binding.constraintPuGround.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintPuGround.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 characteristics.remove("PU地面")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -121,11 +134,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.haveSpotlight.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintSpotlight.setBackgroundResource(R.drawable.bg_light_blue_radius_10dip)
+                binding.constraintSpotlight.setBackgroundResource(
+                    R.drawable.bg_light_blue_radius_10dip
+                )
                 characteristics.add("側面燈光")
                 viewModel.group.value?.characteristic = characteristics
             } else {
-                binding.constraintSpotlight.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintSpotlight.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 characteristics.remove("側面燈光")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -133,11 +150,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.haveShower.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintShower.setBackgroundResource(R.drawable.bg_light_blue_radius_10dip)
+                binding.constraintShower.setBackgroundResource(
+                    R.drawable.bg_light_blue_radius_10dip
+                )
                 characteristics.add("淋浴間")
                 viewModel.group.value?.characteristic = characteristics
             } else {
-                binding.constraintShower.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintShower.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 characteristics.remove("淋浴間")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -145,11 +166,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.haveParking.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintParking.setBackgroundResource(R.drawable.bg_light_blue_radius_10dip)
+                binding.constraintParking.setBackgroundResource(
+                    R.drawable.bg_light_blue_radius_10dip
+                )
                 characteristics.add("停車場")
                 viewModel.group.value?.characteristic = characteristics
             } else {
-                binding.constraintParking.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintParking.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 characteristics.remove("停車場")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -157,11 +182,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.haveCutlery.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintCutlery.setBackgroundResource(R.drawable.bg_light_blue_radius_10dip)
+                binding.constraintCutlery.setBackgroundResource(
+                    R.drawable.bg_light_blue_radius_10dip
+                )
                 characteristics.add("餐飲販售")
                 viewModel.group.value?.characteristic = characteristics
             } else {
-                binding.constraintCutlery.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintCutlery.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 characteristics.remove("餐飲販售")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -169,11 +198,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.haveHairDryer.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintHairDryer.setBackgroundResource(R.drawable.bg_light_blue_radius_10dip)
+                binding.constraintHairDryer.setBackgroundResource(
+                    R.drawable.bg_light_blue_radius_10dip
+                )
                 characteristics.add("吹風機")
                 viewModel.group.value?.characteristic = characteristics
             } else {
-                binding.constraintHairDryer.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintHairDryer.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 characteristics.remove("吹風機")
                 viewModel.group.value?.characteristic = characteristics
             }
@@ -181,11 +214,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.degree1.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintDegree1.setBackgroundResource(R.drawable.bg_orange_radius_10dip)
+                binding.constraintDegree1.setBackgroundResource(
+                    R.drawable.bg_orange_radius_10dip
+                )
                 degree.add("新手")
                 viewModel.group.value?.degree = degree
             } else {
-                binding.constraintDegree1.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintDegree1.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 degree.remove("新手")
                 viewModel.group.value?.degree = degree
             }
@@ -193,11 +230,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.degree2.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintDegree2.setBackgroundResource(R.drawable.bg_orange_radius_10dip)
+                binding.constraintDegree2.setBackgroundResource(
+                    R.drawable.bg_orange_radius_10dip
+                )
                 degree.add("初階")
                 viewModel.group.value?.degree = degree
             } else {
-                binding.constraintDegree2.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintDegree2.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 degree.remove("初階")
                 viewModel.group.value?.degree = degree
             }
@@ -205,11 +246,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.degree3.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintDegree3.setBackgroundResource(R.drawable.bg_orange_radius_10dip)
+                binding.constraintDegree3.setBackgroundResource(
+                    R.drawable.bg_orange_radius_10dip
+                )
                 degree.add("初中")
                 viewModel.group.value?.degree = degree
             } else {
-                binding.constraintDegree3.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintDegree3.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 degree.remove("初中")
                 viewModel.group.value?.degree = degree
             }
@@ -217,11 +262,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.degree4.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintDegree4.setBackgroundResource(R.drawable.bg_orange_radius_10dip)
+                binding.constraintDegree4.setBackgroundResource(
+                    R.drawable.bg_orange_radius_10dip
+                )
                 degree.add("中階")
                 viewModel.group.value?.degree = degree
             } else {
-                binding.constraintDegree4.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintDegree4.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 degree.remove("中階")
                 viewModel.group.value?.degree = degree
             }
@@ -229,11 +278,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.degree5.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintDegree5.setBackgroundResource(R.drawable.bg_orange_radius_10dip)
+                binding.constraintDegree5.setBackgroundResource(
+                    R.drawable.bg_orange_radius_10dip
+                )
                 degree.add("中上")
                 viewModel.group.value?.degree = degree
             } else {
-                binding.constraintDegree5.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintDegree5.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 degree.remove("中上")
                 viewModel.group.value?.degree = degree
             }
@@ -241,11 +294,15 @@ class CreateGroupFragment : Fragment() {
 
         viewModel.degree6.observe(viewLifecycleOwner) {
             if (it) {
-                binding.constraintDegree6.setBackgroundResource(R.drawable.bg_orange_radius_10dip)
+                binding.constraintDegree6.setBackgroundResource(
+                    R.drawable.bg_orange_radius_10dip
+                )
                 degree.add("高階")
                 viewModel.group.value?.degree = degree
             } else {
-                binding.constraintDegree6.setBackgroundResource(R.drawable.bg_white_radius_10dip)
+                binding.constraintDegree6.setBackgroundResource(
+                    R.drawable.bg_white_radius_10dip
+                )
                 degree.remove("高階")
                 viewModel.group.value?.degree = degree
             }
@@ -254,12 +311,12 @@ class CreateGroupFragment : Fragment() {
         binding.radioGroup.setOnCheckedChangeListener { radioGroup, i ->
             viewModel.group.value?.classification =
                 radioGroup.findViewById<RadioButton>(i).text.toString()
-            Timber.d("classification=${radioGroup.findViewById<RadioButton>(i).text.toString()}")
+            Timber.d("classification=${radioGroup.findViewById<RadioButton>(i).text}")
         }
 
-        //for upload image with camara
-        //打開攝影機----------------------------------------------------------------------
-        //打開相機按鈕
+        // for upload image with camara
+        // 打開攝影機----------------------------------------------------------------------
+        // 打開相機按鈕
 //        binding.buttonEditCamera.setOnClickListener {
 //            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 //            photoFile = getPhotoFile(FILE_NAME)
@@ -268,16 +325,15 @@ class CreateGroupFragment : Fragment() {
 //                photoFile!!
 //            ) }
 //            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
-////            if(takePictureIntent.resolveActivity(MainActivity().packageManager)!= null){
-////            }
+// //            if(takePictureIntent.resolveActivity(MainActivity().packageManager)!= null){
+// //            }
 //            startActivityForResult(takePictureIntent,REQUEST_CODE)
 //        }
 
-        img1 = binding.imageShowPhoto //上傳的照片
+        img1 = binding.imageShowPhoto // 上傳的照片
 //        img2 = binding.imageEditMain //顯示firestorge照片
 
-
-        //上傳照片按鈕
+        // 上傳照片按鈕
         binding.constraintPhoto.setOnClickListener {
             val intent = Intent()
             intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -289,8 +345,8 @@ class CreateGroupFragment : Fragment() {
         return binding.root
     }
 
-    fun getDatePickerDialogDateAndTime() {
-        Timber.d("date=${binding.editTextDate.text.toString()}")
+    private fun getDatePickerDialogDateAndTime() {
+        Timber.d("date=${binding.editTextDate.text}")
         val date = binding.editTextDate.text.toString()
         val dateToLong = date.toDateLong()
         viewModel.group.value?.date = Timestamp(dateToLong)
@@ -303,17 +359,21 @@ class CreateGroupFragment : Fragment() {
         viewModel.group.value?.endTime = Timestamp(endTimeToLong)
     }
 
-    fun getPeriod(startTime: String) {
+    private fun getPeriod(startTime: String) {
         val hour = startTime.subSequence(0, 1)
-        val hourToInt = hour.toString().toInt()
-        if (hourToInt in 6..11) {
-            viewModel.group.value?.period = "早上"
-        } else if (hourToInt in 12..17) {
-            viewModel.group.value?.period = "下午"
-        } else if (hourToInt in 18..23) {
-            viewModel.group.value?.period = "晚上"
-        } else {
-            viewModel.group.value?.period = "凌晨"
+        when (hour.toString().toInt()) {
+            in 6..11 -> {
+                viewModel.group.value?.period = "早上"
+            }
+            in 12..17 -> {
+                viewModel.group.value?.period = "下午"
+            }
+            in 18..23 -> {
+                viewModel.group.value?.period = "晚上"
+            }
+            else -> {
+                viewModel.group.value?.period = "凌晨"
+            }
         }
     }
 
@@ -391,9 +451,9 @@ class CreateGroupFragment : Fragment() {
         return true
     }
 
-    fun checkAddress(address: String): List<Address> {
-        val geoCoder: Geocoder? = Geocoder(context, Locale.getDefault())
-        return geoCoder!!.getFromLocationName(address, 1)
+    private fun checkAddress(address: String): List<Address> {
+        val geoCoder = Geocoder(context, Locale.getDefault())
+        return geoCoder.getFromLocationName(address, 1)
     }
 
     fun callViewModelAddGroupResult() {
@@ -406,14 +466,13 @@ class CreateGroupFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        //來自檔案
+        // 來自檔案
         if (requestCode == PICK_CONTACT_REQUEST) {
             uri = data?.data
             img1?.setImageURI(uri)
             Timber.d("上傳拿到的uri -> $uri")
-
         }
-        //來自相機
+        // 來自相機
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
             val takeImage = BitmapFactory.decodeFile(photoFile?.absolutePath)
@@ -422,15 +481,14 @@ class CreateGroupFragment : Fragment() {
             uri = context?.let { getImageUri(it, takeImage) }
         }
 
-        super.onActivityResult(requestCode, resultCode, data);
-
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun uploadImageToStorage() {
-        var storageReference = FirebaseStorage.getInstance().getReference()
+    private fun uploadImageToStorage() {
+        val storageReference = FirebaseStorage.getInstance().reference
         var unusedFileName = 0L
 
-        //上傳圖片   應該要改去viewModel用coroutineScope.launch
+        // 上傳圖片   應該要改去viewModel用coroutineScope.launch
         val time = System.currentTimeMillis()
         val picStorage = storageReference.child("image$time")
         Timber.d("點擊更換圖片1，看一下picStorage是啥 -> $picStorage")
@@ -462,11 +520,10 @@ class CreateGroupFragment : Fragment() {
                 }
             }
         }
-
     }
 
-    //Bitmap to Uri 為了傳firebase
-    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+    // Bitmap to Uri 為了傳firebase
+    private fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
         val bytes = ByteArrayOutputStream()
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
         val path = MediaStore.Images.Media.insertImage(
@@ -479,12 +536,9 @@ class CreateGroupFragment : Fragment() {
     }
 
     //    取得暫存圖片檔案
-    private fun getPhotoFile(fileName: String): File {
-        val storageDirectory = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-
-        return File.createTempFile(fileName, ".jpg", storageDirectory)
-
-    }
-
-
+//    private fun getPhotoFile(fileName: String): File {
+//        val storageDirectory = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+//
+//        return File.createTempFile(fileName, ".jpg", storageDirectory)
+//    }
 }

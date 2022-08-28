@@ -20,5 +20,4 @@ class ChatroomViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragme
     override fun createFragment(position: Int): Fragment {
         return fragments[position]
     }
-
 }

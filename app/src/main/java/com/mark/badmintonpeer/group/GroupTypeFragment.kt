@@ -10,19 +10,21 @@ import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -34,14 +36,16 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.mark.badmintonpeer.MainViewModel
 import com.mark.badmintonpeer.NavigationDirections
 import com.mark.badmintonpeer.R
-import com.mark.badmintonpeer.creategroup.CreateGroupViewModel
 import com.mark.badmintonpeer.databinding.GroupTypeFragmentBinding
 import com.mark.badmintonpeer.ext.getVmFactory
+import java.util.Locale
 import timber.log.Timber
-import java.util.*
 
-class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
-    GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
+class GroupTypeFragment :
+    Fragment(),
+    GoogleMap.OnInfoWindowClickListener,
+    GoogleMap.OnMarkerClickListener,
+    OnMapReadyCallback {
 
     private lateinit var binding: GroupTypeFragmentBinding
 
@@ -55,9 +59,8 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
     lateinit var mainViewModel: MainViewModel
     lateinit var groupViewModel: GroupViewModel
 
-    //台北101
+    // 台北101
     private val defaultLocation = LatLng(25.0338483, 121.5645283)
-
 
     /**
      * Lazily initialize our [GroupTypeViewModel].
@@ -75,7 +78,6 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
 
         const val REQUEST_LOCATION_PERMISSION = 1
         const val REQUEST_ENABLE_GPS = 2
-
     }
 
     fun getType(): String {
@@ -89,7 +91,8 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -115,7 +118,6 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
             }
         )
 
-
         viewModel.navigateToGroupDetail.observe(viewLifecycleOwner) {
             it?.let {
                 findNavController().navigate(NavigationDirections.navigateToGroupDetailFragment(it))
@@ -128,7 +130,7 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
 //            (binding.recyclerViewGroupType.adapter as GroupTypeAdapter).notifyDataSetChanged()
             Timber.d("groups=${viewModel.groups.value}")
             googleMap?.clear()
-            //Add groups address Marker at google map
+            // Add groups address Marker at google map
             viewModel.groups.value?.let { listGroups ->
                 val geoCoder: Geocoder? = Geocoder(context, Locale.getDefault())
 //                val groupAddressList = mutableListOf<List<Address>>()
@@ -141,7 +143,11 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
                     val groupLocation = LatLng(stopLatitude, stopLongitude)
                     googleMap?.addMarker(
                         MarkerOptions().position(groupLocation).title(group.name)
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_badminton_app_icon))
+                            .icon(
+                                BitmapDescriptorFactory.fromResource(
+                                    R.drawable.ic_badminton_app_icon
+                                )
+                            )
                     )
                 }
             }
@@ -149,7 +155,7 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
 
         viewModel.noFilterGroupToast.observe(viewLifecycleOwner) {
             if (it) {
-                Toast.makeText(context,"無符合篩選的揪團",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "無符合篩選的揪團", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -187,9 +193,10 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
 
         viewModel.recyclerViewVisible.observe(viewLifecycleOwner) {
 
-            ViewModelProvider(requireParentFragment()).get(GroupViewModel::class.java)._addGroupImageViewVisible.value =
+            ViewModelProvider(requireParentFragment())
+                .get(GroupViewModel::class.java)
+                ._addGroupImageViewVisible.value =
                 it
-
         }
 
         groupViewModel = ViewModelProvider(requireParentFragment()).get(GroupViewModel::class.java)
@@ -204,20 +211,20 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
     }
 
     private fun getLocationPermission() {
-        //檢查權限
+        // 檢查權限
         if (activity?.let {
-                ActivityCompat.checkSelfPermission(
+            ActivityCompat.checkSelfPermission(
                     it,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 )
-            } == PackageManager.PERMISSION_GRANTED
+        } == PackageManager.PERMISSION_GRANTED
         ) {
-            //已獲取到權限
+            // 已獲取到權限
 //            Toast.makeText(this, "已獲取到位置權限，可以準備開始獲取經緯度", Toast.LENGTH_SHORT).show()
             locationPermissionGranted = true
             checkGPSState()
         } else {
-            //詢問要求獲取權限
+            // 詢問要求獲取權限
             requestLocationPermission()
         }
     }
@@ -228,13 +235,15 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
             AlertDialog.Builder(mContext)
                 .setTitle("GPS 尚未開啟")
                 .setMessage("使用此功能需要開啟 GSP 定位功能")
-                .setPositiveButton("前往開啟",
+                .setPositiveButton(
+                    "前往開啟",
                     DialogInterface.OnClickListener { _, _ ->
                         startActivityForResult(
                             Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),
                             REQUEST_ENABLE_GPS
                         )
-                    })
+                    }
+                )
                 .setNegativeButton("取消", null)
                 .show()
         } else {
@@ -249,16 +258,19 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
             ) {
                 val locationRequest = LocationRequest()
                 locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-                //更新頻率
+                // 更新頻率
                 locationRequest.interval = 1000
-                //更新次數，若沒設定，會持續更新
+                // 更新次數，若沒設定，會持續更新
                 locationRequest.numUpdates = 1
                 mLocationProviderClient.requestLocationUpdates(
                     locationRequest,
                     object : LocationCallback() {
                         override fun onLocationResult(locationResult: LocationResult?) {
                             locationResult ?: return
-                            Timber.d("緯度:" + locationResult.lastLocation.latitude + " , 經度:" + locationResult.lastLocation.longitude + " ")
+                            Timber.d(
+                                "緯度:" + locationResult.lastLocation.latitude +
+                                    " , 經度:" + locationResult.lastLocation.longitude + " "
+                            )
 
                             val currentLocation =
                                 LatLng(
@@ -277,7 +289,6 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
 //                                MarkerOptions().position(currentLocation).title("現在位置")
 //                            )
 
-
                             googleMap?.isMyLocationEnabled = true
 
 //                            googleMap?.addMarker(
@@ -292,7 +303,6 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
                     },
                     null
                 )
-
             } else {
                 getLocationPermission()
             }
@@ -303,10 +313,10 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
 
     private fun requestLocationPermission() {
         if (activity?.let {
-                ActivityCompat.shouldShowRequestPermissionRationale(
+            ActivityCompat.shouldShowRequestPermissionRationale(
                     it, Manifest.permission.ACCESS_FINE_LOCATION
                 )
-            } == true
+        } == true
         ) {
             AlertDialog.Builder(requireActivity())
                 .setMessage("此應用程式，需要位置權限才能正常使用")
@@ -329,7 +339,9 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -337,18 +349,18 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
             REQUEST_LOCATION_PERMISSION -> {
                 if (grantResults.isNotEmpty()) {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        //已獲取到權限
+                        // 已獲取到權限
                         locationPermissionGranted = true
                         checkGPSState()
                     } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                         if (!activity?.let {
-                                ActivityCompat.shouldShowRequestPermissionRationale(
+                            ActivityCompat.shouldShowRequestPermissionRationale(
                                     it,
                                     Manifest.permission.ACCESS_FINE_LOCATION
                                 )
-                            }!!
+                        }!!
                         ) {
-                            //權限被永久拒絕
+                            // 權限被永久拒絕
                             Toast.makeText(activity, "位置權限已被關閉，功能將會無法正常使用", Toast.LENGTH_SHORT)
                                 .show()
 
@@ -365,7 +377,7 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
                                 .setNegativeButton("取消") { _, _ -> requestLocationPermission() }
                                 .show()
                         } else {
-                            //權限被拒絕
+                            // 權限被拒絕
                             Toast.makeText(activity, "位置權限被拒絕，功能將會無法正常使用", Toast.LENGTH_SHORT)
                                 .show()
                             requestLocationPermission()
@@ -402,7 +414,6 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
 //        googleMap.uiSettings.setAllGesturesEnabled(true)
 //        googleMap.setOnInfoWindowClickListener(this)
         googleMap.setOnMarkerClickListener(this)
-
     }
 
     override fun onInfoWindowClick(p0: Marker) {
@@ -433,5 +444,4 @@ class GroupTypeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener,
         }
         return false
     }
-
 }

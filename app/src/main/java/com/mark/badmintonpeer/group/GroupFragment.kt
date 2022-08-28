@@ -1,14 +1,12 @@
 package com.mark.badmintonpeer.group
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -16,7 +14,6 @@ import com.mark.badmintonpeer.NavigationDirections
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.databinding.GroupFragmentBinding
 import com.mark.badmintonpeer.ext.getVmFactory
-import com.mark.badmintonpeer.filter.FilterViewModel
 import com.mark.badmintonpeer.login.UserManager
 
 class GroupFragment : Fragment() {
@@ -24,9 +21,9 @@ class GroupFragment : Fragment() {
     private val viewModel by viewModels<GroupViewModel> {
         getVmFactory(
 //            arguments?.let {
-                GroupFragmentArgs.fromBundle(
-                    requireArguments()
-                ).filterKey
+            GroupFragmentArgs.fromBundle(
+                requireArguments()
+            ).filterKey
 //            }
         )
     }
@@ -40,7 +37,8 @@ class GroupFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = GroupFragmentBinding.inflate(inflater)
@@ -56,10 +54,7 @@ class GroupFragment : Fragment() {
             }
         }
 
-
-
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,5 +71,4 @@ class GroupFragment : Fragment() {
             tab.text = tabLayoutArray[position]
         }.attach()
     }
-
 }

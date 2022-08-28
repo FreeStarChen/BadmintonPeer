@@ -2,12 +2,10 @@ package com.mark.badmintonpeer
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.mark.badmintonpeer.databinding.ActivityAnimationBinding
-import kotlinx.coroutines.delay
 
 class AnimationActivity : AppCompatActivity() {
 
@@ -19,12 +17,11 @@ class AnimationActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_animation)
 
-      Handler().postDelayed({
-          val intent = Intent(applicationContext, MainActivity::class.java)
+        Handler().postDelayed({
+            val intent = Intent(applicationContext, MainActivity::class.java)
 //            throw RuntimeException("Test Crash") // Force a crash
-          startActivity(intent)
-          finish()
-      },3000)
-        
+            startActivity(intent)
+            finish()
+        }, 3000)
     }
 }

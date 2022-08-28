@@ -1,12 +1,11 @@
 package com.mark.badmintonpeer.data
 
 import android.os.Parcelable
+import java.util.Date
 import kotlinx.android.parcel.Parcelize
-import java.sql.Timestamp
-import java.util.*
 
 @Parcelize
-data class Chatroom (
+data class Chatroom(
     var id: String = "",
     val groupId: String = "",
     val member: List<String> = listOf(""),
@@ -16,4 +15,4 @@ data class Chatroom (
     val name: String = "",
     val type: String = "",
     val chats: List<Chat> = emptyList()
-        ) : Parcelable
+) : Parcelable

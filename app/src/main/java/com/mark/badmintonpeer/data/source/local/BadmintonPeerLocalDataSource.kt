@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.mark.badmintonpeer.data.*
 import com.mark.badmintonpeer.data.source.BadmintonPeerDataSource
-import java.util.*
 
 /**
  * Concrete implementation of a Badminton Peer source as a db.
@@ -75,7 +74,6 @@ class BadmintonPeerLocalDataSource(val context: Context) : BadmintonPeerDataSour
     ): Result<Boolean> {
         TODO("Not yet implemented")
     }
-
 
     override fun getLiveChats(chatroomId: String): MutableLiveData<List<Chat>> {
         TODO("Not yet implemented")

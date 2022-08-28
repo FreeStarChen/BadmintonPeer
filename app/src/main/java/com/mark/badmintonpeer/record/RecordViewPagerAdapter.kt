@@ -2,7 +2,6 @@ package com.mark.badmintonpeer.record
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.mark.badmintonpeer.chatroom.ChatroomTypeFragment
 
 class RecordViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
@@ -10,7 +9,7 @@ class RecordViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment
         RecordTypeFragment.newInstance("過往揪團"),
         RecordTypeFragment.newInstance("過往參團"),
 
-        )
+    )
 
     override fun getItemCount(): Int {
         return fragments.size
@@ -19,5 +18,4 @@ class RecordViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment
     override fun createFragment(position: Int): Fragment {
         return fragments[position]
     }
-
 }

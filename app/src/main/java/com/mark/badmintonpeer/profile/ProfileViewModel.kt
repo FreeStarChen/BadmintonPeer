@@ -51,7 +51,6 @@ class ProfileViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
     /**
      * When the [ViewModel] is finished, we cancel our coroutine [viewModelJob], which tells the
      * Retrofit service to stop.
@@ -137,6 +136,4 @@ class ProfileViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
     fun onGroupDetailNavigated() {
         _navigateToGroupDetail.value = null
     }
-
-
 }

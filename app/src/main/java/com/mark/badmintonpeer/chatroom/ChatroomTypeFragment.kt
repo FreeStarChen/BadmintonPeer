@@ -1,24 +1,20 @@
 package com.mark.badmintonpeer.chatroom
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mark.badmintonpeer.NavigationDirections
-import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.databinding.ChatroomTypeFragmentBinding
-import com.mark.badmintonpeer.databinding.GroupTypeFragmentBinding
 import com.mark.badmintonpeer.ext.getVmFactory
-import com.mark.badmintonpeer.group.GroupTypeFragment
 import timber.log.Timber
 
 class ChatroomTypeFragment : Fragment() {
 
-    private val viewModel by viewModels<ChatroomTypeViewModel> {getVmFactory(getType())}
+    private val viewModel by viewModels<ChatroomTypeViewModel> { getVmFactory(getType()) }
 
     companion object {
         fun newInstance(type: String): ChatroomTypeFragment {
@@ -30,14 +26,13 @@ class ChatroomTypeFragment : Fragment() {
         }
     }
 
-
-
-    fun getType(): String {
-        return requireArguments().getString("type","")
+    private fun getType(): String {
+        return requireArguments().getString("type", "")
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -55,7 +50,9 @@ class ChatroomTypeFragment : Fragment() {
 
         viewModel.navigateToChatroomDetail.observe(viewLifecycleOwner) {
             it?.let {
-                findNavController().navigate(NavigationDirections.navigateToChatroomChatFragment(it))
+                findNavController().navigate(
+                    NavigationDirections.navigateToChatroomChatFragment(it)
+                )
                 viewModel.onChatroomDetailNavigated()
             }
         }
@@ -77,5 +74,4 @@ class ChatroomTypeFragment : Fragment() {
 
         return binding.root
     }
-
 }

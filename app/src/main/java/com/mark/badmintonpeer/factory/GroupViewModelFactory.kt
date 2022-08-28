@@ -8,6 +8,7 @@ import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.groupdetail.GroupDetailViewModel
 import java.lang.IllegalArgumentException
 
+@Suppress("UNCHECKED_CAST")
 class GroupViewModelFactory(
     private val group: Group,
     private val repository: BadmintonPeerRepository

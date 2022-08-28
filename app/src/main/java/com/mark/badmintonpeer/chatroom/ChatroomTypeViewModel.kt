@@ -6,14 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.mark.badmintonpeer.MainApplication
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.Chatroom
-import com.mark.badmintonpeer.data.Group
 import com.mark.badmintonpeer.data.Result
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.network.LoadApiStatus
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import timber.log.Timber
 
 class ChatroomTypeViewModel(val type: String, val repository: BadmintonPeerRepository) :
@@ -25,8 +21,8 @@ class ChatroomTypeViewModel(val type: String, val repository: BadmintonPeerRepos
         get() = _status
 
     // error: The internal MutableLiveData that stores the error of the most recent request
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String>
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?>
         get() = _error
 
     // status for the loading icon of swl
@@ -39,8 +35,8 @@ class ChatroomTypeViewModel(val type: String, val repository: BadmintonPeerRepos
         get() = _chatroom
 
     // Handle navigation to group detail
-    private val _navigateToChatroomDetail = MutableLiveData<Chatroom>()
-    val navigateToChatroomDetail: LiveData<Chatroom>
+    private val _navigateToChatroomDetail = MutableLiveData<Chatroom?>()
+    val navigateToChatroomDetail: LiveData<Chatroom?>
         get() = _navigateToChatroomDetail
 
     private var viewModelJob = Job()
@@ -103,7 +99,6 @@ class ChatroomTypeViewModel(val type: String, val repository: BadmintonPeerRepos
             getChatroomResult()
 //            _status.value = LoadApiStatus.DONE
 //            _refreshStatus.value = false
-
         } else {
             if (status.value != LoadApiStatus.LOADING) {
                 getChatroomResult()
@@ -119,4 +114,5 @@ class ChatroomTypeViewModel(val type: String, val repository: BadmintonPeerRepos
     fun onChatroomDetailNavigated() {
         _navigateToChatroomDetail.value = null
     }
+
 }

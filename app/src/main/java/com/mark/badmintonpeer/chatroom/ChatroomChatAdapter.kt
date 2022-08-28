@@ -15,12 +15,12 @@ class ChatroomChatAdapter : ListAdapter<ChatItem, RecyclerView.ViewHolder>(DiffC
 
     class UserSideViewHolder(private var binding: ChatroomChatUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(chat: Chat) {
-                binding.chat = chat
-                binding.textChatOwnerTime.text = TimeCalculator.getTime(chat.createdTime.time)
-                binding.executePendingBindings()
-            }
+        fun bind(chat: Chat) {
+            binding.chat = chat
+            binding.textChatOwnerTime.text = TimeCalculator.getTime(chat.createdTime.time)
+            binding.executePendingBindings()
         }
+    }
 
     class OtherSideViewHolder(private var binding: ChatroomChatOtherBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -40,20 +40,18 @@ class ChatroomChatAdapter : ListAdapter<ChatItem, RecyclerView.ViewHolder>(DiffC
             return oldItem.createdTime == newItem.createdTime
         }
 
-        private const val ITEM_VIEW_TYPE_USERSIDE = 0x00
-        private const val ITEM_VIEW_TYPE_OTHERSIDE = 0x01
-
+        private const val ITEM_VIEW_TYPE_USER_SIDE = 0x00
+        private const val ITEM_VIEW_TYPE_OTHER_SIDE = 0x01
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_VIEW_TYPE_USERSIDE -> UserSideViewHolder(
+            ITEM_VIEW_TYPE_USER_SIDE -> UserSideViewHolder(
                 ChatroomChatUserBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 )
             )
-            ITEM_VIEW_TYPE_OTHERSIDE -> OtherSideViewHolder(
+            ITEM_VIEW_TYPE_OTHER_SIDE -> OtherSideViewHolder(
                 ChatroomChatOtherBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 )
@@ -63,21 +61,20 @@ class ChatroomChatAdapter : ListAdapter<ChatItem, RecyclerView.ViewHolder>(DiffC
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-       when (holder) {
-           is UserSideViewHolder -> {
-               holder.bind((getItem(position) as ChatItem.UserSide).chat)
-           }
-           is OtherSideViewHolder -> {
-               holder.bind((getItem(position) as ChatItem.OtherSide).chat)
-           }
-       }
+        when (holder) {
+            is UserSideViewHolder -> {
+                holder.bind((getItem(position) as ChatItem.UserSide).chat)
+            }
+            is OtherSideViewHolder -> {
+                holder.bind((getItem(position) as ChatItem.OtherSide).chat)
+            }
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is ChatItem.UserSide -> ITEM_VIEW_TYPE_USERSIDE
-            is ChatItem.OtherSide -> ITEM_VIEW_TYPE_OTHERSIDE
+            is ChatItem.UserSide -> ITEM_VIEW_TYPE_USER_SIDE
+            is ChatItem.OtherSide -> ITEM_VIEW_TYPE_OTHER_SIDE
         }
-
     }
 }

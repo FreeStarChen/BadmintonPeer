@@ -2,9 +2,7 @@ package com.mark.badmintonpeer.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
 import android.text.method.LinkMovementMethod
-import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +21,6 @@ import com.mark.badmintonpeer.ext.getVmFactory
 import com.mark.badmintonpeer.ext.setTouchDelegate
 import timber.log.Timber
 
-
 class LoginDialog : AppCompatDialogFragment() {
 
     private val viewModel by viewModels<LoginViewModel> { getVmFactory() }
@@ -39,7 +36,8 @@ class LoginDialog : AppCompatDialogFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -79,7 +77,9 @@ class LoginDialog : AppCompatDialogFragment() {
 
     private fun signIn() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("693739849566-a0guvtjhnl3sp39l837njclnvnjckqsf.apps.googleusercontent.com")
+            .requestIdToken(
+                "693739849566-a0guvtjhnl3sp39l837njclnvnjckqsf.apps.googleusercontent.com"
+            )
             .requestEmail()
             .build()
         val mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
@@ -101,7 +101,7 @@ class LoginDialog : AppCompatDialogFragment() {
 
                 UserManager.userToken = token
                 UserManager.userId = id
-                Timber.d("userToken=${token}")
+                Timber.d("userToken=$token")
 
                 viewModel.userFromGooglelogin.value =
                     id?.let { id ->
@@ -111,7 +111,9 @@ class LoginDialog : AppCompatDialogFragment() {
                             }
                         }
                     }
-                Timber.d("viewModel.userFromGooglelogin.value=${viewModel.userFromGooglelogin.value}")
+                Timber.d(
+                    "viewModel.userFromGooglelogin.value=${viewModel.userFromGooglelogin.value}"
+                )
 
                 viewModel.checkUserResult()
 
@@ -139,6 +141,4 @@ class LoginDialog : AppCompatDialogFragment() {
 
 //        dismiss()
     }
-
-
 }

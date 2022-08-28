@@ -18,15 +18,15 @@ class NewsHotGroupAdapter(private val onClickListener: OnClickListener) :
         @SuppressLint("SetTextI18n")
         fun bind(group: Group) {
             binding.group = group
-            binding.textDateNews.text = TimeCalculator.getDateAndWeek(group.date.time).replace("週","")
+            binding.textDateNews.text =
+                TimeCalculator.getDateAndWeek(group.date.time).replace("週", "")
             binding.textStartTimeNews.text = TimeCalculator.getTime(group.startTime.time)
             binding.textEndTimeNews.text = TimeCalculator.getTime(group.endTime.time)
             binding.textPriceNews.text = "$${group.price}"
-            binding.textCityNews.text = group.address.substring(0,3)
+            binding.textCityNews.text = group.address.substring(0, 3)
 
             binding.executePendingBindings()
         }
-
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Group>() {
@@ -37,7 +37,6 @@ class NewsHotGroupAdapter(private val onClickListener: OnClickListener) :
         override fun areContentsTheSame(oldItem: Group, newItem: Group): Boolean {
             return oldItem.id == newItem.id
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {

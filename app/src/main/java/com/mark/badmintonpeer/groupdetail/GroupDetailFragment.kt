@@ -1,23 +1,20 @@
 package com.mark.badmintonpeer.groupdetail
 
 import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.mark.badmintonpeer.MainViewModel
 import com.mark.badmintonpeer.NavigationDirections
-import com.mark.badmintonpeer.R
-import com.mark.badmintonpeer.chatroom.ChatroomFragmentDirections
-import com.mark.badmintonpeer.creategroup.CreateGroupFragment
 import com.mark.badmintonpeer.databinding.GroupDetailFragmentBinding
 import com.mark.badmintonpeer.ext.getVmFactory
 import timber.log.Timber
@@ -39,7 +36,8 @@ class GroupDetailFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -85,7 +83,8 @@ class GroupDetailFragment : Fragment() {
             binding.recyclerViewDetailImages.scrollToPosition(group.images.size * 100)
 
             viewModel.snapPosition.observe(viewLifecycleOwner) {
-                (binding.recyclerViewDetailCircles.adapter as GroupDetailCircleAdapter).selectedPosition.value =
+                (binding.recyclerViewDetailCircles.adapter as GroupDetailCircleAdapter)
+                    .selectedPosition.value =
                     (it % group.images.size)
             }
         }
@@ -120,7 +119,6 @@ class GroupDetailFragment : Fragment() {
             } else {
                 findNavController().navigate(NavigationDirections.navigateToLoginDialog())
             }
-
         }
 
         viewModel.leave.observe(viewLifecycleOwner) {
@@ -145,11 +143,8 @@ class GroupDetailFragment : Fragment() {
             } else {
                 findNavController().navigate(NavigationDirections.navigateToLoginDialog())
             }
-
         }
 
         return binding.root
     }
-
-
 }

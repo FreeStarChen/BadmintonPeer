@@ -7,7 +7,6 @@ import com.mark.badmintonpeer.MainApplication
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.Group
 import com.mark.badmintonpeer.data.Result
-import com.mark.badmintonpeer.data.User
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.network.LoadApiStatus
@@ -50,13 +49,10 @@ class RecordTypeViewModel(val type: String, val repository: BadmintonPeerReposit
         viewModelJob.cancel()
     }
 
-
     init {
         Timber.d("------------------------------------------")
         Timber.d("$this")
         Timber.d("------------------------------------------")
-
-
     }
 
     fun getRecordOfCreatedGroupResult(type: String) {
@@ -134,5 +130,4 @@ class RecordTypeViewModel(val type: String, val repository: BadmintonPeerReposit
     fun onGroupDetailNavigated() {
         _navigateToGroupDetail.value = null
     }
-
 }

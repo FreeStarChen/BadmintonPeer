@@ -1,6 +1,5 @@
 package com.mark.badmintonpeer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -8,6 +7,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
 //        NavigationUI.setupWithNavController(bottomNavigationView, navController)
 
-
 //        val list = listOf("1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1")
 //
 //        val adapter: ArrayAdapter<String> =
@@ -69,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         ).also { adapter ->
             adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
             binding.spinnerCities.adapter = adapter
-
         }
 
         binding.spinnerCities.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -88,19 +86,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.spinnerReset.observe(this) {
-           it?.let {
-               if (it) {
-                   Timber.d("viewModel.spinnerReset start")
-                   binding.spinnerCities.setSelection(0)
-               }
-           }
-
+            it?.let {
+                if (it) {
+                    Timber.d("viewModel.spinnerReset start")
+                    binding.spinnerCities.setSelection(0)
+                }
+            }
         }
 
-
-
         binding.imageToolbarFilter.setOnClickListener {
-            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToFilterFragment())
+            findNavController(R.id.nav_host_fragment)
+                .navigate(NavigationDirections.navigateToFilterFragment())
         }
 
         binding.buttonCancel.setOnClickListener {
@@ -120,7 +116,6 @@ class MainActivity : AppCompatActivity() {
                     dialog.dismiss()
                 }
                 .show()
-
         }
 
         binding.buttonCreateGroup.setOnClickListener {
@@ -132,7 +127,8 @@ class MainActivity : AppCompatActivity() {
                     val fragment =
                         supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
                     val createGroupFragment =
-                        fragment?.childFragmentManager?.primaryNavigationFragment as CreateGroupFragment
+                        fragment?.childFragmentManager?.primaryNavigationFragment
+                            as CreateGroupFragment
 
                     if (createGroupFragment.checkCreateGroupValue()) {
                         createGroupFragment.callViewModelAddGroupResult()
@@ -152,7 +148,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 .show()
 
-
 //            childFragment.callViewModelAddGroupResult()
 
 //            val createGroupViewModel = ViewModelProvider(
@@ -161,7 +156,6 @@ class MainActivity : AppCompatActivity() {
 //            )[CreateGroupViewModel::class.java]
 //
 //            createGroupViewModel.addGroupResult()
-
         }
 
         binding.buttonMap.setOnClickListener {
@@ -186,7 +180,6 @@ class MainActivity : AppCompatActivity() {
         setupNavController()
         setupBottomNav()
 //        UserManager.clear()
-
     }
 
     /**
@@ -198,7 +191,11 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
 
                 R.id.navigation_group -> {
-                    findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToGroupFragment(null))
+                    findNavController(R.id.nav_host_fragment).navigate(
+                        NavigationDirections.navigateToGroupFragment(
+                            null
+                        )
+                    )
                     return@setOnItemSelectedListener true
                 }
 
@@ -206,11 +203,13 @@ class MainActivity : AppCompatActivity() {
 
                     when (viewModel.isLoggedIn) {
                         true -> {
-                            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToChatroomFragment())
+                            findNavController(R.id.nav_host_fragment)
+                                .navigate(NavigationDirections.navigateToChatroomFragment())
                             return@setOnItemSelectedListener true
                         }
                         false -> {
-                            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToLoginDialog())
+                            findNavController(R.id.nav_host_fragment)
+                                .navigate(NavigationDirections.navigateToLoginDialog())
                             return@setOnItemSelectedListener false
                         }
                     }
@@ -218,7 +217,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.navigation_news -> {
-                    findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToNewsFragment())
+                    findNavController(R.id.nav_host_fragment)
+                        .navigate(NavigationDirections.navigateToNewsFragment())
                     return@setOnItemSelectedListener true
                 }
 
@@ -226,44 +226,44 @@ class MainActivity : AppCompatActivity() {
 
                     when (viewModel.isLoggedIn) {
                         true -> {
-                            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToProfileFragment())
+                            findNavController(R.id.nav_host_fragment)
+                                .navigate(NavigationDirections.navigateToProfileFragment())
                             return@setOnItemSelectedListener true
                         }
                         false -> {
-                            findNavController(R.id.nav_host_fragment).navigate(NavigationDirections.navigateToLoginDialog())
+                            findNavController(R.id.nav_host_fragment)
+                                .navigate(NavigationDirections.navigateToLoginDialog())
                             return@setOnItemSelectedListener false
                         }
                     }
                     return@setOnItemSelectedListener true
                 }
-
             }
             false
         }
     }
-
 
     /**
      * Set up [NavController.addOnDestinationChangedListener] to record the current fragment, it better than another design
      * which is change the [CurrentFragmentType] enum value by [MainViewModel] at [onCreateView]
      */
     private fun setupNavController() {
-        findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener { navController: NavController, _: NavDestination, _: Bundle? ->
-            viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
-                R.id.navigation_group -> CurrentFragmentType.GROUP
-                R.id.navigation_chatroom -> CurrentFragmentType.CHATROOM
-                R.id.navigation_news -> CurrentFragmentType.NEWS
-                R.id.navigation_profile -> CurrentFragmentType.PROFILE
-                R.id.filterDialog -> CurrentFragmentType.FILTER
-                R.id.createGroupFragment -> CurrentFragmentType.CREATE
-                R.id.groupDetailFragment -> CurrentFragmentType.DETAIL
-                R.id.chatroomChatFragment -> CurrentFragmentType.CHAT
-                R.id.newsDetailFragment -> CurrentFragmentType.DETAIL
-                R.id.recordFragment -> CurrentFragmentType.RECORD
-                else -> viewModel.currentFragmentType.value
+        findNavController(R.id.nav_host_fragment)
+            .addOnDestinationChangedListener {
+                navController: NavController, _: NavDestination, _: Bundle? ->
+                viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
+                    R.id.navigation_group -> CurrentFragmentType.GROUP
+                    R.id.navigation_chatroom -> CurrentFragmentType.CHATROOM
+                    R.id.navigation_news -> CurrentFragmentType.NEWS
+                    R.id.navigation_profile -> CurrentFragmentType.PROFILE
+                    R.id.filterDialog -> CurrentFragmentType.FILTER
+                    R.id.createGroupFragment -> CurrentFragmentType.CREATE
+                    R.id.groupDetailFragment -> CurrentFragmentType.DETAIL
+                    R.id.chatroomChatFragment -> CurrentFragmentType.CHAT
+                    R.id.newsDetailFragment -> CurrentFragmentType.DETAIL
+                    R.id.recordFragment -> CurrentFragmentType.RECORD
+                    else -> viewModel.currentFragmentType.value
+                }
             }
-        }
     }
-
-
 }

@@ -13,9 +13,9 @@ import timber.log.Timber
 class FilterViewModel(private val repository: BadmintonPeerRepository) : ViewModel() {
 
     // Handle leave login
-    private val _leave = MutableLiveData<Boolean>()
+    private val _leave = MutableLiveData<Boolean?>()
 
-    val leave: LiveData<Boolean>
+    val leave: LiveData<Boolean?>
         get() = _leave
 
     private val _filter = MutableLiveData<Filter>()
@@ -58,13 +58,11 @@ class FilterViewModel(private val repository: BadmintonPeerRepository) : ViewMod
     val degree6: LiveData<Boolean>
         get() = _degree6
 
-
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
 
     /**
      * When the [ViewModel] is finished, we cancel our coroutine [viewModelJob], which tells the
@@ -160,8 +158,4 @@ class FilterViewModel(private val repository: BadmintonPeerRepository) : ViewMod
     fun resetDegree6() {
         _degree6.value = false
     }
-
-
-
-
 }

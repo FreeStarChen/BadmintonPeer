@@ -7,6 +7,7 @@ import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.newsdetail.NewsDetailViewModel
 import java.lang.IllegalArgumentException
 
+@Suppress("UNCHECKED_CAST")
 class NewsViewModelFactory(
     private val news: News,
     private val repository: BadmintonPeerRepository

@@ -22,7 +22,6 @@ class NewsItemAdapter(private val onClickListener: OnClickListener) :
 
             binding.executePendingBindings()
         }
-
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<News>() {
@@ -33,7 +32,6 @@ class NewsItemAdapter(private val onClickListener: OnClickListener) :
         override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {
             return oldItem.id == newItem.id
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {

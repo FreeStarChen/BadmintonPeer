@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.mark.badmintonpeer.MainActivity
 import com.mark.badmintonpeer.databinding.GroupDetailCircleBinding

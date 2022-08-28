@@ -1,12 +1,12 @@
 package com.mark.badmintonpeer.data
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 import java.sql.Timestamp
-import java.util.*
+import java.util.Date
+import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Group (
+data class Group(
     var id: String = "",
     var classification: String = "",
     var ownerId: String = "",
@@ -28,4 +28,4 @@ data class Group (
     var courtNumber: Int? = null,
     var other: String = "",
     var period: String = ""
-        ) : Parcelable
+) : Parcelable

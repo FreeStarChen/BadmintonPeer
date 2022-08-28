@@ -10,19 +10,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mark.badmintonpeer.NavigationDirections
-import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.Filter
 import com.mark.badmintonpeer.databinding.FilterDialogBinding
 import com.mark.badmintonpeer.ext.getVmFactory
 import com.mark.badmintonpeer.util.CitiesAndTowns
 import com.mark.badmintonpeer.util.TimeCalculator.toDateLong
 import com.mark.badmintonpeer.util.TimeCalculator.transformIntoDatePicker
-import timber.log.Timber
 import java.sql.Timestamp
+import timber.log.Timber
 
 class FilterDialog : AppCompatDialogFragment() {
 
@@ -38,13 +36,9 @@ class FilterDialog : AppCompatDialogFragment() {
         fun newInstance() = FilterDialog()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        setStyle(DialogFragment.STYLE_NOs_FRAME, R.style.FilterDialog)
-    }
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -72,7 +66,6 @@ class FilterDialog : AppCompatDialogFragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-
             }
         }
 
@@ -87,7 +80,6 @@ class FilterDialog : AppCompatDialogFragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
         }
 
@@ -106,7 +98,6 @@ class FilterDialog : AppCompatDialogFragment() {
         viewModel.morningTime.observe(viewLifecycleOwner) {
             if (it) {
                 wantPeriods.add("早上")
-
             } else {
                 wantPeriods.remove("早上")
             }
@@ -220,7 +211,9 @@ class FilterDialog : AppCompatDialogFragment() {
                         priceHigh
                     )
                     Timber.d("filter = $filter")
-                    findNavController().navigate(NavigationDirections.navigateToGroupFragment(filter))
+                    findNavController().navigate(
+                        NavigationDirections.navigateToGroupFragment(filter)
+                    )
                 }
             }
         }
@@ -266,6 +259,4 @@ class FilterDialog : AppCompatDialogFragment() {
             )
         )
     }
-
-
 }

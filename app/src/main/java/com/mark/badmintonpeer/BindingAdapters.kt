@@ -13,11 +13,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.airbnb.lottie.LottieAnimationView
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.mark.badmintonpeer.chatroom.ChatroomChatAdapter
-import com.mark.badmintonpeer.data.Chat
 import com.mark.badmintonpeer.groupdetail.GroupDetailCircleAdapter
 import com.mark.badmintonpeer.groupdetail.GroupDetailImageAdapter
 import com.mark.badmintonpeer.network.LoadApiStatus
@@ -214,7 +210,6 @@ fun bindApiStatusForLottie(view: LottieAnimationView, status: LoadApiStatus?) {
     }
 }
 
-
 /**
  * According to [message] to decide the visibility of [ProgressBar]
  */
@@ -231,8 +226,8 @@ fun bindApiErrorMessage(view: TextView, message: String?) {
     }
 }
 
-//@BindingAdapter("chats")
-//fun bindRecyclerView(recyclerView: RecyclerView, chatItems: List<Chat>?) {
+// @BindingAdapter("chats")
+// fun bindRecyclerView(recyclerView: RecyclerView, chatItems: List<Chat>?) {
 //    chatItems?.let {
 //        recyclerView.adapter?.apply {
 //            when (this) {
@@ -240,4 +235,4 @@ fun bindApiErrorMessage(view: TextView, message: String?) {
 //            }
 //        }
 //    }
-//}
+// }

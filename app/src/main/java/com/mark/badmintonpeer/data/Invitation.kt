@@ -4,6 +4,6 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Invitation (
+data class Invitation(
     val id: String = ""
-        ) : Parcelable
+) : Parcelable

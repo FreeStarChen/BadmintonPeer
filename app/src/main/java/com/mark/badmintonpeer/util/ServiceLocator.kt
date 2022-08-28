@@ -15,7 +15,7 @@ object ServiceLocator {
 
     @Volatile
     var repository: BadmintonPeerRepository? = null
-    @VisibleForTesting set
+        @VisibleForTesting set
 
     fun provideRepository(context: Context): BadmintonPeerRepository {
         synchronized(this) {
@@ -35,5 +35,4 @@ object ServiceLocator {
     private fun createLocalDataSource(context: Context): BadmintonPeerDataSource {
         return BadmintonPeerLocalDataSource(context)
     }
-
 }

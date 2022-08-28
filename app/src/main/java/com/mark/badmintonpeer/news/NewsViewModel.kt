@@ -61,7 +61,9 @@ class NewsViewModel(private val repository: BadmintonPeerRepository) : ViewModel
                 outRect.left = 0
             } else {
                 outRect.left =
-                    MainApplication.instance.resources.getDimensionPixelSize(R.dimen.space_detail_circle)
+                    MainApplication.instance.resources.getDimensionPixelSize(
+                        R.dimen.space_detail_circle
+                    )
             }
         }
     }
@@ -81,7 +83,6 @@ class NewsViewModel(private val repository: BadmintonPeerRepository) : ViewModel
 
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
 
     /**
      * When the [ViewModel] is finished, we cancel our coroutine [viewModelJob], which tells the
@@ -131,7 +132,6 @@ class NewsViewModel(private val repository: BadmintonPeerRepository) : ViewModel
                     null
                 }
             }
-
         }
     }
 
@@ -165,7 +165,6 @@ class NewsViewModel(private val repository: BadmintonPeerRepository) : ViewModel
                     null
                 }
             }
-
         }
     }
 
@@ -201,6 +200,4 @@ class NewsViewModel(private val repository: BadmintonPeerRepository) : ViewModel
     fun onNewsDetailNavigated() {
         _navigateToNewsDetail.value = null
     }
-
-
 }

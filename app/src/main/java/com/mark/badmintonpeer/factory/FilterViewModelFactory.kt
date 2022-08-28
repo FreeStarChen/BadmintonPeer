@@ -7,7 +7,6 @@ import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.group.GroupViewModel
 import java.lang.IllegalArgumentException
 
-
 /**
  * Factory for filter item ViewModels.
  */

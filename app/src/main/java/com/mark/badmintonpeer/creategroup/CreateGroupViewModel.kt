@@ -34,12 +34,12 @@ class CreateGroupViewModel(val repository: BadmintonPeerRepository) : ViewModel(
         get() = _status
 
     // error: The internal MutableLiveData that stores the error of the most recent request
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String>
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?>
         get() = _error
 
-    private val _leave = MutableLiveData<Boolean>()
-    val leave: LiveData<Boolean>
+    private val _leave = MutableLiveData<Boolean?>()
+    val leave: LiveData<Boolean?>
         get() = _leave
 
     private val _haveWaterDispenser = MutableLiveData<Boolean>()
@@ -98,18 +98,6 @@ class CreateGroupViewModel(val repository: BadmintonPeerRepository) : ViewModel(
     val degree6: LiveData<Boolean>
         get() = _degree6
 
-
-    val selectedClassification = MutableLiveData<String>()
-
-//    private val shippingTime: String
-//        get() = when (selectedClassification.value) {
-//            R.id.radioButton1 -> "零打"
-//            R.id.radioButton2 -> "季打"
-//            R.id.radioButton3 -> "課程"
-//            R.id.radioButton3 -> "比賽"
-//            else -> ""
-//        }
-
     private var viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -123,13 +111,12 @@ class CreateGroupViewModel(val repository: BadmintonPeerRepository) : ViewModel(
         Timber.d("------------------------------------------")
         Timber.d("$this")
         Timber.d("------------------------------------------")
-
     }
 
     fun addGroupResult() {
 
         coroutineScope.launch {
-                _status.value = LoadApiStatus.LOADING
+            _status.value = LoadApiStatus.LOADING
             Timber.d("group.value=${group.value}")
             when (val result = repository.addGroup(group.value!!)) {
                 is Result.Success -> {
@@ -211,11 +198,9 @@ class CreateGroupViewModel(val repository: BadmintonPeerRepository) : ViewModel(
         _degree5.value = _degree5.value != true
     }
 
-
     fun degree6() {
         _degree6.value = _degree6.value != true
     }
-
 
     @InverseMethod("convertIntToString")
     fun convertStringToInt(value: String): Int {
@@ -235,22 +220,21 @@ class CreateGroupViewModel(val repository: BadmintonPeerRepository) : ViewModel(
         return value.toString()
     }
 
-    @InverseMethod("convertLongToString")
-    fun convertStringToLong(value: String): Long {
-        return try {
-            value.toLong().let {
-                when (it) {
-                    0L -> 1
-                    else -> it
-                }
-            }
-        } catch (e: NumberFormatException) {
-            1
-        }
-    }
-
-    fun convertLongToString(value: Long): String {
-        return value.toString()
-    }
-
+//    @InverseMethod("convertLongToString")
+//    fun convertStringToLong(value: String): Long {
+//        return try {
+//            value.toLong().let {
+//                when (it) {
+//                    0L -> 1
+//                    else -> it
+//                }
+//            }
+//        } catch (e: NumberFormatException) {
+//            1
+//        }
+//    }
+//
+//    fun convertLongToString(value: Long): String {
+//        return value.toString()
+//    }
 }

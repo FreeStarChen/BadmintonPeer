@@ -11,11 +11,11 @@ import com.mark.badmintonpeer.data.source.BadmintonPeerDataSource
 import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.util.TimeCalculator
 import com.mark.badmintonpeer.util.TimeCalculator.toDateLong
-import timber.log.Timber
 import java.sql.Timestamp
-import java.util.*
+import java.util.Date
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
+import timber.log.Timber
 
 /**
  * Implementation of the Publisher source that from network.
@@ -36,7 +36,6 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
     private const val PATH_CHATS = "chats"
     private const val KEY_CREATED_TIME = "createdTime"
     private const val KEY_LAST_TALK_MESSAGE = "lastTalkMessage"
-    private const val KEY_ADDRESS = "address"
     private const val PATH_NEWS = "news"
     private const val KEY_POST_TIME = "postTime"
     private const val KEY_OWNER_ID = "ownerId"
@@ -76,7 +75,13 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(
+                            Result.Fail(
+                                MainApplication.instance.getString(
+                                    R.string.you_know_nothing
+                                )
+                            )
+                        )
                     }
                 }
         }
@@ -87,7 +92,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             val document = groups.document()
             Timber.d("addGroup")
             group.id = document.id
-            Timber.d("group.id=${group}")
+            Timber.d("group.id=$group")
             group.ownerId = UserManager.userId.toString()
             document
                 .set(group)
@@ -101,7 +106,9 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(
+                            Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing))
+                        )
                     }
                 }
         }
@@ -230,9 +237,9 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                                 continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
                             } else {
                                 for (document in task.result) {
-                                    Timber.d("document=${document}")
+                                    Timber.d("document=$document")
                                     val chatroom = document.toObject(Chatroom::class.java)
-                                    Timber.d("user=${chatroom}")
+                                    Timber.d("user=$chatroom")
                                     continuation.resume(Result.Success(chatroom))
                                 }
                             }
@@ -272,7 +279,6 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 }
         }
 
-
     override suspend fun getAllChatroom(): Result<List<Chatroom>> =
         suspendCoroutine { continuation ->
             UserManager.userId?.let { id ->
@@ -305,11 +311,11 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
 
     override suspend fun getTypeChatroom(type: String): Result<List<Chatroom>> =
         suspendCoroutine { continuation ->
-            UserManager.userId?.let {
+            UserManager.userId?.let { userId ->
                 FirebaseFirestore.getInstance()
                     .collection(PATH_CHATROOM)
                     .whereEqualTo(KEY_TYPE, type)
-                    .whereArrayContains(KEY_MEMBER, it)
+                    .whereArrayContains(KEY_MEMBER, userId)
                     .orderBy(KEY_LAST_TALK_TIME, Query.Direction.DESCENDING)
                     .get()
                     .addOnCompleteListener { task ->
@@ -429,7 +435,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
             .document(chatroomId)
             .collection(PATH_CHATS)
             .orderBy(KEY_CREATED_TIME, Query.Direction.ASCENDING)
-            .addSnapshotListener { snapsot, exception ->
+            .addSnapshotListener { snapshot, exception ->
                 Timber.i("addSnapshotListener detect")
 
                 exception?.let {
@@ -437,7 +443,7 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                 }
 
                 val list = mutableListOf<Chat>()
-                for (document in snapsot!!) {
+                for (document in snapshot!!) {
                     Timber.d(document.id + " => " + document.data)
 
                     val chat = document.toObject(Chat::class.java)
@@ -620,9 +626,9 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                         continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
                     } else {
                         for (document in task.result) {
-                            Timber.d("document=${document}")
+                            Timber.d("document=$document")
                             val user = document.toObject(User::class.java)
-                            Timber.d("user=${user}")
+                            Timber.d("user=$user")
                             continuation.resume(Result.Success(user))
                         }
                     }
@@ -672,9 +678,9 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                             continuation.resume(Result.Fail(MainApplication.instance.getString(R.string.you_know_nothing)))
                         } else {
                             for (document in task.result) {
-                                Timber.d("document=${document}")
+                                Timber.d("document=$document")
                                 val owner = document.toObject(User::class.java)
-                                Timber.d("owner=${owner}")
+                                Timber.d("owner=$owner")
                                 continuation.resume(Result.Success(owner))
                             }
                         }
@@ -789,5 +795,4 @@ object BadmintonPeerRemoteDataSource : BadmintonPeerDataSource {
                     }
                 }
         }
-
 }

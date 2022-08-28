@@ -5,19 +5,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mark.badmintonpeer.MainApplication
 import com.mark.badmintonpeer.R
-import com.mark.badmintonpeer.data.*
+import com.mark.badmintonpeer.data.Chat
+import com.mark.badmintonpeer.data.ChatItem
+import com.mark.badmintonpeer.data.Chatroom
+import com.mark.badmintonpeer.data.Result
+import com.mark.badmintonpeer.data.User
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.login.UserManager
 import com.mark.badmintonpeer.network.LoadApiStatus
+import java.util.Date
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.*
 
 class ChatroomChatViewModel(
-    val argument: Chatroom,
+    private val argument: Chatroom,
     private val repository: BadmintonPeerRepository
 ) : ViewModel() {
 
@@ -27,18 +31,14 @@ class ChatroomChatViewModel(
     val chatroom: LiveData<Chatroom>
         get() = _chatroom
 
-    private val _chats = MutableLiveData<List<Chat>>()
-    val chats: LiveData<List<Chat>>
-        get() = _chats
-
     // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
     val status: LiveData<LoadApiStatus>
         get() = _status
 
     // error: The internal MutableLiveData that stores the error of the most recent request
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String>
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?>
         get() = _error
 
     private val _chatItem = MutableLiveData<List<ChatItem>>()
@@ -78,7 +78,7 @@ class ChatroomChatViewModel(
         getUserResult()
     }
 
-    fun getChatsResult() {
+    private fun getChatsResult() {
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
@@ -124,7 +124,7 @@ class ChatroomChatViewModel(
         return newItems
     }
 
-    fun getUserResult() {
+    private fun getUserResult() {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
             Timber.d("getUserResult is start")
@@ -136,7 +136,6 @@ class ChatroomChatViewModel(
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
-
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -159,7 +158,6 @@ class ChatroomChatViewModel(
 
     fun sendMessageResult(content: String) {
         Timber.d("_user.value = ${_user.value}")
-        Timber.d("chat.value = ${chat.value}")
         _user.value?.let {
             _chat.value = Chat("", it.id, Date(), content, it.image, it.nickname)
         }
@@ -167,14 +165,16 @@ class ChatroomChatViewModel(
 
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-            when (val result = _chatroom.value?.let { chatroom ->
-                _chat.value?.let { chat ->
-                    repository.sendChat(
-                        chatroom.id,
-                        chat
-                    )
+            when (
+                val result = _chatroom.value?.let { chatroom ->
+                    _chat.value?.let { chat ->
+                        repository.sendChat(
+                            chatroom.id,
+                            chat
+                        )
+                    }
                 }
-            }) {
+            ) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -198,12 +198,14 @@ class ChatroomChatViewModel(
     fun addChatroomMessageAndTimeResult() {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-            when (val result =
-                _chatroom.value?.let { chatroom ->
-                    _chat.value?.let { chat ->
-                        repository.addChatroomMessageAndTime(chatroom.id, chat.content)
+            when (
+                val result =
+                    _chatroom.value?.let { chatroom ->
+                        _chat.value?.let { chat ->
+                            repository.addChatroomMessageAndTime(chatroom.id, chat.content)
+                        }
                     }
-                }) {
+            ) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -224,11 +226,8 @@ class ChatroomChatViewModel(
         }
     }
 
-    fun getLiveChatsResult() {
+    private fun getLiveChatsResult() {
         liveChatItem = repository.getLiveChats(_chatroom.value!!.id)
         _status.value = LoadApiStatus.DONE
-
     }
-
-
 }

@@ -4,13 +4,12 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.widget.EditText
-import com.mark.badmintonpeer.R
 import java.lang.Exception
 import java.text.SimpleDateFormat
-import java.util.*
-import java.util.regex.Pattern
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 object TimeCalculator {
 
@@ -21,44 +20,44 @@ object TimeCalculator {
         } else {
             val tms = Calendar.getInstance()
             tms.get(Calendar.DAY_OF_MONTH).toString() + "/" +
-                    tms.get(Calendar.MONTH).toString() + "/" +
-                    tms.get(Calendar.YEAR).toString() + " " +
-                    tms.get(Calendar.DAY_OF_MONTH).toString() + " " +
-                    tms.get(Calendar.HOUR_OF_DAY).toString() + ":" +
-                    tms.get(Calendar.MINUTE).toString() + ":" +
-                    tms.get(Calendar.SECOND).toString()
+                tms.get(Calendar.MONTH).toString() + "/" +
+                tms.get(Calendar.YEAR).toString() + " " +
+                tms.get(Calendar.DAY_OF_MONTH).toString() + " " +
+                tms.get(Calendar.HOUR_OF_DAY).toString() + ":" +
+                tms.get(Calendar.MINUTE).toString() + ":" +
+                tms.get(Calendar.SECOND).toString()
         }
     }
 
     @SuppressLint("SimpleDateFormat")
     fun getDateAndWeek(time: Long): String {
         return if (android.os.Build.VERSION.SDK_INT >= 24) {
-            SimpleDateFormat("YYYY/MM/dd (E)").format(time)
+            SimpleDateFormat("yyyy/MM/dd (E)").format(time)
         } else {
             val tms = Calendar.getInstance()
             tms.get(Calendar.DAY_OF_MONTH).toString() + "/" +
-                    tms.get(Calendar.MONTH).toString() + "/" +
-                    tms.get(Calendar.YEAR).toString() + " " +
-                    tms.get(Calendar.DAY_OF_MONTH).toString() + " " +
-                    tms.get(Calendar.HOUR_OF_DAY).toString() + ":" +
-                    tms.get(Calendar.MINUTE).toString() + ":" +
-                    tms.get(Calendar.SECOND).toString()
+                tms.get(Calendar.MONTH).toString() + "/" +
+                tms.get(Calendar.YEAR).toString() + " " +
+                tms.get(Calendar.DAY_OF_MONTH).toString() + " " +
+                tms.get(Calendar.HOUR_OF_DAY).toString() + ":" +
+                tms.get(Calendar.MINUTE).toString() + ":" +
+                tms.get(Calendar.SECOND).toString()
         }
     }
 
     @SuppressLint("SimpleDateFormat")
     fun getDateAndYear(time: Long): String {
         return if (android.os.Build.VERSION.SDK_INT >= 24) {
-            SimpleDateFormat("YYYY/MM/dd").format(time)
+            SimpleDateFormat("yyyy/MM/dd").format(time)
         } else {
             val tms = Calendar.getInstance()
             tms.get(Calendar.DAY_OF_MONTH).toString() + "/" +
-                    tms.get(Calendar.MONTH).toString() + "/" +
-                    tms.get(Calendar.YEAR).toString() + " " +
-                    tms.get(Calendar.DAY_OF_MONTH).toString() + " " +
-                    tms.get(Calendar.HOUR_OF_DAY).toString() + ":" +
-                    tms.get(Calendar.MINUTE).toString() + ":" +
-                    tms.get(Calendar.SECOND).toString()
+                tms.get(Calendar.MONTH).toString() + "/" +
+                tms.get(Calendar.YEAR).toString() + " " +
+                tms.get(Calendar.DAY_OF_MONTH).toString() + " " +
+                tms.get(Calendar.HOUR_OF_DAY).toString() + ":" +
+                tms.get(Calendar.MINUTE).toString() + ":" +
+                tms.get(Calendar.SECOND).toString()
         }
     }
 
@@ -69,16 +68,16 @@ object TimeCalculator {
         } else {
             val tms = Calendar.getInstance()
             tms.get(Calendar.DAY_OF_MONTH).toString() + "/" +
-                    tms.get(Calendar.MONTH).toString() + "/" +
-                    tms.get(Calendar.YEAR).toString() + " " +
-                    tms.get(Calendar.DAY_OF_MONTH).toString() + " " +
-                    tms.get(Calendar.HOUR_OF_DAY).toString() + ":" +
-                    tms.get(Calendar.MINUTE).toString() + ":" +
-                    tms.get(Calendar.SECOND).toString()
+                tms.get(Calendar.MONTH).toString() + "/" +
+                tms.get(Calendar.YEAR).toString() + " " +
+                tms.get(Calendar.DAY_OF_MONTH).toString() + " " +
+                tms.get(Calendar.HOUR_OF_DAY).toString() + ":" +
+                tms.get(Calendar.MINUTE).toString() + ":" +
+                tms.get(Calendar.SECOND).toString()
         }
     }
 
-    //extension function transform into DatePicker for edit tex
+    // extension function transform into DatePicker for edit tex
     fun EditText.transformIntoDatePicker(
         context: Context,
         format: String,
@@ -112,7 +111,7 @@ object TimeCalculator {
         }
     }
 
-    //extension function transform into TimePicker for edit text
+    // extension function transform into TimePicker for edit text
     fun EditText.transformIntoTimePicker(
         context: Context,
         format: String,
@@ -144,28 +143,27 @@ object TimeCalculator {
         }
     }
 
-    fun String.toDateLong(pattern: String = "yyyy/MM/dd") : Long {
+    fun String.toDateLong(pattern: String = "yyyy/MM/dd"): Long {
         @SuppressLint("SimpleDateFormat")
         val dateFormat = SimpleDateFormat(pattern)
         var date: Date? = Date()
         try {
             date = dateFormat.parse(this)
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         return date?.time ?: 0
     }
 
-    fun String.toTimeLong(pattern: String = "HH:mm") : Long {
+    fun String.toTimeLong(pattern: String = "HH:mm"): Long {
         @SuppressLint("SimpleDateFormat")
         val dateFormat = SimpleDateFormat(pattern)
         var date: Date? = Date()
         try {
             date = dateFormat.parse(this)
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         return date?.time ?: 0
     }
-
 }

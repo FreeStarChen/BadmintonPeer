@@ -60,7 +60,6 @@ class LoginViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
     /**
      * When the [ViewModel] is finished, we cancel our coroutine [viewModelJob], which tells the
      * Retrofit service to stop.
@@ -89,7 +88,6 @@ class LoginViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     checkUserResult.data
-
                 }
                 is Result.Fail -> {
                     _error.value = checkUserResult.error
@@ -129,7 +127,6 @@ class LoginViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
                         _status.value = LoadApiStatus.ERROR
                     }
                 }
-
             } else {
                 UserManager.user.value = _userFromFirebase.value
                 leave()
@@ -137,7 +134,6 @@ class LoginViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
             Timber.d("UserManager.user.value=${UserManager.user.value}")
         }
     }
-
 
     fun leave() {
         _leave.value = true
@@ -148,5 +144,4 @@ class LoginViewModel(val repository: BadmintonPeerRepository) : ViewModel() {
     }
 
     fun nothing() {}
-
 }

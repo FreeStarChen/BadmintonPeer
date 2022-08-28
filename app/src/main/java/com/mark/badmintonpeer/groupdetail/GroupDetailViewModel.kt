@@ -25,7 +25,6 @@ import timber.log.Timber
 class GroupDetailViewModel(val argument: Group, private val repository: BadmintonPeerRepository) :
     ViewModel() {
 
-
     private val _group = MutableLiveData<Group>().apply {
         value = argument
     }
@@ -84,7 +83,9 @@ class GroupDetailViewModel(val argument: Group, private val repository: Badminto
                 outRect.left = 0
             } else {
                 outRect.left =
-                    MainApplication.instance.resources.getDimensionPixelSize(R.dimen.space_detail_circle)
+                    MainApplication.instance.resources.getDimensionPixelSize(
+                        R.dimen.space_detail_circle
+                    )
             }
         }
     }
@@ -120,14 +121,16 @@ class GroupDetailViewModel(val argument: Group, private val repository: Badminto
 
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-            when (val result = group.value?.let { group ->
-                user.value?.let { user ->
-                    repository.addGroupMember(
-                        group.id,
-                        user.id
-                    )
+            when (
+                val result = group.value?.let { group ->
+                    user.value?.let { user ->
+                        repository.addGroupMember(
+                            group.id,
+                            user.id
+                        )
+                    }
                 }
-            }) {
+            ) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -153,12 +156,14 @@ class GroupDetailViewModel(val argument: Group, private val repository: Badminto
 
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-            when (val result = group.value?.let {
-                repository.subtractNeedPeopleNumber(
-                    it.id,
-                    it.needPeopleNumber!!
-                )
-            }) {
+            when (
+                val result = group.value?.let {
+                    repository.subtractNeedPeopleNumber(
+                        it.id,
+                        it.needPeopleNumber!!
+                    )
+                }
+            ) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -192,7 +197,6 @@ class GroupDetailViewModel(val argument: Group, private val repository: Badminto
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
-
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -225,7 +229,6 @@ class GroupDetailViewModel(val argument: Group, private val repository: Badminto
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
-
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -266,7 +269,6 @@ class GroupDetailViewModel(val argument: Group, private val repository: Badminto
     fun onLeft() {
         _leave.value = null
     }
-
 
     /**
      * When the gallery scroll, at the same time circles design will switch.

@@ -17,5 +17,4 @@ class NewsDetailViewModel(val argument: News, private val repository: BadmintonP
         get() = _news
 
     val newsPostTime = _news.value?.postTime?.let { TimeCalculator.getDateAndYear(it.time) }
-
 }

@@ -13,5 +13,4 @@ enum class CurrentFragmentType(val value: String) {
     CREATE(getString(R.string.create)),
     CHAT(""),
     RECORD("")
-
 }

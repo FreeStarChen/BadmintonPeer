@@ -3,8 +3,8 @@ package com.mark.badmintonpeer
 import android.app.Application
 import com.mark.badmintonpeer.data.source.BadmintonPeerRepository
 import com.mark.badmintonpeer.util.ServiceLocator
-import timber.log.Timber
 import kotlin.properties.Delegates
+import timber.log.Timber
 
 class MainApplication : Application() {
 

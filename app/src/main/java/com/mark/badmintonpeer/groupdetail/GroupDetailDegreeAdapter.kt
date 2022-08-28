@@ -10,14 +10,12 @@ import com.mark.badmintonpeer.databinding.GroupDetailDegreeBinding
 class GroupDetailDegreeAdapter :
     ListAdapter<String, GroupDetailDegreeAdapter.DegreeViewHolder>(DiffCallback) {
 
-
     class DegreeViewHolder(private var binding: GroupDetailDegreeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(degree: String) {
             binding.degree = degree
             binding.executePendingBindings()
         }
-
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<String>() {
@@ -28,8 +26,6 @@ class GroupDetailDegreeAdapter :
         override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
             return oldItem == newItem
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DegreeViewHolder {

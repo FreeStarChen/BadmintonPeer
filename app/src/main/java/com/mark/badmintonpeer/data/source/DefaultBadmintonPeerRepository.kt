@@ -2,7 +2,6 @@ package com.mark.badmintonpeer.data.source
 
 import androidx.lifecycle.MutableLiveData
 import com.mark.badmintonpeer.data.*
-import java.util.*
 
 /**
  * Concrete implementation to load Publisher sources.
@@ -46,7 +45,6 @@ class DefaultBadmintonPeerRepository(
         return remoteDataSource.getNews()
     }
 
-
     override suspend fun getGroupChatroom(groupId: String): Result<Chatroom> {
         return remoteDataSource.getGroupChatroom(groupId)
     }
@@ -77,7 +75,6 @@ class DefaultBadmintonPeerRepository(
     ): Result<Boolean> {
         return remoteDataSource.addChatroomMessageAndTime(chatroomId, message)
     }
-
 
     override fun getLiveChats(chatroomId: String): MutableLiveData<List<Chat>> {
         return remoteDataSource.getLiveChats(chatroomId)

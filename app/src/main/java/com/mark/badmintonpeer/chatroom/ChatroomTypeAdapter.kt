@@ -9,18 +9,18 @@ import com.mark.badmintonpeer.data.Chatroom
 import com.mark.badmintonpeer.databinding.ChatroomTypeItemBinding
 import com.mark.badmintonpeer.util.TimeCalculator
 
-
 class ChatroomTypeAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Chatroom, ChatroomTypeAdapter.ChatroomViewHolder>(DiffCallback) {
     class ChatroomViewHolder(private var binding: ChatroomTypeItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(chatroom: Chatroom) {
-                binding.chatroom = chatroom
-                binding.textLastTalkTime.text = chatroom.lastTalkTime?.let {
-                    TimeCalculator.getDate(
-                        it.time)
-                }
+        fun bind(chatroom: Chatroom) {
+            binding.chatroom = chatroom
+            binding.textLastTalkTime.text = chatroom.lastTalkTime?.let {
+                TimeCalculator.getDate(
+                    it.time
+                )
             }
+        }
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Chatroom>() {
@@ -31,7 +31,6 @@ class ChatroomTypeAdapter(private val onClickListener: OnClickListener) :
         override fun areContentsTheSame(oldItem: Chatroom, newItem: Chatroom): Boolean {
             return oldItem.id == newItem.id
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatroomViewHolder {

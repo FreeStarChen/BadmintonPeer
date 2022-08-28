@@ -2,16 +2,12 @@ package com.mark.badmintonpeer.login
 
 import android.content.Context
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mark.badmintonpeer.MainApplication
 import com.mark.badmintonpeer.R
 import com.mark.badmintonpeer.data.User
 import com.mark.badmintonpeer.util.Util.getString
 
-/**
- * Created by Wayne Chen in Jul. 2019.
- */
 object UserManager {
 
     private const val USER_DATA = "user_data"
